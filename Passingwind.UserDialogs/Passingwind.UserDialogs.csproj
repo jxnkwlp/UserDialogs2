@@ -1,0 +1,85 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFrameworks></TargetFrameworks>
+		<TargetFrameworks Condition=" '$(OS)' == 'Windows_NT' ">netstandard2.0;MonoAndroid80;Xamarin.iOS10;</TargetFrameworks>
+		<TargetFrameworks Condition=" '$(OS)' != 'Windows_NT' ">netstandard2.0;MonoAndroid80;Xamarin.iOS10</TargetFrameworks>
+		<SignAssembly>true</SignAssembly>
+	</PropertyGroup>
+
+
+	<PropertyGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' ">
+		<ProduceReferenceAssembly>True</ProduceReferenceAssembly>
+		<DefineConstants>$(DefineConstants);NETSTANDARD;BAIT</DefineConstants>
+		<Product>Passingwind.UserDialogs - .NET Standard 2</Product>
+	</PropertyGroup>
+
+	<PropertyGroup Condition=" '$(TargetFramework)' == 'MonoAndroid70' OR  '$(TargetFramework)' == 'MonoAndroid80' ">
+		<DefineConstants>$(DefineConstants);__ANDROID__</DefineConstants>
+		<Product>Passingwind.UserDialogs - Android</Product>
+	</PropertyGroup>
+
+	<PropertyGroup Condition=" '$(TargetFramework)' == 'Xamarin.iOS10' ">
+		<DefineConstants>$(DefineConstants);__IOS__</DefineConstants>
+		<Product>Passingwind.UserDialogs - iOS</Product>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|netstandard2.0|AnyCPU'">
+		<DocumentationFile />
+	</PropertyGroup>
+
+	<ItemGroup>
+		<Compile Remove="Platforms\**\*.cs" />
+		<None Include="Platforms\**\*.cs" />
+		<PackageReference Include="MSBuild.Sdk.Extras" Version="1.6.55" PrivateAssets="all" />
+	</ItemGroup>
+
+	<ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' ">
+		<Compile Include="Platforms\Shared\**\*.cs" />
+	</ItemGroup>
+
+	<ItemGroup Condition=" '$(TargetFramework)' == 'MonoAndroid70' ">
+		<Compile Include="Platforms\Shared\**\*.cs" />
+		<Compile Include="Platforms\Android\**\*.cs" />
+		<PackageReference Include="AndHUD" Version="1.2.0" />
+		<PackageReference Include="Xamarin.Android.Support.Design" Version="25.4.0.2" />
+		<PackageReference Include="Xamarin.Android.Support.Core.Utils" Version="25.4.0.2" />
+	</ItemGroup>
+
+	<ItemGroup Condition=" '$(TargetFramework)' == 'MonoAndroid80' ">
+		<Compile Include="Platforms\Shared\**\*.cs" />
+		<Compile Include="Platforms\Android\**\*.cs" />
+		<PackageReference Include="AndHUD" Version="1.2.0" />
+		<PackageReference Include="Xamarin.Android.Support.Design" Version="26.1.0.1" />
+		<PackageReference Include="Xamarin.Android.Support.Core.Utils" Version="26.1.0.1" />
+
+		<ProjectReference Include="..\BindingKProgressHUD\BindingKProgressHUD.csproj" />
+	</ItemGroup>
+	<ItemGroup Condition=" '$(TargetFramework)' == 'MonoAndroid81' ">
+		<Compile Include="Platforms\Shared\**\*.cs" />
+		<Compile Include="Platforms\Android\**\*.cs" />
+		<PackageReference Include="AndHUD" Version="1.2.0" />
+		<PackageReference Include="Xamarin.Android.Support.Design" Version="26.1.0.1" />
+		<PackageReference Include="Xamarin.Android.Support.Core.Utils" Version="26.1.0.1" />
+	</ItemGroup>
+
+	<ItemGroup Condition=" '$(TargetFramework)' == 'Xamarin.iOS10' ">
+		<Compile Include="Platforms\Shared\**\*.cs" />
+		<Compile Include="Platforms\ios\**\*.cs" />
+		<Reference Include="OpenTK-1.0" />
+		<PackageReference Include="BTProgressHUD" Version="1.2.0.6" />
+	</ItemGroup>
+
+
+	<ItemGroup>
+		<None Include="**\*.cs" Exclude="$(DefaultItemExcludes);$(DefaultExcludesInProjectFolder)" />
+	</ItemGroup>
+
+
+	<ItemGroup>
+		<Compile Remove="IProgress.cs" />
+	</ItemGroup>
+
+
+	<Import Project="$(MSBuildSDKExtrasTargets)" Condition="Exists('$(MSBuildSDKExtrasTargets)')" />
+</Project>
