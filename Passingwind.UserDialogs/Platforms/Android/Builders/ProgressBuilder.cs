@@ -7,8 +7,7 @@ namespace Passingwind.UserDialogs.Platforms
     class ProgressBuilder
     {
         public ProgressBuilder()
-        { 
-            AndroidHUD.AndHUD.Shared.Show()
+        {
         }
     }
 }

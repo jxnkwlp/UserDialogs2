@@ -5,14 +5,13 @@ using Android.Widget;
 using Android.Support.V7.App;
 using Android.Support.Design.Widget;
 using Android.Text.Style;
-using Android.Widget;
-using Android.Views;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Passingwind.UserDialogs.Platforms;
+using KProgressHUD;
 
 namespace Passingwind.UserDialogs
 {
@@ -47,7 +46,7 @@ namespace Passingwind.UserDialogs
         public override IDisposable Toast(ToastConfig toastConfig)
         {
             var activity = this.TopActivityFunc();
-             
+
             if (toastConfig.Style == ToastStyle.Snackbar)
             {
                 ToastBuilder.ShowSnackbar(activity, toastConfig);
@@ -98,14 +97,39 @@ namespace Passingwind.UserDialogs
             );
         }
 
+
+        KProgressHUD.KProgressHUD _kProgressHUD;
+
         public override void ShowLoading(LoadingConfig config)
         {
-            KProgressHUD
+            var activity = this.TopActivityFunc();
+
+            if (_kProgressHUD != null && _kProgressHUD.IsShowing)
+            {
+                _kProgressHUD.Dismiss();
+            }
+
+            _kProgressHUD = KProgressHUD.KProgressHUD.Create(activity)
+                  .SetLabel(config.Text);
+
+            if (config.Duration != null)
+            {
+                _kProgressHUD.SetAutoDismiss(true);
+                _kProgressHUD.SetGraceTime((int)config.Duration.Value.TotalSeconds);
+            }
+
+            _kProgressHUD.Show();
         }
 
         public override void HideLoading()
         {
-            throw new NotImplementedException();
+            var activity = this.TopActivityFunc();
+
+            if (_kProgressHUD != null)
+            {
+                _kProgressHUD.Dismiss();
+            }
+
         }
     }
 }

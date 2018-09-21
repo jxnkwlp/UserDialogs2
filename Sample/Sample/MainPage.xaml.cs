@@ -25,5 +25,10 @@ namespace Sample
             // await UserDialogs.Instance.ToastAsync(new ToastConfig(DateTime.Now.ToString()));
             await UserDialogs.Instance.ToastAsync(new ToastConfig(DateTime.Now.ToString()).SetStyle(ToastStyle.Snackbar));
         }
+
+        private void Button_Clicked_2(object sender, EventArgs e)
+        {
+            UserDialogs.Instance.ShowLoading(new LoadingConfig("loading..."));
+        }
     }
 }

@@ -38,13 +38,13 @@
 		<Compile Include="Platforms\Shared\**\*.cs" />
 	</ItemGroup>
 
-	<ItemGroup Condition=" '$(TargetFramework)' == 'MonoAndroid70' ">
+	<!--<ItemGroup Condition=" '$(TargetFramework)' == 'MonoAndroid70' ">
 		<Compile Include="Platforms\Shared\**\*.cs" />
 		<Compile Include="Platforms\Android\**\*.cs" />
 		<PackageReference Include="AndHUD" Version="1.2.0" />
 		<PackageReference Include="Xamarin.Android.Support.Design" Version="25.4.0.2" />
 		<PackageReference Include="Xamarin.Android.Support.Core.Utils" Version="25.4.0.2" />
-	</ItemGroup>
+	</ItemGroup>-->
 
 	<ItemGroup Condition=" '$(TargetFramework)' == 'MonoAndroid80' ">
 		<Compile Include="Platforms\Shared\**\*.cs" />
@@ -52,15 +52,8 @@
 		<PackageReference Include="AndHUD" Version="1.2.0" />
 		<PackageReference Include="Xamarin.Android.Support.Design" Version="26.1.0.1" />
 		<PackageReference Include="Xamarin.Android.Support.Core.Utils" Version="26.1.0.1" />
-
-		<ProjectReference Include="..\BindingKProgressHUD\BindingKProgressHUD.csproj" />
-	</ItemGroup>
-	<ItemGroup Condition=" '$(TargetFramework)' == 'MonoAndroid81' ">
-		<Compile Include="Platforms\Shared\**\*.cs" />
-		<Compile Include="Platforms\Android\**\*.cs" />
-		<PackageReference Include="AndHUD" Version="1.2.0" />
-		<PackageReference Include="Xamarin.Android.Support.Design" Version="26.1.0.1" />
-		<PackageReference Include="Xamarin.Android.Support.Core.Utils" Version="26.1.0.1" />
+		<PackageReference Include="Xamarin.Android.Support.v7.AppCompat" Version="26.1.0.1" />
+		<ProjectReference Include="..\KProgressHUD.charp\KProgressHUD.csproj" />
 	</ItemGroup>
 
 	<ItemGroup Condition=" '$(TargetFramework)' == 'Xamarin.iOS10' ">
@@ -78,6 +71,11 @@
 
 	<ItemGroup>
 		<Compile Remove="IProgress.cs" />
+	</ItemGroup>
+
+
+	<ItemGroup>
+		<None Remove="MarkType.cs" />
 	</ItemGroup>
 
 

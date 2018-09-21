@@ -26,17 +26,23 @@ using System;
 
 namespace KProgressHUD
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class KProgressHUD
     {
         public enum Style
         {
-            SPIN_INDETERMINATE, PIE_DETERMINATE, ANNULAR_DETERMINATE, BAR_DETERMINATE
+            SpinIndeterminate,
+            PieDeterminate,
+            AnnularDeterminate,
+            BarDeterminate
         }
 
         // To avoid redundant APIs, make the HUD as a wrapper class around a Dialog
         private ProgressDialog mProgressDialog;
         private float mDimAmount;
-        private int mWindowColor;
+        private Color mWindowColor;
         private float mCornerRadius;
         private Context mContext;
 
@@ -49,6 +55,9 @@ namespace KProgressHUD
         private Handler mGraceTimer;
         private bool mFinished;
 
+        /// <summary>
+        ///  
+        /// </summary> 
         public KProgressHUD(Context context)
         {
             mContext = context;
@@ -62,52 +71,51 @@ namespace KProgressHUD
             mGraceTimeMs = 0;
             mFinished = false;
 
-            SetStyle(Style.SPIN_INDETERMINATE);
+            SetStyle(Style.SpinIndeterminate);
         }
 
-        /**
-         * Create a new HUD. Have the same effect as the constructor.
-         * For convenient only.
-         * @param context Activity context that the HUD bound to
-         * @return An unique HUD instance
-         */
+        /// <summary>
+        /// Create a new HUD. Have the same effect as the constructor.
+        /// For convenient only. </summary>
+        /// <param name="context"> Activity context that the HUD bound to </param>
+        /// <returns> An unique HUD instance </returns> 
         public static KProgressHUD Create(Context context)
         {
             return new KProgressHUD(context);
         }
 
-        /**
-         * Create a new HUD. specify the HUD style (if you use a custom view, you need {@code KProgressHUD.create(Context context)}).
-         *
-         * @param context Activity context that the HUD bound to
-         * @param style One of the KProgressHUD.Style values
-         * @return An unique HUD instance
-         */
-        public static KProgressHUD create(Context context, Style style)
+        /// <summary>
+        /// Create a new HUD. specify the HUD style (if you use a custom view, you need {@code KProgressHUD.create(Context context)}).
+        /// </summary>
+        /// <param name="context"> Activity context that the HUD bound to </param>
+        /// <param name="style"> One of the KProgressHUD.Style values </param>
+        /// <returns> An unique HUD instance </returns>
+
+        public static KProgressHUD Create(Context context, Style style)
         {
             return new KProgressHUD(context).SetStyle(style);
         }
 
-        /**
-         * Specify the HUD style (not needed if you use a custom view)
-         * @param style One of the KProgressHUD.Style values
-         * @return Current HUD
-         */
+
+        /// <summary>
+        /// Specify the HUD style (not needed if you use a custom view) </summary>
+        /// <param name="style"> One of the KProgressHUD.Style values </param>
+        /// <returns> Current HUD </returns>  
         public KProgressHUD SetStyle(Style style)
         {
             View view = null;
             switch (style)
             {
-                case Style.SPIN_INDETERMINATE:
+                case Style.SpinIndeterminate:
                     view = new SpinView(mContext);
                     break;
-                case Style.PIE_DETERMINATE:
+                case Style.PieDeterminate:
                     view = new PieView(mContext);
                     break;
-                case Style.ANNULAR_DETERMINATE:
+                case Style.AnnularDeterminate:
                     view = new AnnularView(mContext);
                     break;
-                case Style.BAR_DETERMINATE:
+                case Style.BarDeterminate:
                     view = new BarView(mContext);
                     break;
                     // No custom view style here, because view will be added later
@@ -117,11 +125,10 @@ namespace KProgressHUD
             return this;
         }
 
-        /**
-         * Specify the dim area around the HUD, like in Dialog
-         * @param dimAmount May take value from 0 to 1. Default to 0 (no dimming)
-         * @return Current HUD
-         */
+        /// <summary>
+        /// Specify the dim area around the HUD, like in Dialog </summary>
+        /// <param name="dimAmount"> May take value from 0 to 1. Default to 0 (no dimming) </param>
+        /// <returns> Current HUD </returns> 
         public KProgressHUD SetDimAmount(float dimAmount)
         {
             if (dimAmount >= 0 && dimAmount <= 1)
@@ -131,12 +138,11 @@ namespace KProgressHUD
             return this;
         }
 
-        /**
-         * Set HUD size. If not the HUD view will use WRAP_CONTENT instead
-         * @param width in dp
-         * @param height in dp
-         * @return Current HUD
-         */
+        /// <summary>
+        /// Set HUD size. If not the HUD view will use WRAP_CONTENT instead </summary>
+        /// <param name="width"> in dp </param>
+        /// <param name="height"> in dp </param>
+        /// <returns> Current HUD </returns> 
         public KProgressHUD SetSize(int width, int height)
         {
             mProgressDialog.SetSize(width, height);
@@ -155,103 +161,95 @@ namespace KProgressHUD
         //    return this;
         //}
 
-        /**
-         * Specify the HUD background color
-         * @param color ARGB color
-         * @return Current HUD
-         */
-        public KProgressHUD SetBackgroundColor(int color)
+        /// <summary>
+        /// Specify the HUD background color </summary>
+        /// <param name="color"> ARGB color </param>
+        /// <returns> Current HUD </returns> 
+        public KProgressHUD SetBackgroundColor(Color color)
         {
             mWindowColor = color;
             return this;
         }
 
-        /**
-         * Specify corner radius of the HUD (default is 10)
-         * @param radius Corner radius in dp
-         * @return Current HUD
-         */
+        /// <summary>
+        /// Specify corner radius of the HUD (default is 10) </summary>
+        /// <param name="radius"> Corner radius in dp </param>
+        /// <returns> Current HUD </returns> 
         public KProgressHUD SetCornerRadius(float radius)
         {
             mCornerRadius = radius;
             return this;
         }
 
-        /**
-         * Change animation speed relative to default. Used with indeterminate style
-         * @param scale Default is 1. If you want double the speed, Set the param at 2.
-         * @return Current HUD
-         */
+        /// <summary>
+        /// Change animation speed relative to default. Used with indeterminate style </summary>
+        /// <param name="scale"> Default is 1. If you want double the speed, Set the param at 2. </param>
+        /// <returns> Current HUD </returns>
         public KProgressHUD SetAnimationSpeed(int scale)
         {
             mAnimateSpeed = scale;
             return this;
         }
 
-        /**
-         * Optional label to be displayed.
-         * @return Current HUD
-         */
+        /// <summary>
+        /// Optional label to be displayed. </summary>
+        /// <returns> Current HUD </returns>
         public KProgressHUD SetLabel(string label)
         {
             mProgressDialog.SetLabel(label);
             return this;
         }
 
-        /**
-         * Optional label to be displayed
-         * @return Current HUD
-         */
+        /// <summary>
+        /// Optional label to be displayed </summary>
+        /// <returns> Current HUD </returns> 
         public KProgressHUD SetLabel(string label, Color color)
         {
             mProgressDialog.SetLabel(label, color);
             return this;
         }
 
-        /**
-         * Optional detail description to be displayed on the HUD
-         * @return Current HUD
-         */
+        /// <summary>
+        /// Optional detail description to be displayed on the HUD </summary>
+        /// <returns> Current HUD </returns> 
         public KProgressHUD SetDetailsLabel(string detailsLabel)
         {
             mProgressDialog.SetDetailsLabel(detailsLabel);
             return this;
         }
 
-        /**
-         * Optional detail description to be displayed
-         * @return Current HUD
-         */
+        /// <summary>
+        /// Optional detail description to be displayed </summary>
+        /// <returns> Current HUD </returns> 
         public KProgressHUD SetDetailsLabel(string detailsLabel, Color color)
         {
             mProgressDialog.SetDetailsLabel(detailsLabel, color);
             return this;
         }
 
-        /**
-         * Max value for use in one of the determinate styles
-         * @return Current HUD
-         */
+        /// <summary>
+        /// Max value for use in one of the determinate styles </summary>
+        /// <returns> Current HUD </returns>  
         public KProgressHUD SetMaxProgress(int maxProgress)
         {
             mMaxProgress = maxProgress;
+            mProgressDialog.SetMaxProgressValue(maxProgress);
             return this;
         }
 
-        /**
-         * Set current progress. Only have effect when use with a determinate style, or a custom
-         * view which , Determinate interface.
-         */
+        /// <summary>
+        /// Set current progress. Only have effect when use with a determinate style, or a custom
+        /// view which , Determinate interface.
+        /// </summary> 
         public void SetProgress(int progress)
         {
             mProgressDialog.SetProgress(progress);
         }
 
-        /**
-         * Provide a custom view to be displayed.
-         * @param view Must not be null
-         * @return Current HUD
-         */
+        /// <summary>
+        /// Provide a custom view to be displayed. </summary>
+        /// <param name="view"> Must not be null </param>
+        /// <returns> Current HUD </returns> 
         public KProgressHUD SetCustomView(View view)
         {
             if (view != null)
@@ -265,15 +263,12 @@ namespace KProgressHUD
             return this;
         }
 
-        /**
-         * Specify whether this HUD can be cancelled by using back button (default is false)
-         *
-         * Setting a cancelable to true with this method will Set a null callback,
-         * clearing any callback previously Set with
-         * {@link #SetCancellable(DialogInterface.OnCancelListener)}
-         *
-         * @return Current HUD
-         */
+        /// <summary>
+        /// Specify whether this HUD can be cancelled by using back button (default is false) 
+        /// Setting a cancelable to true with this method will Set a null callback,
+        /// clearing any callback previously Set with <seealso cref="bool"/>
+        /// </summary>
+        /// <returns> Current HUD </returns> 
         public KProgressHUD SetCancellable(bool isCancellable)
         {
             mProgressDialog.SetCancelable(isCancellable);
@@ -281,47 +276,68 @@ namespace KProgressHUD
             return this;
         }
 
-        /**
-         * Specify a callback to run when using the back button (default is null)
-         *
-         * @param listener The code that will run if the user presses the back
-         * button. If you pass null, the dialog won't be cancellable, just like
-         * if you had called {@link #SetCancellable(bool)} passing false.
-         *
-         * @return Current HUD
-         */
-        public KProgressHUD SetCancellable(IDialogInterfaceOnCancelListener listener)
+        /// <summary>
+        /// Specify a callback to run when using the back button (default is null)
+        /// </summary> 
+        /// <returns> Current HUD </returns> 
+        public KProgressHUD SetCancelListener(IDialogInterfaceOnCancelListener listener)
         {
             mProgressDialog.SetCancelable(null != listener);
             mProgressDialog.SetOnCancelListener(listener);
             return this;
         }
 
-        /**
-         * Specify whether this HUD closes itself if progress reaches max. Default is true.
-         * @return Current HUD
-         */
+        /// <summary>
+        ///  Specify a callback to run when using the back button (default is null)
+        /// </summary> 
+        public KProgressHUD SetCancelAction(Action action)
+        {
+            return SetCancelListener(new DefaultOnCancelListener(action));
+        }
+
+
+        private class DefaultOnCancelListener : Java.Lang.Object, IDialogInterfaceOnCancelListener
+        {
+            readonly Action _action;
+
+            public DefaultOnCancelListener(Action action)
+            {
+                _action = action;
+            }
+
+            public void OnCancel(IDialogInterface dialog)
+            {
+                _action?.Invoke();
+            }
+        }
+
+        /// <summary>
+        /// Specify whether this HUD closes itself if progress reaches max. Default is true. </summary>
+        /// <returns> Current HUD </returns> 
         public KProgressHUD SetAutoDismiss(bool isAutoDismiss)
         {
             mIsAutoDismiss = isAutoDismiss;
             return this;
         }
 
-        /**
-         * Grace period is the time (in milliseconds) that the invoked method may be run without
-         * showing the HUD. If the task finishes before the grace time runs out, the HUD will
-         * not be shown at all.
-         * This may be used to prevent HUD display for very short tasks.
-         * Defaults to 0 (no grace time).
-         * @param graceTimeMs Grace time in milliseconds
-         * @return Current HUD
-         */
+        /// <summary>
+        /// Grace period is the time (in milliseconds) that the invoked method may be run without
+        /// showing the HUD. If the task finishes before the grace time runs out, the HUD will
+        /// not be shown at all.
+        /// This may be used to prevent HUD display for very short tasks.
+        /// Defaults to 0 (no grace time). </summary>
+        /// <param name="graceTimeMs"> Grace time in milliseconds </param>
+        /// <returns> Current HUD </returns> 
         public KProgressHUD SetGraceTime(int graceTimeMs)
         {
             mGraceTimeMs = graceTimeMs;
             return this;
         }
 
+        /// <summary>
+        ///  show the hub
+        /// </summary>
+        /// <returns></returns>
         public KProgressHUD Show()
         {
             if (!IsShowing)
@@ -347,6 +363,9 @@ namespace KProgressHUD
             return this;
         }
 
+        /// <summary>
+        ///  the hud is show 
+        /// </summary>
         public bool IsShowing
         {
             get
@@ -355,7 +374,10 @@ namespace KProgressHUD
             }
         }
 
-        public void dismiss()
+        /// <summary>
+        ///  close 
+        /// </summary>
+        public void Dismiss()
         {
             mFinished = true;
             if (mContext != null && !((Activity)mContext).IsFinishing && mProgressDialog != null && mProgressDialog.IsShowing)
@@ -466,8 +488,16 @@ namespace KProgressHUD
 
                     if (_instance.mIsAutoDismiss && progress >= _instance.mMaxProgress)
                     {
-                        _instance.dismiss();
+                        _instance.Dismiss();
                     }
+                }
+            }
+
+            public void SetMaxProgressValue(int value)
+            {
+                if (mDeterminateView != null)
+                {
+                    mDeterminateView.SetMax(value);
                 }
             }
 
