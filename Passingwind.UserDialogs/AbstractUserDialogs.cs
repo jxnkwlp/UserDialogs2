@@ -27,13 +27,11 @@ namespace Passingwind.UserDialogs
         //    disp.Dispose();
         //    tcs.TrySetCanceled();
         //}
-
-
-        public abstract void ShowLoading(LoadingConfig config);
-        public abstract void HideLoading();
-
+         
         public abstract IDisposable Confirm(ConfirmConfig config);
         public abstract IDisposable ActionSheet(ActionSheetConfig config);
         public abstract IDisposable Alert(IAlertRequest alert);
+        public abstract IDisposable Loading(LoadingConfig config);
+        public abstract IProgressDialog Progress(ProgressConfig config);
     }
 }

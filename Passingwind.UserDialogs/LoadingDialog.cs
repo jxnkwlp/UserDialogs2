@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Passingwind.UserDialogs
 {
-    public class LoadingDialog : ILoadingDialog
+    public class LoadingDialog : IProgressDialog
     {
         public void Hide()
         {

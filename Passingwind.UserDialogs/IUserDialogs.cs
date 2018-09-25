@@ -38,10 +38,9 @@ namespace Passingwind.UserDialogs
 
         #region Loading
 
-        void ShowLoading(LoadingConfig config);
+        IDisposable Loading(LoadingConfig config);
 
-        void HideLoading();
-
+        IProgressDialog Progress(ProgressConfig config);
 
         #endregion
 

@@ -19,7 +19,7 @@
 	<PropertyGroup Condition=" '$(TargetFramework)' == 'MonoAndroid70' OR  '$(TargetFramework)' == 'MonoAndroid80' ">
 		<DefineConstants>$(DefineConstants);__ANDROID__</DefineConstants>
 		<Product>Passingwind.UserDialogs - Android</Product>
-		<AndroidSupportedAbis>armeabi;x86</AndroidSupportedAbis>
+		<!--<AndroidSupportedAbis>armeabi;x86</AndroidSupportedAbis>-->
 	</PropertyGroup>
 
 	<PropertyGroup Condition=" '$(TargetFramework)' == 'Xamarin.iOS10' ">

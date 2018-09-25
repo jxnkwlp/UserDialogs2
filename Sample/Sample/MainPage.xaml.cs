@@ -28,11 +28,11 @@ namespace Sample
 
         private void Button_Clicked_2(object sender, EventArgs e)
         {
-            UserDialogs.Instance.ShowLoading(new LoadingConfig("loading..."));
+            var loading = UserDialogs.Instance.Loading(new LoadingConfig("loading...delay 5s "));
 
             Device.StartTimer(TimeSpan.FromSeconds(5), () =>
             {
-                UserDialogs.Instance.HideLoading();
+                loading.Dispose();
 
                 return false;
             });
@@ -82,6 +82,38 @@ namespace Sample
         void Toast(string message)
         {
             UserDialogs.Instance.Toast(new ToastConfig(message));
+        }
+
+
+        private void Progress_Clicked(object sender, EventArgs e)
+        {
+            int count = 0;
+
+            var hud = UserDialogs.Instance.Progress(new ProgressConfig("download...")
+            {
+                Max = 100,
+                Cancellable = true,
+                CancelAction = () =>
+                {
+                    Toast("canced");
+                }
+            });
+
+            Device.StartTimer(TimeSpan.FromSeconds(1), () =>
+            {
+                if (count > 100)
+                {
+                    hud.Hide();
+
+                    return false;
+                }
+
+                count += 10;
+
+                hud.SetProgress(count);
+
+                return true;
+            });
         }
     }
 }

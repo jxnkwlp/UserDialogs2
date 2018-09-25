@@ -4,10 +4,8 @@ using System.Text;
 
 namespace Passingwind.UserDialogs
 {
-    public interface IProgressDialog
+    public enum LoadingType
     {
-        void Hide();
-
-        void SetProgress(double value);
+        Default,
     }
 }

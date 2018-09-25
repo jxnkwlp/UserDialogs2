@@ -11,10 +11,8 @@ namespace Passingwind.UserDialogs
 
         public TimeSpan? Duration { get; set; }
 
-
         public MarkType MarkType { get; set; }
-
-
+         
         public LoadingConfig()
         {
         }
