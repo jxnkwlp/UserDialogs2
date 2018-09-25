@@ -7,7 +7,7 @@ using Android.Views;
 
 namespace Passingwind.UserDialogs.Platforms
 {
-    public abstract class AbstractDialogFragment<T> : AppCompatDialogFragment where T : class
+    public abstract class AbstractAppCompatDialogFragment<T> : AppCompatDialogFragment where T : class
     {
         public T Config { get; set; }
 
@@ -40,7 +40,8 @@ namespace Passingwind.UserDialogs.Platforms
 
         protected virtual void SetDialogDefaults(Dialog dialog)
         {
-            dialog.Window.SetSoftInputMode(SoftInput.StateVisible);
+            // dialog.Window.SetSoftInputMode(SoftInput.StateHidden);
+
             dialog.SetCancelable(false);
             dialog.SetCanceledOnTouchOutside(false);
             dialog.KeyPress += this.OnKeyPress;

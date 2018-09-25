@@ -22,10 +22,16 @@ namespace Sample.iOS
         //
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
+            //UIAlertController uIAlert = new UIAlertController(); 
+            //uIAlert.AddAction(UIAlertAction.Create("", UIAlertActionStyle.Default, (e) => { }));
+           
             global::Xamarin.Forms.Forms.Init();
             LoadApplication(new App());
 
             return base.FinishedLaunching(app, options);
+
+
+
         }
     }
 }

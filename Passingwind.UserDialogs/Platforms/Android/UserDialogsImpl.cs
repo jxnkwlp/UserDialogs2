@@ -18,6 +18,7 @@ namespace Passingwind.UserDialogs
     public class UserDialogsImpl : AbstractUserDialogs
     {
         public static string FragmentTag { get; set; } = "UserDialogs";
+
         protected internal Func<Activity> TopActivityFunc { get; set; }
 
 
@@ -40,7 +41,15 @@ namespace Passingwind.UserDialogs
         }
 
 
+        public override IDisposable Confirm(ConfirmConfig config)
+        {
+            var activity = this.TopActivityFunc();
 
+            if (activity is AppCompatActivity compatActivity)
+                return this.ShowDialog<ConfirmAppCompatDialogFragment, ConfirmConfig>(compatActivity, config);
+
+            return this.Show(activity, () => new ConfirmBuilder().Build(activity, config));
+        }
 
 
         public override IDisposable Toast(ToastConfig toastConfig)
@@ -81,7 +90,7 @@ namespace Passingwind.UserDialogs
 
 
         protected virtual IDisposable ShowDialog<TFragment, TConfig>(AppCompatActivity activity, TConfig config)
-            where TFragment : AbstractDialogFragment<TConfig>
+            where TFragment : AbstractAppCompatDialogFragment<TConfig>
             where TConfig : class, new()
         {
             var frag = (TFragment)Activator.CreateInstance(typeof(TFragment));
@@ -114,8 +123,8 @@ namespace Passingwind.UserDialogs
 
             if (config.Duration != null)
             {
-                _kProgressHUD.SetAutoDismiss(true);
-                _kProgressHUD.SetGraceTime((int)config.Duration.Value.TotalSeconds);
+                // _kProgressHUD.SetAutoDismiss(true);
+                // _kProgressHUD.SetGraceTime((int)config.Duration.Value.TotalSeconds);
             }
 
             _kProgressHUD.Show();
@@ -130,6 +139,27 @@ namespace Passingwind.UserDialogs
                 _kProgressHUD.Dismiss();
             }
 
+        }
+
+        public override IDisposable ActionSheet(ActionSheetConfig config)
+        {
+            var activity = this.TopActivityFunc();
+
+            if (activity is AppCompatActivity compatActivity)
+            {
+                if (config.BottomSheet)
+                {
+                    return this.ShowDialog<BottomActionSheetDialogFragment, ActionSheetConfig>(compatActivity, config);
+                }
+                return this.ShowDialog<ActionSheetAppCompatDialogFragment, ActionSheetConfig>(compatActivity, config);
+            }
+
+            return this.Show(activity, () => new ActionSheetBuilder().Build(activity, config));
+        }
+
+        public override IDisposable Alert(IAlertRequest alert)
+        {
+            return null;
         }
     }
 }

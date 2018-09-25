@@ -22,6 +22,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KProgressHUD.Sample", "KProgressHUD.Sample\KProgressHUD.Sample.csproj", "{2D10C46A-5846-49D3-B0A2-36A53A2C033F}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "KProgress", "KProgress", "{EB244910-76E4-438F-9364-EDA844466326}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Ad-Hoc|Any CPU = Ad-Hoc|Any CPU
@@ -229,6 +231,11 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{38855710-656E-40EB-8490-024F96ADCDDE} = {EB244910-76E4-438F-9364-EDA844466326}
+		{B687CEFE-9A4E-4FA9-8F77-07E4ADEA7E72} = {EB244910-76E4-438F-9364-EDA844466326}
+		{2D10C46A-5846-49D3-B0A2-36A53A2C033F} = {EB244910-76E4-438F-9364-EDA844466326}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F6D39595-1059-4C91-AD65-4FC26A668684}

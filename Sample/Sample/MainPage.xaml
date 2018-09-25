@@ -7,10 +7,14 @@
     <StackLayout>
 
         <Button Text="Alert" Clicked="Button_Clicked" />
+        
+        <Button Text="Confirm" Clicked="Button_Clicked_3" />
 
         <Button Text="Toast" Clicked="Button_Clicked_1" />
         
         <Button Text="Loading" Clicked="Button_Clicked_2" />
+
+        <Button Text="ActionSheet" Clicked="ActionSheet_Clicked" />
 
     </StackLayout>
 

@@ -10,23 +10,31 @@ namespace Passingwind.UserDialogs
     {
         #region Toast
 
-        Task ToastAsync(ToastConfig toastConfig);
+        IDisposable Toast(ToastConfig toastConfig);
 
         #endregion
 
         #region Alert
 
-        Task AlertAsync(AlertConfig config);
+        IDisposable Alert(IAlertRequest alert);
 
-        #endregion
-
-        #region ActionSheet
+        IDisposable Alert(AlertConfig config);
 
         #endregion
 
         #region Confirm
 
+        IDisposable Confirm(ConfirmConfig config);
+
         #endregion
+
+
+        #region ActionSheet
+
+        IDisposable ActionSheet(ActionSheetConfig config);
+
+        #endregion
+
 
         #region Loading
 
