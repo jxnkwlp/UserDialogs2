@@ -41,7 +41,7 @@ namespace Sample
         private void Button_Clicked_3(object sender, EventArgs e)
         {
             var config = new ConfirmConfig("标题", "这是提示文本" + DateTime.Now.ToString())
-                .SetOkAction(() =>
+                .SetAction(() =>
                 {
                     UserDialogs.Instance.Toast(new ToastConfig("you click ok action"));
                 })

@@ -24,10 +24,7 @@ namespace Passingwind.UserDialogs
 
         public string Message { get; set; }
 
-        public Action OkAction { get; set; }
-
-        public Action CancelAction { get; set; }
-
+        public Action<bool> Action { get; set; }
 
         public int? AndroidStyleId { get; set; } = DefaultAndroidStyleId;
 
@@ -77,19 +74,11 @@ namespace Passingwind.UserDialogs
             return this;
         }
 
-        public ConfirmConfig SetOkAction(Action action)
+        public ConfirmConfig SetAction(Action<bool> action)
         {
-            this.OkAction = action;
+            this.Action = action;
 
             return this;
         }
-
-        public ConfirmConfig SetCancelAction(Action action)
-        {
-            this.CancelAction = action;
-
-            return this;
-        }
-
     }
 }

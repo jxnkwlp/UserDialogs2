@@ -14,7 +14,7 @@ namespace Passingwind.UserDialogs.Platforms
                 .SetCancelable(false)
                 .SetMessage(config.Message)
                 .SetTitle(config.Title)
-                .SetPositiveButton(config.OkText, (o, e) => config.OkAction?.Invoke())
+                .SetPositiveButton(config.OkText, (o, e) => config.Action?.Invoke())
                 .SetNegativeButton(config.CancelText, (o, e) => config.CancelAction?.Invoke())
                 .Create();
 
@@ -26,7 +26,7 @@ namespace Passingwind.UserDialogs.Platforms
                 .SetCancelable(false)
                 .SetMessage(config.Message)
                 .SetTitle(config.Title)
-                .SetPositiveButton(config.OkText, (o, e) => config.OkAction?.Invoke())
+                .SetPositiveButton(config.OkText, (o, e) => config.Action?.Invoke())
                 .SetNegativeButton(config.CancelText, (o, e) => config.CancelAction?.Invoke())
                 .Create();
 
