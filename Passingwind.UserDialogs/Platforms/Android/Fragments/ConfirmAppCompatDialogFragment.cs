@@ -16,7 +16,7 @@ namespace Passingwind.UserDialogs.Platforms
             {
                 args.Handled = true;
 
-                this.Config?.CancelAction?.Invoke();
+                this.Config?.Action?.Invoke(false);
 
                 this.Dismiss();
             }

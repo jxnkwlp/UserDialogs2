@@ -8,6 +8,6 @@ namespace Passingwind.UserDialogs
     {
         void Hide();
 
-        void SetProgress(double value);
+        void SetProgress(int value);
     }
 }

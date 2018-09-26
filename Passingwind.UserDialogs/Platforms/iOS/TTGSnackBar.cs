@@ -27,7 +27,7 @@ namespace Passingwind.UserDialogs.TTGSnackBar
     public class TTGSnackbar : UIView
     {
 
-        /// Snackbar action button max width.
+        // Snackbar action button max width.
         private const float snackbarActionButtonMaxWidth = 64;
 
         // Snackbar action button min width.
@@ -78,7 +78,7 @@ namespace Passingwind.UserDialogs.TTGSnackBar
             }
         }
 
-        /// Top margin. Default is 4
+        // Top margin. Default is 4
         private float _topMargin = 20;
         public float TopMargin
         {

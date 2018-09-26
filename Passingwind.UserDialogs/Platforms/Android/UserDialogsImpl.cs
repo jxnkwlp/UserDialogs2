@@ -185,9 +185,9 @@ namespace Passingwind.UserDialogs
                 _hud.Dismiss();
             }
 
-            public void SetProgress(double value)
+            public void SetProgress(int value)
             {
-                _hud.SetProgress((int)value);
+                _hud.SetProgress(value);
             }
         }
 
