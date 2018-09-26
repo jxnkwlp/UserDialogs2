@@ -33,5 +33,6 @@ namespace Passingwind.UserDialogs
         public abstract IDisposable Alert(IAlertRequest alert);
         public abstract IDisposable Loading(LoadingConfig config);
         public abstract IProgressDialog Progress(ProgressConfig config);
+        public abstract IDisposable DateTimerPicker();
     }
 }

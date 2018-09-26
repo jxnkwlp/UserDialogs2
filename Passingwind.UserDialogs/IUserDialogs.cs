@@ -16,7 +16,7 @@ namespace Passingwind.UserDialogs
 
         #region Alert
 
-        IDisposable Alert(IAlertRequest alert);
+        //IDisposable Alert(IAlertRequest alert);
 
         IDisposable Alert(AlertConfig config);
 
@@ -45,7 +45,13 @@ namespace Passingwind.UserDialogs
         #endregion
 
         #region Show
-        
+
+
+        #endregion
+
+        #region Pickerview
+
+        IDisposable DateTimerPicker();
 
         #endregion
     }

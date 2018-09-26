@@ -220,9 +220,12 @@ namespace Passingwind.UserDialogs
 
         public override IDisposable Alert(IAlertRequest alert)
         {
-            return null;
+            throw new NotImplementedException();
         }
 
-
+        public override IDisposable DateTimerPicker()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
