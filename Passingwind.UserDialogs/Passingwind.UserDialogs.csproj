@@ -33,7 +33,7 @@
 
 	<ItemGroup>
 		<Compile Remove="Platforms\**\*.cs" />
-		<None Include="Platforms\**\*.cs" /> 
+		<None Include="Platforms\**\*.cs" />
 		<PackageReference Include="MSBuild.Sdk.Extras" Version="1.6.55" PrivateAssets="all" />
 	</ItemGroup>
 
@@ -50,14 +50,14 @@
 	</ItemGroup>-->
 
 	<ItemGroup Condition=" '$(TargetFramework)' == 'MonoAndroid80' ">
-		
+
 		<Compile Include="Platforms\Shared\**\*.cs" />
 		<Compile Include="Platforms\Android\**\*.cs" />
 		<!--<PackageReference Include="AndHUD" Version="1.2.0" />-->
 		<PackageReference Include="Xamarin.Android.Support.Design" Version="26.1.0.1" />
 		<PackageReference Include="Xamarin.Android.Support.Core.Utils" Version="26.1.0.1" />
 		<PackageReference Include="Xamarin.Android.Support.v7.AppCompat" Version="26.1.0.1" />
-		<ProjectReference Include="..\KProgressHUD.charp\KProgressHUD.csproj" />
+		<ProjectReference Include="..\KProgressHUD\KProgressHUD.cs\KProgressHUD.csproj" />
 	</ItemGroup>
 
 	<ItemGroup Condition=" '$(TargetFramework)' == 'Xamarin.iOS10' ">
@@ -68,7 +68,11 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Platforms\iOS\Builders\" />
+		<Folder Include="Platforms\iOS\Builders\" />
+	</ItemGroup>
+
+	<ItemGroup>
+
 	</ItemGroup>
 
 

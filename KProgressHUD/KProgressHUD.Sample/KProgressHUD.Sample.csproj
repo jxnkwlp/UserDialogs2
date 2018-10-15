@@ -97,7 +97,7 @@
     <PackageReference Include="Xamarin.Android.Support.Design" Version="27.0.2.1" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\KProgressHUD.charp\KProgressHUD.csproj">
+    <ProjectReference Include="..\KProgressHUD.cs\KProgressHUD.csproj">
       <Project>{b687cefe-9a4e-4fa9-8f77-07e4adea7e72}</Project>
       <Name>KProgressHUD</Name>
     </ProjectReference>

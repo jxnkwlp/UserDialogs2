@@ -91,10 +91,6 @@
     <Folder Include="Resources\drawable\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\KProgressHUD.charp\KProgressHUD.csproj">
-      <Project>{b687cefe-9a4e-4fa9-8f77-07e4adea7e72}</Project>
-      <Name>KProgressHUD</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Passingwind.UserDialogs\Passingwind.UserDialogs.csproj">
       <Project>{dba6284b-c0c8-436a-b012-0fe2adced0aa}</Project>
       <Name>Passingwind.UserDialogs</Name>
