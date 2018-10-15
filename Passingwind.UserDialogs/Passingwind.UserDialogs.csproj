@@ -39,6 +39,7 @@
 
 	<ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' ">
 		<Compile Include="Platforms\Shared\**\*.cs" />
+		<PackageReference Include="Xamarin.Forms" Version="2.5.0.77107" />
 	</ItemGroup>
 
 	<!--<ItemGroup Condition=" '$(TargetFramework)' == 'MonoAndroid70' ">
@@ -50,10 +51,8 @@
 	</ItemGroup>-->
 
 	<ItemGroup Condition=" '$(TargetFramework)' == 'MonoAndroid80' ">
-
 		<Compile Include="Platforms\Shared\**\*.cs" />
 		<Compile Include="Platforms\Android\**\*.cs" />
-		<!--<PackageReference Include="AndHUD" Version="1.2.0" />-->
 		<PackageReference Include="Xamarin.Android.Support.Design" Version="26.1.0.1" />
 		<PackageReference Include="Xamarin.Android.Support.Core.Utils" Version="26.1.0.1" />
 		<PackageReference Include="Xamarin.Android.Support.v7.AppCompat" Version="26.1.0.1" />

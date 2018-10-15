@@ -1,9 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Text;
 
 namespace Passingwind.UserDialogs
 {
+    /// <summary>
+    /// Define toast config 
+    /// </summary>
     public class ToastConfig
     {
         public static TimeSpan DefaultTimeSpan = TimeSpan.FromSeconds(1.5);
@@ -19,6 +23,16 @@ namespace Passingwind.UserDialogs
 
         public ToastStyle Style { get; set; } = DefaultToastStyle;
 
+
+
+        public Color? BackgroundColor { get; set; }
+
+        public Color? TextColor { get; set; }
+
+
+        public string ActionText { get; set; }
+        public Color? ActionTextColor { get; set; }
+        public Action Action { get; set; }
 
 
         public ToastConfig()

@@ -4,15 +4,14 @@ using System.Text;
 
 namespace Passingwind.UserDialogs
 {
-    public class AlertConfig
+    /// <summary>
+    ///  Define Alert config
+    /// </summary>
+    public class AlertConfig : IAndroidStyleDialogConfig
     {
         public static string DefaultOkText = "Yes";
 
         public static int? DefaultAndroidStyleId;
-
-
-        // internal Action _okAction;
-
 
         public string Title { get; set; }
 

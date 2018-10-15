@@ -1,8 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Application xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:app="clr-namespace:Sample"
              x:Class="Sample.App">
     <Application.Resources>
-
+        <ResourceDictionary>
+            <app:IntEnumConverter x:Key="IntEnum" />
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

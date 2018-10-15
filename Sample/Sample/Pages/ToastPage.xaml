@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:Sample.ViewModels"
+             xmlns:ud="clr-namespace:Passingwind.UserDialogs;assembly=Passingwind.UserDialogs"
+             x:Class="Sample.Pages.ToastPage">
+
+    <ContentPage.BindingContext>
+        <vm:ToastViewModel />
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <StackLayout> 
+            <Label Text="Message"/>
+            <Entry Text="{Binding Message, Mode=TwoWay}"/>
+
+            <Label Text="Position"/>
+            <Picker SelectedIndex="{Binding Position, Mode=TwoWay}" ItemsSource="{Binding ToastPosition, Converter={StaticResource IntEnum}}" />
+
+            <Label Text="Style"/>
+            <Picker ItemsSource="{Binding Style, Mode=TwoWay, Converter={StaticResource IntEnum}}" />
+
+
+
+            <Button Text="Show" Command="{Binding ShowCommand}"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

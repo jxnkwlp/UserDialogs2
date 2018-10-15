@@ -10,7 +10,7 @@ using Passingwind.UserDialogs;
 
 namespace Sample.Droid
 {
-    [Activity(Label = "Sample", Icon = "@mipmap/icon", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+    [Activity(Label = "UserDialogs", Icon = "@mipmap/icon", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
         protected override void OnCreate(Bundle savedInstanceState)
@@ -24,7 +24,9 @@ namespace Sample.Droid
             UserDialogs.Init(this);
 
             LoadApplication(new App());
-             
+
+
+            // Resource.Id.snackbar_text
         }
     }
 }

@@ -28,13 +28,11 @@ namespace Passingwind.UserDialogs
 
         #endregion
 
-
         #region ActionSheet
 
         IDisposable ActionSheet(ActionSheetConfig config);
 
         #endregion
-
 
         #region Loading
 
@@ -51,7 +49,9 @@ namespace Passingwind.UserDialogs
 
         #region Pickerview
 
-        IDisposable DateTimerPicker();
+        // IDisposable DateTimerPicker();
+
+        // IDisposable OptionsPicker();
 
         #endregion
     }
