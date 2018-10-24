@@ -6,7 +6,7 @@ using Android.Content;
 
 namespace Passingwind.UserDialogs.Platforms
 {
-    class ActionSheetAppCompatDialogFragment : AbstractAppCompatDialogFragment<ActionSheetConfig>
+    class ActionSheetAppCompatDialogFragment : AbstractAppCompatDialogFragment<ActionSheetOptions>
     {
         protected override void SetDialogDefaults(Dialog dialog)
         {
@@ -15,7 +15,6 @@ namespace Passingwind.UserDialogs.Platforms
             var cancellable = this.Config.Cancel != null;
             dialog.SetCancelable(cancellable);
             dialog.SetCanceledOnTouchOutside(cancellable);
-
 
             dialog.CancelEvent += (s, a) => this.Config.Cancel?.Action?.Invoke();
         }
@@ -32,7 +31,7 @@ namespace Passingwind.UserDialogs.Platforms
             this.Dismiss();
         }
 
-        protected override Dialog CreateDialog(ActionSheetConfig config)
+        protected override Dialog CreateDialog(ActionSheetOptions config)
         {
             return new ActionSheetBuilder().Build(this.AppCompatActivity, config);
         }

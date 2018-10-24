@@ -23,20 +23,15 @@ namespace Sample
 
         private void Toast_Clicked(object sender, EventArgs e)
         {
-            //UserDialogs.Instance.Toast(new ToastConfig()
+            //UserDialogs.Instance.Toast(new ToastOptions()
             //{
             //    Message = DateTime.Now.ToString(),
-
-            //    Style = ToastStyle.Default, 
             //});
 
 
-            UserDialogs.Instance.Toast(new ToastConfig()
+            UserDialogs.Instance.Snackbar(new SnackbarOptions()
             {
                 Message = DateTime.Now.ToString(),
-
-                Style = ToastStyle.Snackbar,
-                Position = ToastPosition.Default,
 
                 Duration = TimeSpan.FromSeconds(3),
 
@@ -46,12 +41,31 @@ namespace Sample
                 ActionText = "ok",
                 ActionTextColor = Color.Red,
 
-                Action = () => UserDialogs.Instance.Toast(new ToastConfig("click ok"))
+                Action = () => UserDialogs.Instance.Toast("clicked")
 
             });
 
 
             // await Navigation.PushAsync(new ToastPage());
+        }
+
+        private void ActionSheet_Clicked(object sender, EventArgs e)
+        {
+            var c = new ActionSheetOptions();
+
+            c.Title = "Title";
+            c.Message = "Message";
+
+
+
+            c.AddItem("item1", icon: "ic_android_black_24dp");
+            c.AddItem("item2");
+            c.AddItem("item3");
+
+            c.BottomSheet = true;
+
+            UserDialogs.Instance.ActionSheet(c);
+
         }
 
         //private void Button_Clicked_1(object sender, EventArgs e)

@@ -14,7 +14,7 @@ using Android.Widget;
 
 namespace Passingwind.UserDialogs.Platforms
 {
-    public class BottomActionSheetDialogFragment : AbstractAppCompatDialogFragment<ActionSheetConfig>
+    public class BottomActionSheetDialogFragment : AbstractAppCompatDialogFragment<ActionSheetOptions>
     {
         public override void OnCreate(Bundle savedInstanceState)
         {
@@ -25,19 +25,30 @@ namespace Passingwind.UserDialogs.Platforms
             //windows.Attributes.Height = WindowManagerLayoutParams.WrapContent;
         }
 
-        public override void OnStart()
+        //public override void OnStart()
+        //{
+        //    base.OnStart();
+
+        //    var dialog = this.Dialog;
+
+        //    if (dialog != null)
+        //    {
+        //        dialog.Window.SetSoftInputMode(SoftInput.StateAlwaysHidden);
+
+
+        //        dialog.Window.SetLayout(-1, -2);
+        //    }
+        //}
+
+        public override Dialog OnCreateDialog(Bundle bundle)
         {
-            base.OnStart();
+            var di = base.OnCreateDialog(bundle);
 
-            var dialog = this.Dialog;
+            var windows = this.Dialog.Window;
+            windows.SetGravity(GravityFlags.Bottom);
+            windows.Attributes.Gravity = GravityFlags.Bottom;
 
-            if (dialog != null)
-            {
-                dialog.Window.SetSoftInputMode(SoftInput.StateAlwaysHidden);
-
-
-                dialog.Window.SetLayout(-1, -2);
-            }
+            return di;
         }
 
 
@@ -56,6 +67,10 @@ namespace Passingwind.UserDialogs.Platforms
                 dialog.SetCanceledOnTouchOutside(true);
                 dialog.CancelEvent += (sender, args) => this.Config.Cancel.Action.Invoke();
             }
+
+            this.Dialog.Window.SetLayout(WindowManagerLayoutParams.MatchParent, -2);
+            this.Dialog.Window.SetGravity(GravityFlags.Bottom);
+
         }
 
         protected override void OnKeyPress(object sender, DialogKeyEventArgs args)
@@ -70,23 +85,29 @@ namespace Passingwind.UserDialogs.Platforms
             base.OnKeyPress(sender, args);
         }
 
-        protected override Dialog CreateDialog(ActionSheetConfig config)
+        protected override Dialog CreateDialog(ActionSheetOptions config)
         {
-            CustomBottomSheetDialog dialog = new CustomBottomSheetDialog(this.Activity);
+            var contentView = CreateView(this.Config);
 
-            dialog.SetContentView(CreateView(this.Config));
+            //dialog.SetContentView();
 
-            var windows = this.Dialog.Window;
-            windows.SetGravity(GravityFlags.Bottom);
-            windows.Attributes.Gravity = GravityFlags.Bottom;
+            //var windows = this.Dialog.Window;
+            //windows.SetGravity(GravityFlags.Bottom);
+            //windows.Attributes.Gravity = GravityFlags.Bottom;
 
-            dialog.Window.SetSoftInputMode(SoftInput.StateAlwaysHidden);
+            //dialog.Window.SetSoftInputMode(SoftInput.StateAlwaysHidden);
+
+            // ButtomDialogView dialog = new ButtomDialogView(this.Activity, contentView);
+
+            var dialog = new Dialog(this.Context);
+
+            dialog.SetContentView(contentView);
 
             return dialog;
         }
 
 
-        private View CreateView(ActionSheetConfig config)
+        private View CreateView(ActionSheetOptions config)
         {
             var container = new LinearLayout(this.Activity);
             container.Orientation = Orientation.Vertical;
@@ -96,7 +117,7 @@ namespace Passingwind.UserDialogs.Platforms
                 container.AddView(GetHeaderText(config.Title));
             }
 
-            foreach (var action in config.Options)
+            foreach (var action in config.Items)
                 container.AddView(this.CreateRow(action, false));
 
             if (config.Destructive != null)
@@ -116,7 +137,7 @@ namespace Passingwind.UserDialogs.Platforms
         }
 
 
-        private View CreateRow(ActionSheetOption option, bool isDestructive)
+        private View CreateRow(ActionSheetItemOption option, bool isDestructive)
         {
             var row = new LinearLayout(this.Activity)
             {
@@ -222,24 +243,59 @@ namespace Passingwind.UserDialogs.Platforms
     }
 
 
-    public class CustomBottomSheetDialog : Dialog
+    //public class CustomBottomSheetDialog : Dialog
+    //{
+    //    ActionSheetOptions _sheetConfig;
+
+    //    public CustomBottomSheetDialog(Context context) : base(context)
+    //    {
+    //    }
+
+    //    public override void Create()
+    //    {
+    //        base.Create();
+
+    //        //var windows = this.Window;
+
+    //        //windows.SetGravity(GravityFlags.Bottom);
+    //        //windows.Attributes.Width = WindowManagerLayoutParams.MatchParent;
+    //        //windows.Attributes.Height = WindowManagerLayoutParams.WrapContent;
+    //    }
+
+    //}
+
+    /// <summary>
+    ///   https://blog.csdn.net/zhao_doubi/article/details/77895028
+    /// </summary>
+    public class ButtomDialogView : Dialog
     {
-        ActionSheetConfig _sheetConfig;
+        Context _context;
+        View _view;
 
-        public CustomBottomSheetDialog(Context context) : base(context)
+        public ButtomDialogView(Context context, View view) : base(context)
         {
+            _context = context;
+            _view = view;
+
         }
 
-        public override void Create()
+        protected override void OnCreate(Bundle savedInstanceState)
         {
-            base.Create();
+            base.OnCreate(savedInstanceState);
 
-            //var windows = this.Window;
+            SetContentView(_view);
 
-            //windows.SetGravity(GravityFlags.Bottom);
-            //windows.Attributes.Width = WindowManagerLayoutParams.MatchParent;
-            //windows.Attributes.Height = WindowManagerLayoutParams.WrapContent;
+            SetCancelable(false);
+            SetCanceledOnTouchOutside(false);
+
+            var attribute = Window.Attributes;
+            attribute.Width = WindowManagerLayoutParams.MatchParent;
+            attribute.Height = WindowManagerLayoutParams.WrapContent;
+
+            Window.Attributes = attribute;
         }
+
+
 
     }
 

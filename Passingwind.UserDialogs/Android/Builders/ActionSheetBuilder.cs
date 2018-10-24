@@ -24,7 +24,7 @@ namespace Passingwind.UserDialogs.Platforms
         //    return parent;
         //}
 
-        public Dialog Build(Activity activity, ActionSheetConfig config)
+        public Dialog Build(Activity activity, ActionSheetOptions config)
         {
             var dialog = new AlertDialog.Builder(activity, config.AndroidStyleId ?? 0)
                 .SetTitle(config.Title);
@@ -47,15 +47,15 @@ namespace Passingwind.UserDialogs.Platforms
             }
 
 
-            if (config.Options != null && config.Options.Count > 0)
+            if (config.Items != null && config.Items.Count > 0)
             {
-                if (config.Options.All(t => t.ItemIcon == null))
+                if (config.Items.Any(t => t.ItemIcon != null))
                 {
-                    var array = config.Options.Select(t => t.Text).ToArray();
+                    var array = config.Items.Select(t => t.Text).ToArray();
 
                     dialog.SetItems(array, (s, a) =>
                     {
-                        config.Options[a.Which].Action?.Invoke();
+                        config.Items[a.Which].Action?.Invoke();
                     });
                 }
                 else
@@ -64,7 +64,7 @@ namespace Passingwind.UserDialogs.Platforms
 
                     dialog.SetAdapter(adapter, (s, a) =>
                     {
-                        config.Options[a.Which].Action?.Invoke();
+                        config.Items[a.Which].Action?.Invoke();
                     });
                 }
             }
@@ -72,7 +72,7 @@ namespace Passingwind.UserDialogs.Platforms
             return dialog.Create();
         }
 
-        public Dialog Build(AppCompatActivity activity, ActionSheetConfig config)
+        public Dialog Build(AppCompatActivity activity, ActionSheetOptions config)
         {
             var dialog = new AppCompatAlertDialog.Builder(activity, config.AndroidStyleId ?? 0)
                 .SetTitle(config.Title);
@@ -95,25 +95,26 @@ namespace Passingwind.UserDialogs.Platforms
             }
 
 
-            if (config.Options != null && config.Options.Count > 0)
+            if (config.Items != null && config.Items.Count > 0)
             {
-                if (config.Options.Any(t => t.ItemIcon != null))
+                if (config.Items.Any(t => t.ItemIcon != null))
                 {
                     var adapter = new ActionSheetListAdapter(activity, global::Android.Resource.Layout.SelectDialogItem, global::Android.Resource.Id.Text1, config);
 
                     dialog.SetAdapter(adapter, (s, a) =>
                     {
-                        config.Options[a.Which].Action?.Invoke();
+                        config.Items[a.Which].Action?.Invoke();
                     });
                 }
                 else
                 {
-                    var array = config.Options.Select(t => t.Text).ToArray();
+                    var array = config.Items.Select(t => t.Text).ToArray();
 
                     dialog.SetItems(array, (s, a) =>
                     {
-                        config.Options[a.Which].Action?.Invoke();
+                        config.Items[a.Which].Action?.Invoke();
                     });
+
                 }
             }
 
@@ -122,15 +123,15 @@ namespace Passingwind.UserDialogs.Platforms
 
     }
 
-    public class ActionSheetListAdapter : ArrayAdapter<ActionSheetOption>
+    public class ActionSheetListAdapter : ArrayAdapter<ActionSheetItemOption>
     {
         private Context _context;
         private int _resource;
-        private ActionSheetConfig _config;
+        private ActionSheetOptions _config;
 
         public bool AddMarginForImage { get; set; } = true;
 
-        public ActionSheetListAdapter(Context context, int resource, int textViewResourceId, ActionSheetConfig config) : base(context, resource, textViewResourceId, config.Options)
+        public ActionSheetListAdapter(Context context, int resource, int textViewResourceId, ActionSheetOptions config) : base(context, resource, textViewResourceId, config.Items)
         {
             this._context = context;
             this._config = config;
@@ -142,16 +143,16 @@ namespace Passingwind.UserDialogs.Platforms
 
             var textView = view.FindViewById<TextView>(global::Android.Resource.Id.Text1);
 
-            var item = _config.Options[position];
+            var item = _config.Items[position];
 
             textView.Text = item.Text;
 
             if (item.ItemIcon != null)
             {
                 var icon = ImageLoader.Load(item.ItemIcon);
-                if (item.IconPosition == ActionSheetOption.ItemIconPosition.Left)
+                if (item.IconPosition == ActionSheetItemOption.ItemIconPosition.Left)
                     textView.SetCompoundDrawablesWithIntrinsicBounds(icon, null, null, null);
-                else if (item.IconPosition == ActionSheetOption.ItemIconPosition.Right)
+                else if (item.IconPosition == ActionSheetItemOption.ItemIconPosition.Right)
                     textView.SetCompoundDrawablesWithIntrinsicBounds(null, null, icon, null);
 
                 if (AddMarginForImage)

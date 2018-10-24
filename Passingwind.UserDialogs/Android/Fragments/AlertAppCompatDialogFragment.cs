@@ -1,11 +1,11 @@
 ﻿using System;
 using Android.App;
 using Android.Content;
-using Android.Views; 
+using Android.Views;
 
 namespace Passingwind.UserDialogs.Platforms
 {
-    public class AlertAppCompatDialogFragment : AbstractAppCompatDialogFragment<AlertConfig>
+    public class AlertAppCompatDialogFragment : AbstractAppCompatDialogFragment<AlertOptions>
     {
         protected override void OnKeyPress(object sender, DialogKeyEventArgs args)
         {
@@ -16,12 +16,10 @@ namespace Passingwind.UserDialogs.Platforms
 
             args.Handled = true;
 
-            this.Config?.OkAction?.Invoke();
-
             this.Dismiss();
         }
 
 
-        protected override Dialog CreateDialog(AlertConfig config) => new AlertBuilder().Build(this.AppCompatActivity, config);
+        protected override Dialog CreateDialog(AlertOptions config) => new AlertBuilder().Build(this.AppCompatActivity, config);
     }
 }

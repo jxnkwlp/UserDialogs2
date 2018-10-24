@@ -8,21 +8,21 @@ namespace Sample.ViewModels
 {
     class ToastViewModel : BaseViewModel
     {
-        ToastConfig _toastConfig = new ToastConfig();
+        //ToastConfig _toastConfig = new ToastConfig();
 
-        public string Message { get; set; }
+        //public string Message { get; set; }
 
-        public TimeSpan Duration { get; set; }
+        //public TimeSpan Duration { get; set; }
 
-        public ToastPosition Position { get; set; }
+        //public ToastPosition Position { get; set; }
 
-        public ToastStyle Style { get; set; }
+        //public ToastStyle Style { get; set; }
 
 
-        public Command ShowCommand => new Command(() =>
-        {
-            this.UserDialog.Toast(_toastConfig);
-        });
+        //public Command ShowCommand => new Command(() =>
+        //{
+        //    this.UserDialog.Toast(_toastConfig);
+        //});
 
     }
 }

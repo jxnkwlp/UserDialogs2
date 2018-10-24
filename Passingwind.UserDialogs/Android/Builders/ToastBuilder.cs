@@ -11,11 +11,11 @@ using Android;
 
 namespace Passingwind.UserDialogs.Platforms
 {
-    public class ToastBuilder
+    public static class ToastBuilder
     {
         static Toast _toast;
 
-        public static void Show(Activity activity, ToastConfig config)
+        public static void Show(Activity activity, ToastOptions config)
         {
             if (_toast == null)
                 _toast = Toast.MakeText(activity, config.Message, ToastLength.Short);
@@ -61,7 +61,7 @@ namespace Passingwind.UserDialogs.Platforms
 
         static Snackbar _snackbar;
 
-        public static void ShowSnackbar(Activity activity, ToastConfig config)
+        public static void ShowSnackbar(Activity activity, SnackbarOptions config)
         {
             var view = activity.Window.DecorView.RootView.FindViewById(global::Android.Resource.Id.Content);
 
@@ -104,30 +104,30 @@ namespace Passingwind.UserDialogs.Platforms
                 // TODO 
             }
 
-            if (config.Position != ToastPosition.Default)
-            {
-                // watch for this to change in future support lib versions
-                var layoutParams = _snackbar.View.LayoutParameters as FrameLayout.LayoutParams;
-                if (layoutParams != null)
-                {
-                    if (config.Position == ToastPosition.Top)
-                    {
-                        layoutParams.Gravity = GravityFlags.Top;
-                        layoutParams.SetMargins(0, 80, 0, 0);
-                    }
-                    else if (config.Position == ToastPosition.Center)
-                    {
-                        layoutParams.Gravity = GravityFlags.Center;
-                    }
-                    else if (config.Position == ToastPosition.Bottom)
-                    {
-                        layoutParams.Gravity = GravityFlags.Bottom;
-                        layoutParams.SetMargins(0, 0, 0, 30);
-                    }
+            //if (config.Position != ToastPosition.Default)
+            //{
+            //    // watch for this to change in future support lib versions
+            //    var layoutParams = _snackbar.View.LayoutParameters as FrameLayout.LayoutParams;
+            //    if (layoutParams != null)
+            //    {
+            //        if (config.Position == ToastPosition.Top)
+            //        {
+            //            layoutParams.Gravity = GravityFlags.Top;
+            //            layoutParams.SetMargins(0, 80, 0, 0);
+            //        }
+            //        else if (config.Position == ToastPosition.Center)
+            //        {
+            //            layoutParams.Gravity = GravityFlags.Center;
+            //        }
+            //        else if (config.Position == ToastPosition.Bottom)
+            //        {
+            //            layoutParams.Gravity = GravityFlags.Bottom;
+            //            layoutParams.SetMargins(0, 0, 0, 30);
+            //        }
 
-                    _snackbar.View.LayoutParameters = layoutParams;
-                }
-            }
+            //        _snackbar.View.LayoutParameters = layoutParams;
+            //    }
+            //}
 
             _snackbar.Show();
         }

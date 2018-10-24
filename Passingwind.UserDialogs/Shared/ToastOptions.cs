@@ -6,13 +6,12 @@ using System.Text;
 namespace Passingwind.UserDialogs
 {
     /// <summary>
-    /// Define toast config 
+    /// Define toast config options 
     /// </summary>
-    public class ToastConfig
+    public class ToastOptions
     {
         public static TimeSpan DefaultTimeSpan = TimeSpan.FromSeconds(1.5);
         public static ToastPosition DefaultPosition = ToastPosition.Default;
-        public static ToastStyle DefaultToastStyle = ToastStyle.Default;
 
 
         public string Message { get; set; }
@@ -20,8 +19,6 @@ namespace Passingwind.UserDialogs
         public TimeSpan Duration { get; set; } = DefaultTimeSpan;
 
         public ToastPosition Position { get; set; } = DefaultPosition;
-
-        public ToastStyle Style { get; set; } = DefaultToastStyle;
 
 
 
@@ -35,37 +32,31 @@ namespace Passingwind.UserDialogs
         public Action Action { get; set; }
 
 
-        public ToastConfig()
+        public ToastOptions()
         {
         }
 
 
-        public ToastConfig(string message) : this()
+        public ToastOptions(string message) : this()
         {
             this.Message = message;
         }
 
-        public ToastConfig SetMessage(string message)
+        public ToastOptions SetMessage(string message)
         {
             this.Message = message;
             return this;
         }
 
-        public ToastConfig SetDuration(TimeSpan time)
+        public ToastOptions SetDuration(TimeSpan time)
         {
             this.Duration = time;
             return this;
         }
 
-        public ToastConfig SetPosition(ToastPosition position)
+        public ToastOptions SetPosition(ToastPosition position)
         {
             this.Position = position;
-            return this;
-        }
-
-        public ToastConfig SetStyle(ToastStyle style)
-        {
-            this.Style = style;
             return this;
         }
 

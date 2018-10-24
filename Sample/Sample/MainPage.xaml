@@ -9,6 +9,8 @@
         <Button Text="Alert" Clicked="Alert_Clicked" />
 
         <Button Text="Toast" Clicked="Toast_Clicked" />
+
+        <Button Text="ActionSheet" Clicked="ActionSheet_Clicked" />
          
     </StackLayout>
 
