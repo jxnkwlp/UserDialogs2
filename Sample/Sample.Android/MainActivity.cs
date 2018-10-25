@@ -27,6 +27,23 @@ namespace Sample.Droid
 
 
             // Resource.Id.snackbar_text
+
+
+            //var di = new Dialog(this);
+
+            //di.SetContentView(new TextView(this)
+            //{
+            //    Text = "12121",
+            //    LayoutParameters = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MatchParent, ViewGroup.LayoutParams.WrapContent)
+            //});
+
+
+            //di.Window.SetGravity(GravityFlags.Bottom);
+
+            //di.Show();
+
+             // ActionSheetOptions.DefaultAndroidStyleId = Resource.Style.dialog;
+
         }
     }
 }

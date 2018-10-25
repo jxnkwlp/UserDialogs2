@@ -5394,6 +5394,9 @@ namespace Sample.Droid
 			// aapt resource value: 0x7f0d000a
 			public const int Widget_MediaRouter_MediaRouteButton = 2131558410;
 			
+			// aapt resource value: 0x7f0d0192
+			public const int dialog = 2131558802;
+			
 			static Style()
 			{
 				global::Android.Runtime.ResourceIdManager.UpdateIdValues();

@@ -1,118 +1,102 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Android.App;
+﻿using Android.App;
 using Android.Content;
 using Android.Graphics;
 using Android.Graphics.Drawables;
 using Android.OS;
 using Android.Runtime;
-using Android.Support.Design.Widget;
 using Android.Util;
 using Android.Views;
 using Android.Widget;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 
+/// <summary>
+///  https://juejin.im/post/58de0a9a44d904006d04cead
+/// </summary>
 namespace Passingwind.UserDialogs.Platforms
 {
-    public class BottomActionSheetDialogFragment : AbstractAppCompatDialogFragment<ActionSheetOptions>
+    class BottomActionSheetBuilder
     {
-        public override void OnCreate(Bundle savedInstanceState)
+        Activity Activity { get; set; }
+
+        public Dialog Build(Activity activity, ActionSheetOptions config)
         {
-            base.OnCreate(savedInstanceState);
+            var di = new Dialog(activity, config.AndroidStyleId ?? 0);
 
-            //windows.SetGravity(GravityFlags.Bottom);
-            //windows.Attributes.Width = WindowManagerLayoutParams.MatchParent;
-            //windows.Attributes.Height = WindowManagerLayoutParams.WrapContent;
+            var windows = di.Window;
 
+            // 1.
+            windows.RequestFeature(WindowFeatures.NoTitle);
 
+            // 2.
+            di.SetContentView(new BottomActionViewBuilder(activity).CreateView(config));
 
-        }
+            // 3.
+            windows.SetBackgroundDrawable(new ColorDrawable(Color.White)); // 背景 
 
-        public override void OnStart()
-        {
-            base.OnStart();
+            // 4.
+            windows.SetLayout(-1, -2);
 
-            var dialog = this.Dialog;
-
-            if (dialog != null && dialog.Window != null)
-            {
-                dialog.Window.SetSoftInputMode(SoftInput.StateAlwaysHidden);
-                dialog.Window.SetLayout(-1, -2);
-                dialog.Window.Attributes.Gravity = GravityFlags.Bottom;
-
-            }
-        }
-
-        public override Dialog OnCreateDialog(Bundle bundle)
-        {
-            var di = base.OnCreateDialog(bundle);
-
-            var windows = this.Dialog.Window;
             windows.SetGravity(GravityFlags.Bottom);
-            windows.Attributes.Gravity = GravityFlags.Bottom;
+
+            windows.Attributes.Width = windows.WindowManager.DefaultDisplay.Width;
+
+            windows.DecorView.SetPadding(0, 0, 0, 0);
+
+            windows.SetDimAmount(0.5f);
+
 
             return di;
+
         }
 
 
-        protected override void SetDialogDefaults(Dialog dialog)
+
+        //protected override Dialog CreateDialog(ActionSheetOptions config)
+        //{
+        //    var contentView = CreateView(this.Config);
+
+        //    //dialog.SetContentView();
+
+        //    //var windows = this.Dialog.Window;
+        //    //windows.SetGravity(GravityFlags.Bottom);
+        //    //windows.Attributes.Gravity = GravityFlags.Bottom;
+
+        //    //dialog.Window.SetSoftInputMode(SoftInput.StateAlwaysHidden);
+
+        //    // ButtomDialogView dialog = new ButtomDialogView(this.Activity, contentView);
+
+        //    var dialog = new Dialog(this.Context);
+
+        //    dialog.SetContentView(contentView);
+
+        //    return dialog;
+        //}
+
+
+
+
+
+    }
+
+
+    class BottomActionViewBuilder
+    {
+
+        public Activity Activity { get; private set; }
+
+        public BottomActionViewBuilder(Activity activity)
         {
-            // base.SetDialogDefaults(dialog);
-
-            if (this.Config.Cancel == null)
-            {
-                dialog.SetCancelable(false);
-                dialog.SetCanceledOnTouchOutside(false);
-            }
-            else
-            {
-                dialog.SetCancelable(true);
-                dialog.SetCanceledOnTouchOutside(true);
-                dialog.CancelEvent += (sender, args) => this.Config.Cancel.Action.Invoke();
-            }
-
-            this.Dialog.Window.SetLayout(WindowManagerLayoutParams.MatchParent, -2);
-            this.Dialog.Window.SetGravity(GravityFlags.Bottom);
-
-        }
-
-        protected override void OnKeyPress(object sender, DialogKeyEventArgs args)
-        {
-            if (args.KeyCode == Keycode.Back)
-            {
-                args.Handled = true;
-                this.Config?.Cancel?.Action?.Invoke();
-                this.Dismiss();
-            }
-
-            base.OnKeyPress(sender, args);
-        }
-
-        protected override Dialog CreateDialog(ActionSheetOptions config)
-        {
-            var contentView = CreateView(this.Config);
-
-            //dialog.SetContentView();
-
-            //var windows = this.Dialog.Window;
-            //windows.SetGravity(GravityFlags.Bottom);
-            //windows.Attributes.Gravity = GravityFlags.Bottom;
-
-            //dialog.Window.SetSoftInputMode(SoftInput.StateAlwaysHidden);
-
-            // ButtomDialogView dialog = new ButtomDialogView(this.Activity, contentView);
-
-            var dialog = new Dialog(this.Context);
-
-            dialog.SetContentView(contentView);
-
-            return dialog;
+            this.Activity = activity;
         }
 
 
-        private View CreateView(ActionSheetOptions config)
+        public View CreateView(ActionSheetOptions config)
         {
             var container = new LinearLayout(this.Activity);
+            container.LayoutParameters = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MatchParent, ViewGroup.LayoutParams.WrapContent);
             container.Orientation = Orientation.Vertical;
 
             if (!string.IsNullOrEmpty(config.Title))
@@ -155,10 +139,11 @@ namespace Passingwind.UserDialogs.Platforms
             row.Click += (sender, args) =>
             {
                 option.Action?.Invoke();
-                this.Dismiss();
-            };
-            return row;
 
+                // this.Dismiss();
+            };
+
+            return row;
 
         }
 
@@ -242,64 +227,29 @@ namespace Passingwind.UserDialogs.Platforms
             return Convert.ToInt32(value);
         }
 
-
     }
 
 
-    //public class CustomBottomSheetDialog : Dialog
+    //public class BottomActionDialog : Dialog
     //{
-    //    ActionSheetOptions _sheetConfig;
+    //    ActionSheetOptions _options;
 
-    //    public CustomBottomSheetDialog(Context context) : base(context)
+    //    public BottomActionDialog(Context context, ActionSheetOptions options) : base(context)
     //    {
+    //        _options = options;
     //    }
 
-    //    public override void Create()
+    //    protected override void OnCreate(Bundle savedInstanceState)
     //    {
-    //        base.Create();
+    //        base.OnCreate(savedInstanceState);
 
-    //        //var windows = this.Window;
+    //        BottomActionViewBuilder viewBuilder = new BottomActionViewBuilder(this.OwnerActivity);
 
-    //        //windows.SetGravity(GravityFlags.Bottom);
-    //        //windows.Attributes.Width = WindowManagerLayoutParams.MatchParent;
-    //        //windows.Attributes.Height = WindowManagerLayoutParams.WrapContent;
+    //        this.SetContentView(viewBuilder.CreateView(_options));
+
+    //        this.Window.Attributes.Width = WindowManagerLayoutParams.MatchParent;
+    //        this.Window.Attributes.Height = WindowManagerLayoutParams.WrapContent;
+    //        this.Window.SetGravity(Android.Views.GravityFlags.Bottom);
     //    }
-
     //}
-
-    /// <summary>
-    ///   https://blog.csdn.net/zhao_doubi/article/details/77895028
-    /// </summary>
-    public class ButtomDialogView : Dialog
-    {
-        Context _context;
-        View _view;
-
-        public ButtomDialogView(Context context, View view) : base(context)
-        {
-            _context = context;
-            _view = view;
-
-        }
-
-        protected override void OnCreate(Bundle savedInstanceState)
-        {
-            base.OnCreate(savedInstanceState);
-
-            SetContentView(_view);
-
-            SetCancelable(false);
-            SetCanceledOnTouchOutside(false);
-
-            var attribute = Window.Attributes;
-            attribute.Width = WindowManagerLayoutParams.MatchParent;
-            attribute.Height = WindowManagerLayoutParams.WrapContent;
-
-            Window.Attributes = attribute;
-        }
-
-
-
-    }
-
 }

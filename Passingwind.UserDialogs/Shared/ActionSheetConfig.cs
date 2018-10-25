@@ -6,6 +6,8 @@ namespace Passingwind.UserDialogs
 {
     public class ActionSheetOptions : IAndroidStyleDialogConfig
     {
+        public static int? DefaultAndroidStyleId { get; set; }
+
         public static string DefaultCancelText { get; set; } = "Cancel";
         public static string DefaultDestructiveText { get; set; } = "Remove";
 
@@ -14,7 +16,7 @@ namespace Passingwind.UserDialogs
         public static string DefaultItemIcon { get; set; }
 
 
-        public int? AndroidStyleId { get; set; }
+        public int? AndroidStyleId { get; set; } = DefaultAndroidStyleId;
 
 
         public string Title { get; set; }

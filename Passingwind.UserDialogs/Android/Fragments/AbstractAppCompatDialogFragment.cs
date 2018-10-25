@@ -12,25 +12,26 @@ namespace Passingwind.UserDialogs.Platforms
         public T Config { get; set; }
 
 
-        public override void OnSaveInstanceState(Bundle bundle)
+        public override void OnSaveInstanceState(Bundle outState)
         {
-            base.OnSaveInstanceState(bundle);
+            base.OnSaveInstanceState(outState);
 
-            ConfigStore.Instance.Store(bundle, this.Config);
+            ConfigStore.Instance.Store(outState, this.Config);
+             
         }
 
 
-        public override Dialog OnCreateDialog(Bundle bundle)
+        public override Dialog OnCreateDialog(Bundle savedInstanceState)
         {
             Dialog dialog = null;
-            if (this.Config == null && !ConfigStore.Instance.Contains(bundle))
+            if (this.Config == null && !ConfigStore.Instance.Contains(savedInstanceState))
             {
                 this.ShowsDialog = false;
                 this.Dismiss();
             }
             else
             {
-                this.Config = this.Config ?? ConfigStore.Instance.Pop<T>(bundle);
+                this.Config = this.Config ?? ConfigStore.Instance.Pop<T>(savedInstanceState);
                 dialog = this.CreateDialog(this.Config);
                 this.SetDialogDefaults(dialog);
             }
