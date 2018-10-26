@@ -89,7 +89,7 @@ namespace Passingwind.UserDialogs
         {
             var activity = this.TopActivityFunc();
 
-            activity.SafeRunOnUi(() => ToastBuilder.Show(activity, options));
+            ToastBuilder.Show(activity, options);
 
             return new DisposableAction(() =>
             {

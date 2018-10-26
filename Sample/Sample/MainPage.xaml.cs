@@ -23,12 +23,16 @@ namespace Sample
 
         private void Toast_Clicked(object sender, EventArgs e)
         {
-            //UserDialogs.Instance.Toast(new ToastOptions()
-            //{
-            //    Message = DateTime.Now.ToString(),
-            //});
+            UserDialogs.Instance.Toast(new ToastOptions()
+            {
+                Message = DateTime.Now.ToString(),
+            });
 
+            // await Navigation.PushAsync(new ToastPage());
+        }
 
+        private void Snackbar_Clicked(object sender, EventArgs e)
+        {
             UserDialogs.Instance.Snackbar(new SnackbarOptions()
             {
                 Message = DateTime.Now.ToString(),
@@ -45,8 +49,6 @@ namespace Sample
 
             });
 
-
-            // await Navigation.PushAsync(new ToastPage());
         }
 
         private void ActionSheet_Clicked(object sender, EventArgs e)
@@ -55,17 +57,26 @@ namespace Sample
 
             c.Title = "Title";
             c.Message = "Message";
-
-
-
-            c.AddItem("item1", icon: "ic_android_black_24dp");
-            c.AddItem("item2");
-            c.AddItem("item3");
-
             c.BottomSheet = true;
+            c.ItemTextAlgin = ActionSheetItemTextAlgin.Center;
+
+            c.AddItem("item1_icon", icon: "ic_android_black_24dp");
+            c.AddItem("item1");
+            c.AddItem("item2");
+            c.AddItem("item3", action: () => ToastShow("item3"));
+
+            c.SetCancel(action: () => ToastShow("cancel"));
+            c.SetDestructive(action: () => ToastShow("destructive"));
+
+
 
             UserDialogs.Instance.ActionSheet(c);
 
+        }
+
+        void ToastShow(string text)
+        {
+            UserDialogs.Instance.Toast(text);
         }
 
         //private void Button_Clicked_1(object sender, EventArgs e)

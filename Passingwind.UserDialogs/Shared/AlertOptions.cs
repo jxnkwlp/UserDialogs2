@@ -9,20 +9,21 @@ namespace Passingwind.UserDialogs
     /// </summary>
     public class AlertOptions : IAndroidStyleDialogConfig
     {
-        //public static string DefaultOkText = "Yes";
+        public static string DefaultOkText = "Yes";
+        public static string DefaultCancelText = "Cancel";
 
         public static int? DefaultAndroidStyleId;
 
         public string Title { get; set; }
 
-        //public string OkText { get; set; } = DefaultOkText;
-
         public string Message { get; set; }
-
-        //public Action OkAction { get; set; }
 
 
         public int? AndroidStyleId { get; set; } = DefaultAndroidStyleId;
+
+
+        public string OkText { get; set; } = DefaultOkText;
+        public string CancelText { get; set; } = DefaultCancelText;
 
 
 
@@ -60,6 +61,24 @@ namespace Passingwind.UserDialogs
 
         public AlertOptions AddButton(string text, Action action = null)
         {
+            this.Buttons.Add(new AlertButtonOption(text) { Action = action });
+
+            return this;
+        }
+
+        public AlertOptions AddOkButton(string text = null, Action action = null)
+        {
+            text = text ?? OkText;
+
+            this.Buttons.Add(new AlertButtonOption(text) { Action = action });
+
+            return this;
+        }
+
+        public AlertOptions AddCancelButton(string text = null, Action action = null)
+        {
+            text = text ?? CancelText;
+
             this.Buttons.Add(new AlertButtonOption(text) { Action = action });
 
             return this;

@@ -56,10 +56,10 @@
 	<ItemGroup Condition="'$(TargetFramework)' == 'MonoAndroid80'">
 		<Compile Include="Shared\**\*.cs" />
 		<Compile Include="Android\**\*.cs" />
+		<PackageReference Include="KProgressHUD.csharp" Version="1.2.0" />
 		<PackageReference Include="Xamarin.Android.Support.Design" Version="26.1.0.1" />
 		<PackageReference Include="Xamarin.Android.Support.Core.Utils" Version="26.1.0.1" />
 		<PackageReference Include="Xamarin.Android.Support.v7.AppCompat" Version="26.1.0.1" />
-		<ProjectReference Include="..\KProgressHUD\KProgressHUD.cs\KProgressHUD.csproj" />
 	</ItemGroup>
 
 	<ItemGroup Condition="'$(TargetFramework)' == 'Xamarin.iOS10'">

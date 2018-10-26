@@ -25,8 +25,16 @@ namespace Passingwind.UserDialogs
         public string ItemIcon { get; set; } = DefaultItemIcon;
 
 
+        public ActionSheetItemTextAlgin ItemTextAlgin { get; set; }
 
+        /// <summary>
+        ///  cancel option item 
+        /// </summary>
         public ActionSheetItemOption Cancel { get; set; }
+
+        /// <summary>
+        ///  destructive option item
+        /// </summary>
         public ActionSheetItemOption Destructive { get; set; }
 
         public IList<ActionSheetItemOption> Items { get; } = new List<ActionSheetItemOption>();

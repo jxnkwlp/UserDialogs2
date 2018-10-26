@@ -10,6 +10,8 @@
 
         <Button Text="Toast" Clicked="Toast_Clicked" />
 
+        <Button Text="Snackbar" Clicked="Snackbar_Clicked" />
+
         <Button Text="ActionSheet" Clicked="ActionSheet_Clicked" />
          
     </StackLayout>

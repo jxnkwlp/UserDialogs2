@@ -46,8 +46,6 @@ namespace Passingwind.UserDialogs.Platforms
                 _toast.SetGravity(GravityFlags.Bottom, 0, 0);
             }
 
-            _toast.Cancel();
-
             _toast.Show();
         }
 

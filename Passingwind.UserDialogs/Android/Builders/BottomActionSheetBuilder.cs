@@ -31,7 +31,9 @@ namespace Passingwind.UserDialogs.Platforms
             windows.RequestFeature(WindowFeatures.NoTitle);
 
             // 2.
-            di.SetContentView(new BottomActionViewBuilder(activity).CreateView(config));
+            var viewBuilder = new BottomActionViewBuilder(activity, config);
+            viewBuilder.Clicked = () => di.Dismiss();
+            di.SetContentView(viewBuilder.CreateView());
 
             // 3.
             windows.SetBackgroundDrawable(new ColorDrawable(Color.White)); // 背景 
@@ -84,47 +86,60 @@ namespace Passingwind.UserDialogs.Platforms
 
     class BottomActionViewBuilder
     {
+        /// <summary>
+        ///  items start 2
+        ///  0: remove
+        ///  1: cancel
+        /// </summary>
+        public Action Clicked { get; set; }
+
 
         public Activity Activity { get; private set; }
 
-        public BottomActionViewBuilder(Activity activity)
+
+        ActionSheetOptions _config;
+
+        public BottomActionViewBuilder(Activity activity, ActionSheetOptions config)
         {
-            this.Activity = activity;
+            Activity = activity;
+            _config = config;
         }
 
 
-        public View CreateView(ActionSheetOptions config)
+        public virtual View CreateView()
         {
             var container = new LinearLayout(this.Activity);
             container.LayoutParameters = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MatchParent, ViewGroup.LayoutParams.WrapContent);
             container.Orientation = Orientation.Vertical;
 
-            if (!string.IsNullOrEmpty(config.Title))
+            if (!string.IsNullOrEmpty(_config.Title))
             {
-                container.AddView(GetHeaderText(config.Title));
+                container.AddView(GetHeaderText(_config.Title, _config.ItemTextAlgin));
             }
 
-            foreach (var action in config.Items)
-                container.AddView(this.CreateRow(action, false));
+            foreach (var item in _config.Items)
+            {
+                container.AddView(this.CreateRow(item, false, _config.ItemTextAlgin));
+            }
 
-            if (config.Destructive != null)
+            if (_config.Destructive != null)
             {
                 container.AddView(this.CreateDivider());
-                container.AddView(this.CreateRow(config.Destructive, true));
+                container.AddView(this.CreateRow(_config.Destructive, true, _config.ItemTextAlgin));
             }
-            if (config.Cancel != null)
+            if (_config.Cancel != null)
             {
-                if (config.Destructive == null)
+                if (_config.Destructive == null)
                     container.AddView(this.CreateDivider());
 
-                container.AddView(this.CreateRow(config.Cancel, false));
+                container.AddView(this.CreateRow(_config.Cancel, false, _config.ItemTextAlgin));
             }
 
             return container;
         }
 
 
-        private View CreateRow(ActionSheetItemOption option, bool isDestructive)
+        protected View CreateRow(ActionSheetItemOption option, bool isDestructive, ActionSheetItemTextAlgin textAlgin)
         {
             var row = new LinearLayout(this.Activity)
             {
@@ -132,22 +147,27 @@ namespace Passingwind.UserDialogs.Platforms
                 Orientation = Orientation.Horizontal,
                 LayoutParameters = new LinearLayout.LayoutParams(Android.Views.ViewGroup.LayoutParams.MatchParent, this.DpToPixels(48))
             };
-            if (option.ItemIcon != null)
-                row.AddView(this.GetIcon(option.ItemIcon));
 
-            row.AddView(this.GetText(option.Text, isDestructive));
+            //if (option.ItemIcon != null)
+            //    row.AddView(this.GetIcon(option.ItemIcon));
+
+            row.AddView(this.GetText(option.Text, option.ItemIcon, isDestructive, textAlgin));
+
+            // row.SetGravity(GravityFlags.CenterHorizontal | GravityFlags.CenterVertical);
+
+
             row.Click += (sender, args) =>
             {
                 option.Action?.Invoke();
 
-                // this.Dismiss();
+                Clicked?.Invoke();
             };
 
             return row;
 
         }
 
-        protected virtual TextView GetHeaderText(string text)
+        protected virtual TextView GetHeaderText(string text, ActionSheetItemTextAlgin textAlgin)
         {
             var layout = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MatchParent, this.DpToPixels(56))
             {
@@ -157,29 +177,65 @@ namespace Passingwind.UserDialogs.Platforms
             {
                 Text = text,
                 LayoutParameters = layout,
-                Gravity = GravityFlags.CenterVertical
+                Gravity = GravityFlags.CenterVertical,
             };
             txt.SetTextSize(ComplexUnitType.Sp, 16);
+            txt.Paint.FakeBoldText = true;
+
+            if (textAlgin == ActionSheetItemTextAlgin.Center || textAlgin == ActionSheetItemTextAlgin.Right)
+            {
+                txt.Gravity = GravityFlags.CenterVertical | GravityFlags.CenterHorizontal;
+            }
+
             return txt;
         }
 
 
-        protected virtual TextView GetText(string text, bool isDestructive)
+        protected virtual TextView GetText(string text, string icon, bool isDestructive, ActionSheetItemTextAlgin textAlgin)
         {
             var layout = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MatchParent, LinearLayout.LayoutParams.MatchParent)
             {
                 TopMargin = this.DpToPixels(8),
                 BottomMargin = this.DpToPixels(8),
-                LeftMargin = this.DpToPixels(16)
+                LeftMargin = this.DpToPixels(16),
+                RightMargin = this.DpToPixels(16),
             };
 
             var txt = new TextView(this.Activity)
             {
                 Text = text,
                 LayoutParameters = layout,
-                Gravity = GravityFlags.CenterVertical
+                // Gravity = GravityFlags.CenterVertical | GravityFlags.CenterHorizontal,
             };
             txt.SetTextSize(ComplexUnitType.Sp, 16);
+            //  txt.SetBackgroundResource(global::Android.Resource.Attribute.SelectableItemBackground);
+
+            if (!string.IsNullOrWhiteSpace(icon))
+            {
+                var drawable = ImageLoader.Load(icon);
+                drawable.SetBounds(0, 0, drawable.MinimumWidth, drawable.MinimumHeight);
+                txt.SetCompoundDrawables(drawable, null, null, null);
+                txt.CompoundDrawablePadding = this.DpToPixels(6);
+            }
+
+
+            //switch (textAlgin)
+            //{
+            //    case ActionSheetItemTextAlgin.Center:
+            //        txt.Gravity = GravityFlags.CenterVertical | GravityFlags.CenterHorizontal;
+            //        break;
+            //    case ActionSheetItemTextAlgin.Right:
+            //        txt.Gravity = GravityFlags.CenterVertical | GravityFlags.Right;
+            //        break;
+
+            //    default:
+            //        txt.Gravity = GravityFlags.CenterVertical | GravityFlags.Left;
+
+            //        break;
+            //}
+
+
+
             if (isDestructive)
                 txt.SetTextColor(Color.Red);
 
