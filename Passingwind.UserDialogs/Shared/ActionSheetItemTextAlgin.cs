@@ -8,6 +8,6 @@ namespace Passingwind.UserDialogs
     {
         Left,
         Center,
-        Right,
+        // Right,
     }
 }

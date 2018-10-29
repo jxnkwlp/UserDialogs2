@@ -57,13 +57,17 @@ namespace Sample
 
             c.Title = "Title";
             c.Message = "Message";
-            c.BottomSheet = true;
-            c.ItemTextAlgin = ActionSheetItemTextAlgin.Center;
+            // c.BottomSheet = true;
 
-            c.AddItem("item1_icon", icon: "ic_android_black_24dp");
-            c.AddItem("item1");
-            c.AddItem("item2");
-            c.AddItem("item3", action: () => ToastShow("item3"));
+            // c.ItemTextAlgin = ActionSheetItemTextAlgin.Center;
+
+            c.AddItem("item1_icon", icon: "ic_3d_rotation_black_24dp");
+            c.AddItem("item2_icon", icon: "ic_android_black_24dp");
+            c.AddItem("item3_icon", icon: "ic_credit_card_black_24dp");
+
+            //c.AddItem("item1");
+            //c.AddItem("item2");
+            //c.AddItem("item3", action: () => ToastShow("item3"));
 
             c.SetCancel(action: () => ToastShow("cancel"));
             c.SetDestructive(action: () => ToastShow("destructive"));

@@ -28,31 +28,31 @@ namespace Passingwind.UserDialogs.Platforms
 
         }
 
-        public override void OnStart()
-        {
-            base.OnStart();
+        //public override void OnStart()
+        //{
+        //    base.OnStart();
 
-            var dialog = this.Dialog;
+        //    var dialog = this.Dialog;
 
-            if (dialog != null && dialog.Window != null)
-            {
-                dialog.Window.SetSoftInputMode(SoftInput.StateAlwaysHidden);
-                dialog.Window.SetLayout(-1, -2);
-                dialog.Window.Attributes.Gravity = GravityFlags.Bottom;
+        //    if (dialog != null && dialog.Window != null)
+        //    {
+        //        dialog.Window.SetSoftInputMode(SoftInput.StateAlwaysHidden);
+        //        dialog.Window.SetLayout(-1, -2);
+        //        dialog.Window.Attributes.Gravity = GravityFlags.Bottom;
 
-            }
-        }
+        //    }
+        //}
 
-        public override Dialog OnCreateDialog(Bundle bundle)
-        {
-            var di = base.OnCreateDialog(bundle);
+        //public override Dialog OnCreateDialog(Bundle bundle)
+        //{
+        //    var di = base.OnCreateDialog(bundle);
 
-            var windows = this.Dialog.Window;
-            windows.SetGravity(GravityFlags.Bottom);
-            windows.Attributes.Gravity = GravityFlags.Bottom;
+        //    var windows = this.Dialog.Window;
+        //    windows.SetGravity(GravityFlags.Bottom);
+        //    windows.Attributes.Gravity = GravityFlags.Bottom;
 
-            return di;
-        }
+        //    return di;
+        //}
 
 
         protected override void SetDialogDefaults(Dialog dialog)
@@ -71,8 +71,8 @@ namespace Passingwind.UserDialogs.Platforms
                 dialog.CancelEvent += (sender, args) => this.Config.Cancel.Action.Invoke();
             }
 
-            this.Dialog.Window.SetLayout(WindowManagerLayoutParams.MatchParent, -2);
-            this.Dialog.Window.SetGravity(GravityFlags.Bottom);
+            //this.Dialog.Window.SetLayout(WindowManagerLayoutParams.MatchParent, -2);
+            //this.Dialog.Window.SetGravity(GravityFlags.Bottom);
 
         }
 
@@ -90,157 +90,141 @@ namespace Passingwind.UserDialogs.Platforms
 
         protected override Dialog CreateDialog(ActionSheetOptions config)
         {
-            var contentView = CreateView(this.Config);
-
-            //dialog.SetContentView();
-
-            //var windows = this.Dialog.Window;
-            //windows.SetGravity(GravityFlags.Bottom);
-            //windows.Attributes.Gravity = GravityFlags.Bottom;
-
-            //dialog.Window.SetSoftInputMode(SoftInput.StateAlwaysHidden);
-
-            // ButtomDialogView dialog = new ButtomDialogView(this.Activity, contentView);
-
-            var dialog = new Dialog(this.Context);
-
-            dialog.SetContentView(contentView);
-
-            return dialog;
+            return new BottomActionSheetBuilder().Build(this.AppCompatActivity, config);
         }
 
 
-        private View CreateView(ActionSheetOptions config)
-        {
-            var container = new LinearLayout(this.Activity);
-            container.Orientation = Orientation.Vertical;
+        //private View CreateView(ActionSheetOptions config)
+        //{
+        //    var container = new LinearLayout(this.Activity);
+        //    container.Orientation = Orientation.Vertical;
 
-            if (!string.IsNullOrEmpty(config.Title))
-            {
-                container.AddView(GetHeaderText(config.Title));
-            }
+        //    if (!string.IsNullOrEmpty(config.Title))
+        //    {
+        //        container.AddView(GetHeaderText(config.Title));
+        //    }
 
-            foreach (var action in config.Items)
-                container.AddView(this.CreateRow(action, false));
+        //    foreach (var action in config.Items)
+        //        container.AddView(this.CreateRow(action, false));
 
-            if (config.Destructive != null)
-            {
-                container.AddView(this.CreateDivider());
-                container.AddView(this.CreateRow(config.Destructive, true));
-            }
-            if (config.Cancel != null)
-            {
-                if (config.Destructive == null)
-                    container.AddView(this.CreateDivider());
+        //    if (config.Destructive != null)
+        //    {
+        //        container.AddView(this.CreateDivider());
+        //        container.AddView(this.CreateRow(config.Destructive, true));
+        //    }
+        //    if (config.Cancel != null)
+        //    {
+        //        if (config.Destructive == null)
+        //            container.AddView(this.CreateDivider());
 
-                container.AddView(this.CreateRow(config.Cancel, false));
-            }
+        //        container.AddView(this.CreateRow(config.Cancel, false));
+        //    }
 
-            return container;
-        }
-
-
-        private View CreateRow(ActionSheetItemOption option, bool isDestructive)
-        {
-            var row = new LinearLayout(this.Activity)
-            {
-                Clickable = true,
-                Orientation = Orientation.Horizontal,
-                LayoutParameters = new LinearLayout.LayoutParams(Android.Views.ViewGroup.LayoutParams.MatchParent, this.DpToPixels(48))
-            };
-            if (option.ItemIcon != null)
-                row.AddView(this.GetIcon(option.ItemIcon));
-
-            row.AddView(this.GetText(option.Text, isDestructive));
-            row.Click += (sender, args) =>
-            {
-                option.Action?.Invoke();
-                this.Dismiss();
-            };
-            return row;
+        //    return container;
+        //}
 
 
-        }
+        //private View CreateRow(ActionSheetItemOption option, bool isDestructive)
+        //{
+        //    var row = new LinearLayout(this.Activity)
+        //    {
+        //        Clickable = true,
+        //        Orientation = Orientation.Horizontal,
+        //        LayoutParameters = new LinearLayout.LayoutParams(Android.Views.ViewGroup.LayoutParams.MatchParent, this.DpToPixels(48))
+        //    };
+        //    if (option.ItemIcon != null)
+        //        row.AddView(this.GetIcon(option.ItemIcon));
 
-        protected virtual TextView GetHeaderText(string text)
-        {
-            var layout = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MatchParent, this.DpToPixels(56))
-            {
-                LeftMargin = this.DpToPixels(16)
-            };
-            var txt = new TextView(this.Activity)
-            {
-                Text = text,
-                LayoutParameters = layout,
-                Gravity = GravityFlags.CenterVertical
-            };
-            txt.SetTextSize(ComplexUnitType.Sp, 16);
-            return txt;
-        }
-
-
-        protected virtual TextView GetText(string text, bool isDestructive)
-        {
-            var layout = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MatchParent, LinearLayout.LayoutParams.MatchParent)
-            {
-                TopMargin = this.DpToPixels(8),
-                BottomMargin = this.DpToPixels(8),
-                LeftMargin = this.DpToPixels(16)
-            };
-
-            var txt = new TextView(this.Activity)
-            {
-                Text = text,
-                LayoutParameters = layout,
-                Gravity = GravityFlags.CenterVertical
-            };
-            txt.SetTextSize(ComplexUnitType.Sp, 16);
-            if (isDestructive)
-                txt.SetTextColor(Color.Red);
-
-            return txt;
-        }
+        //    row.AddView(this.GetText(option.Text, isDestructive));
+        //    row.Click += (sender, args) =>
+        //    {
+        //        option.Action?.Invoke();
+        //        this.Dismiss();
+        //    };
+        //    return row;
 
 
-        protected virtual ImageView GetIcon(string icon)
-        {
-            var layout = new LinearLayout.LayoutParams(this.DpToPixels(24), this.DpToPixels(24))
-            {
-                TopMargin = this.DpToPixels(8),
-                BottomMargin = this.DpToPixels(8),
-                LeftMargin = this.DpToPixels(16),
-                RightMargin = this.DpToPixels(16),
-                Gravity = GravityFlags.Center
-            };
+        //}
 
-            var img = new ImageView(this.Activity)
-            {
-                LayoutParameters = layout
-            };
-            if (icon != null)
-                img.SetImageDrawable(ImageLoader.Load(icon));
-
-            return img;
-        }
+        //protected virtual TextView GetHeaderText(string text)
+        //{
+        //    var layout = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MatchParent, this.DpToPixels(56))
+        //    {
+        //        LeftMargin = this.DpToPixels(16)
+        //    };
+        //    var txt = new TextView(this.Activity)
+        //    {
+        //        Text = text,
+        //        LayoutParameters = layout,
+        //        Gravity = GravityFlags.CenterVertical
+        //    };
+        //    txt.SetTextSize(ComplexUnitType.Sp, 16);
+        //    return txt;
+        //}
 
 
-        protected virtual View CreateDivider()
-        {
-            var view = new View(this.Activity)
-            {
-                Background = new ColorDrawable(Color.LightGray),
-                LayoutParameters = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MatchParent, this.DpToPixels(1))
-            };
-            view.SetPadding(0, this.DpToPixels(7), 0, this.DpToPixels(8));
-            return view;
-        }
+        //protected virtual TextView GetText(string text, bool isDestructive)
+        //{
+        //    var layout = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MatchParent, LinearLayout.LayoutParams.MatchParent)
+        //    {
+        //        TopMargin = this.DpToPixels(8),
+        //        BottomMargin = this.DpToPixels(8),
+        //        LeftMargin = this.DpToPixels(16)
+        //    };
+
+        //    var txt = new TextView(this.Activity)
+        //    {
+        //        Text = text,
+        //        LayoutParameters = layout,
+        //        Gravity = GravityFlags.CenterVertical
+        //    };
+        //    txt.SetTextSize(ComplexUnitType.Sp, 16);
+        //    if (isDestructive)
+        //        txt.SetTextColor(Color.Red);
+
+        //    return txt;
+        //}
 
 
-        protected virtual int DpToPixels(int dp)
-        {
-            var value = TypedValue.ApplyDimension(ComplexUnitType.Dip, dp, this.Activity.Resources.DisplayMetrics);
-            return Convert.ToInt32(value);
-        }
+        //protected virtual ImageView GetIcon(string icon)
+        //{
+        //    var layout = new LinearLayout.LayoutParams(this.DpToPixels(24), this.DpToPixels(24))
+        //    {
+        //        TopMargin = this.DpToPixels(8),
+        //        BottomMargin = this.DpToPixels(8),
+        //        LeftMargin = this.DpToPixels(16),
+        //        RightMargin = this.DpToPixels(16),
+        //        Gravity = GravityFlags.Center
+        //    };
+
+        //    var img = new ImageView(this.Activity)
+        //    {
+        //        LayoutParameters = layout
+        //    };
+        //    if (icon != null)
+        //        img.SetImageDrawable(ImageLoader.Load(icon));
+
+        //    return img;
+        //}
+
+
+        //protected virtual View CreateDivider()
+        //{
+        //    var view = new View(this.Activity)
+        //    {
+        //        Background = new ColorDrawable(Color.LightGray),
+        //        LayoutParameters = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MatchParent, this.DpToPixels(1))
+        //    };
+        //    view.SetPadding(0, this.DpToPixels(7), 0, this.DpToPixels(8));
+        //    return view;
+        //}
+
+
+        //protected virtual int DpToPixels(int dp)
+        //{
+        //    var value = TypedValue.ApplyDimension(ComplexUnitType.Dip, dp, this.Activity.Resources.DisplayMetrics);
+        //    return Convert.ToInt32(value);
+        //}
 
 
     }
@@ -267,39 +251,39 @@ namespace Passingwind.UserDialogs.Platforms
 
     //}
 
-    /// <summary>
-    ///   https://blog.csdn.net/zhao_doubi/article/details/77895028
-    /// </summary>
-    public class ButtomDialogView : Dialog
-    {
-        Context _context;
-        View _view;
+    ///// <summary>
+    /////   https://blog.csdn.net/zhao_doubi/article/details/77895028
+    ///// </summary>
+    //public class ButtomDialogView : Dialog
+    //{
+    //    Context _context;
+    //    View _view;
 
-        public ButtomDialogView(Context context, View view) : base(context)
-        {
-            _context = context;
-            _view = view;
+    //    public ButtomDialogView(Context context, View view) : base(context)
+    //    {
+    //        _context = context;
+    //        _view = view;
 
-        }
+    //    }
 
-        protected override void OnCreate(Bundle savedInstanceState)
-        {
-            base.OnCreate(savedInstanceState);
+    //    protected override void OnCreate(Bundle savedInstanceState)
+    //    {
+    //        base.OnCreate(savedInstanceState);
 
-            SetContentView(_view);
+    //        SetContentView(_view);
 
-            SetCancelable(false);
-            SetCanceledOnTouchOutside(false);
+    //        SetCancelable(false);
+    //        SetCanceledOnTouchOutside(false);
 
-            var attribute = Window.Attributes;
-            attribute.Width = WindowManagerLayoutParams.MatchParent;
-            attribute.Height = WindowManagerLayoutParams.WrapContent;
+    //        var attribute = Window.Attributes;
+    //        attribute.Width = WindowManagerLayoutParams.MatchParent;
+    //        attribute.Height = WindowManagerLayoutParams.WrapContent;
 
-            Window.Attributes = attribute;
-        }
+    //        Window.Attributes = attribute;
+    //    }
 
 
 
-    }
+    //}
 
 }

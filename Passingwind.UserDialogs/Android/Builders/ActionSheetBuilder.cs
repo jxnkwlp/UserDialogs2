@@ -12,18 +12,6 @@ namespace Passingwind.UserDialogs.Platforms
 {
     public class ActionSheetBuilder
     {
-        //private View GetCustomTitle(Activity activity, ActionSheetConfig config)
-        //{
-        //    LinearLayout parent = new LinearLayout(activity);
-
-        //    var titleView = new TextView(activity);
-        //    titleView.Text = config.Title;
-
-        //    parent.AddView(titleView, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WrapContent, ViewGroup.LayoutParams.WrapContent));
-
-        //    return parent;
-        //}
-
         public Dialog Build(Activity activity, ActionSheetOptions config)
         {
             var dialog = new AlertDialog.Builder(activity, config.AndroidStyleId ?? 0)

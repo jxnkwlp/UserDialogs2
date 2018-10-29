@@ -23,6 +23,8 @@ namespace Passingwind.UserDialogs.Platforms
 
         public Dialog Build(Activity activity, ActionSheetOptions config)
         {
+            this.Activity = activity;
+
             var di = new Dialog(activity, config.AndroidStyleId ?? 0);
 
             var windows = di.Window;
@@ -86,11 +88,6 @@ namespace Passingwind.UserDialogs.Platforms
 
     class BottomActionViewBuilder
     {
-        /// <summary>
-        ///  items start 2
-        ///  0: remove
-        ///  1: cancel
-        /// </summary>
         public Action Clicked { get; set; }
 
 
@@ -171,7 +168,8 @@ namespace Passingwind.UserDialogs.Platforms
         {
             var layout = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MatchParent, this.DpToPixels(56))
             {
-                LeftMargin = this.DpToPixels(16)
+                LeftMargin = this.DpToPixels(16),
+                RightMargin = this.DpToPixels(16),
             };
             var txt = new TextView(this.Activity)
             {
@@ -182,7 +180,7 @@ namespace Passingwind.UserDialogs.Platforms
             txt.SetTextSize(ComplexUnitType.Sp, 16);
             txt.Paint.FakeBoldText = true;
 
-            if (textAlgin == ActionSheetItemTextAlgin.Center || textAlgin == ActionSheetItemTextAlgin.Right)
+            if (textAlgin == ActionSheetItemTextAlgin.Center)
             {
                 txt.Gravity = GravityFlags.CenterVertical | GravityFlags.CenterHorizontal;
             }
@@ -201,11 +199,11 @@ namespace Passingwind.UserDialogs.Platforms
                 RightMargin = this.DpToPixels(16),
             };
 
-            var txt = new TextView(this.Activity)
+            var txt = new TextViewFix(this.Activity)
             {
                 Text = text,
                 LayoutParameters = layout,
-                // Gravity = GravityFlags.CenterVertical | GravityFlags.CenterHorizontal,
+                Gravity = GravityFlags.CenterVertical | GravityFlags.Left,
             };
             txt.SetTextSize(ComplexUnitType.Sp, 16);
             //  txt.SetBackgroundResource(global::Android.Resource.Attribute.SelectableItemBackground);
@@ -213,26 +211,19 @@ namespace Passingwind.UserDialogs.Platforms
             if (!string.IsNullOrWhiteSpace(icon))
             {
                 var drawable = ImageLoader.Load(icon);
-                drawable.SetBounds(0, 0, drawable.MinimumWidth, drawable.MinimumHeight);
+                drawable.SetBounds(0, 0, this.DpToPixels(32), this.DpToPixels(32));
                 txt.SetCompoundDrawables(drawable, null, null, null);
                 txt.CompoundDrawablePadding = this.DpToPixels(6);
+
+                txt.CenterText = textAlgin == ActionSheetItemTextAlgin.Center;
+
             }
 
+            if (string.IsNullOrWhiteSpace(icon) && textAlgin == ActionSheetItemTextAlgin.Center)
+            {
+                txt.Gravity = GravityFlags.CenterHorizontal | GravityFlags.CenterVertical;
 
-            //switch (textAlgin)
-            //{
-            //    case ActionSheetItemTextAlgin.Center:
-            //        txt.Gravity = GravityFlags.CenterVertical | GravityFlags.CenterHorizontal;
-            //        break;
-            //    case ActionSheetItemTextAlgin.Right:
-            //        txt.Gravity = GravityFlags.CenterVertical | GravityFlags.Right;
-            //        break;
-
-            //    default:
-            //        txt.Gravity = GravityFlags.CenterVertical | GravityFlags.Left;
-
-            //        break;
-            //}
+            }
 
 
 
@@ -281,6 +272,60 @@ namespace Passingwind.UserDialogs.Platforms
         {
             var value = TypedValue.ApplyDimension(ComplexUnitType.Dip, dp, this.Activity.Resources.DisplayMetrics);
             return Convert.ToInt32(value);
+        }
+
+
+
+        public class TextViewFix : TextView
+        {
+            public bool CenterText { get; set; }
+
+            public TextViewFix(Context context) : base(context)
+            {
+            }
+
+            public TextViewFix(Context context, IAttributeSet attrs) : base(context, attrs)
+            {
+            }
+
+            public TextViewFix(Context context, IAttributeSet attrs, int defStyleAttr) : base(context, attrs, defStyleAttr)
+            {
+            }
+
+            public TextViewFix(Context context, IAttributeSet attrs, int defStyleAttr, int defStyleRes) : base(context, attrs, defStyleAttr, defStyleRes)
+            {
+            }
+
+            protected TextViewFix(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
+            {
+            }
+
+
+            protected override void OnDraw(Canvas canvas)
+            {
+                if (!CenterText)
+                {
+                    base.OnDraw(canvas);
+                    return;
+                }
+
+                Drawable[] drawables = GetCompoundDrawables();
+                if (drawables != null)
+                {
+                    Drawable drawableLeft = drawables[0];
+                    if (drawableLeft != null)
+                    {
+                        float textWidth = Paint.MeasureText(Text);
+                        int drawablePadding = CompoundDrawablePadding;
+                        int drawableWidth = drawableLeft.IntrinsicWidth;
+                        float bodyWidth = textWidth + drawableWidth + drawablePadding;
+                        canvas.Translate((Width - bodyWidth) / 2, 0);
+                    }
+                }
+
+                base.OnDraw(canvas);
+            }
+
         }
 
     }

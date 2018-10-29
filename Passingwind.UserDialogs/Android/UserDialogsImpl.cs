@@ -128,20 +128,30 @@ namespace Passingwind.UserDialogs
         {
             var activity = this.TopActivityFunc();
 
-            //if (activity is AppCompatActivity compatActivity)
-            //{
-            //    if (config.BottomSheet)
-            //        return this.ShowDialog<BottomActionSheetDialogFragment, ActionSheetOptions>(compatActivity, config);
-            //    else
-            //        return this.ShowDialog<ActionSheetAppCompatDialogFragment, ActionSheetOptions>(compatActivity, config);
-            //}
 
-            return this.Show(activity, () => new BottomActionSheetBuilder().Build(activity, config));
+            if (activity is AppCompatActivity compatActivity)
+            {
+                if (config.BottomSheet)
+                {
+                    return this.ShowDialog<BottomActionSheetDialogFragment, ActionSheetOptions>(compatActivity, config);
+                }
+                else
+                {
+                    return this.ShowDialog<ActionSheetAppCompatDialogFragment, ActionSheetOptions>(compatActivity, config);
+                }
+            }
+            else
+            {
+                if (config.BottomSheet)
+                {
+                    return this.Show(activity, () => new BottomActionSheetBuilder().Build(activity, config));
+                }
+                else
+                {
+                    return this.Show(activity, () => new ActionSheetBuilder().Build(activity, config));
+                }
+            }
 
-            //if (config.BottomSheet)
-
-            //else
-            //    return this.Show(activity, () => new ActionSheetBuilder().Build(activity, config));
         }
 
 
