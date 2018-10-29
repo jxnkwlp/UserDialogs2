@@ -11,7 +11,6 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Passingwind.UserDialogs.Platforms;
-using KProgressHUD;
 
 namespace Passingwind.UserDialogs
 {
@@ -156,38 +155,21 @@ namespace Passingwind.UserDialogs
 
 
 
+        public override IDisposable Loading(LoadingConfig config)
+        {
+            var activity = this.TopActivityFunc();
 
-        //public override void HideLoading()
-        //{
-        //    var activity = this.TopActivityFunc();
+            return new ProgressBuilder().Loading(activity, config);
+        }
 
-        //    if (_kProgressHUD != null)
-        //    {
-        //        _kProgressHUD.Dismiss();
-        //    }
+        public override IProgressDialog Progress(ProgressConfig config)
+        {
+            var activity = this.TopActivityFunc();
 
-        //}
+            return new ProgressBuilder().Progress(activity, config);
+        }
 
-        //public override IDisposable ActionSheet(ActionSheetConfig config)
-        //{
-        //    var activity = this.TopActivityFunc();
 
-        //    if (activity is AppCompatActivity compatActivity)
-        //    {
-        //        if (config.BottomSheet)
-        //        {
-        //            return this.ShowDialog<BottomActionSheetDialogFragment, ActionSheetConfig>(compatActivity, config);
-        //        }
-        //        return this.ShowDialog<ActionSheetAppCompatDialogFragment, ActionSheetConfig>(compatActivity, config);
-        //    }
-
-        //    return this.Show(activity, () => new ActionSheetBuilder().Build(activity, config));
-        //}
-
-        //public override IDisposable DateTimerPicker()
-        //{
-        //    throw new NotImplementedException();
-        //}
 
 
     }

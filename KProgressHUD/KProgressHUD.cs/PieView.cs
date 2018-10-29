@@ -19,9 +19,9 @@ using Android.Graphics;
 using Android.Util;
 using Android.Views;
 
-namespace KProgressHUD
+namespace KProgressHUDLib
 {
-    class PieView : View, IDeterminate
+    public class PieView : View, IDeterminate
     {
         private Paint mWhitePaint;
         private Paint mGreyPaint;
@@ -59,7 +59,6 @@ namespace KProgressHUD
             mBound = new RectF();
         }
 
-
         protected override void OnSizeChanged(int w, int h, int oldw, int oldh)
         {
             base.OnSizeChanged(w, h, oldw, oldh);
@@ -94,6 +93,5 @@ namespace KProgressHUD
 
             Invalidate();
         }
-
     }
 }

@@ -83,6 +83,45 @@ namespace Sample
             UserDialogs.Instance.Toast(text);
         }
 
+        private void Loading_Clicked(object sender, EventArgs e)
+        {
+            UserDialogs.Instance.Loading(new LoadingConfig("please wait")
+            {
+                Cancellable = true,
+                CancelAction = () => ToastShow("you canceled."),
+
+                Duration = TimeSpan.FromSeconds(5),
+
+                MarkType = MarkType.Blank,
+
+            });
+        }
+
+        private void Progress_Clicked(object sender, EventArgs e)
+        {
+            var dialog = UserDialogs.Instance.Progress(new ProgressConfig("download...")
+            {
+                Cancellable = true,
+                CancelAction = () => ToastShow("you canceled."),
+
+                Max = 10,
+                Start = 0,
+            });
+
+            int i = 1;
+            Device.StartTimer(TimeSpan.FromSeconds(1), () =>
+            {
+                dialog.SetProgress(i++);
+
+                return i <= 10;
+            });
+
+
+        }
+
+
+
+
         //private void Button_Clicked_1(object sender, EventArgs e)
         //{
         //    // await UserDialogs.Instance.ToastAsync(new ToastConfig(DateTime.Now.ToString()));

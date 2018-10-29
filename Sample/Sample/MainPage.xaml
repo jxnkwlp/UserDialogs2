@@ -13,7 +13,14 @@
         <Button Text="Snackbar" Clicked="Snackbar_Clicked" />
 
         <Button Text="ActionSheet" Clicked="ActionSheet_Clicked" />
-         
+
+
+        <Button Text="Loading" Clicked="Loading_Clicked" />
+        <Button Text="Progress" Clicked="Progress_Clicked" />
+        
+        
+
+
     </StackLayout>
 
 </ContentPage>

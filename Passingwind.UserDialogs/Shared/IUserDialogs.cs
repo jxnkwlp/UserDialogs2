@@ -38,13 +38,13 @@ namespace Passingwind.UserDialogs
 
         #endregion
 
-        //#region Loading
+        #region Loading
 
-        //IDisposable Loading(LoadingConfig config);
+        IDisposable Loading(LoadingConfig config);
 
-        //IProgressDialog Progress(ProgressConfig config);
+        IProgressDialog Progress(ProgressConfig config);
 
-        //#endregion
+        #endregion
 
         //#region Show
 

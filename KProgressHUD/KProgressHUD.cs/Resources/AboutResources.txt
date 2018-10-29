@@ -39,6 +39,6 @@ public class R {
     }
 }
 
-You would then use Resource.Drawable.icon to reference the drawable/icon.png file, or R.layout.main 
+You would then use R.drawable.icon to reference the drawable/icon.png file, or R.layout.main 
 to reference the layout/main.axml file, or R.strings.first_string to reference the first 
 string in the dictionary file values/strings.xml.

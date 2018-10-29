@@ -20,11 +20,10 @@ using Android.Util;
 using Android.Widget;
 using Java.Lang;
 
-namespace KProgressHUD
+namespace KProgressHUDLib
 {
-    class SpinView : ImageView, IIndeterminate
+    public class SpinView : ImageView, IIndeterminate
     {
-
         private float mRotateDegrees;
         private int mFrameTime;
         private bool mNeedToUpdateView;
@@ -54,8 +53,6 @@ namespace KProgressHUD
                     PostDelayed(mUpdateViewRunnable, mFrameTime);
                 }
             });
-
-
         }
 
         public virtual void SetAnimationSpeed(float scale)
@@ -63,13 +60,11 @@ namespace KProgressHUD
             mFrameTime = (int)(1000 / 12 / scale);
         }
 
-
         protected override void OnDraw(Canvas canvas)
         {
             canvas.Rotate(mRotateDegrees, Width / 2, Height / 2);
             base.OnDraw(canvas);
         }
-
 
         protected override void OnAttachedToWindow()
         {
@@ -78,13 +73,10 @@ namespace KProgressHUD
             Post(mUpdateViewRunnable);
         }
 
-
         protected override void OnDetachedFromWindow()
         {
             mNeedToUpdateView = false;
             base.OnDetachedFromWindow();
         }
     }
-
-
 }

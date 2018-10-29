@@ -10,11 +10,17 @@ namespace Passingwind.UserDialogs
 
         public MarkType MarkType { get; set; }
 
+        /// <summary>
+        ///  default 100 
+        /// </summary>
         public int Max { get; set; } = 100;
 
+        /// <summary>
+        ///  default 0
+        /// </summary>
         public int Start { get; set; } = 0;
 
-         
+
         public bool Cancellable { get; set; }
 
         public Action CancelAction { get; set; }

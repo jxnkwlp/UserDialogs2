@@ -19,10 +19,10 @@ using Android.Graphics;
 using Android.Util;
 using Android.Views;
 
-namespace KProgressHUD
+namespace KProgressHUDLib
 {
-    class BarView : View, IDeterminate
-    { 
+    public class BarView : View, IDeterminate
+    {
         private Paint mOuterPaint;
         private Paint mInnerPaint;
         private RectF mBound;
@@ -78,7 +78,6 @@ namespace KProgressHUD
             canvas.DrawRoundRect(mInBound, mInBound.Height() / 2, mInBound.Height() / 2, mInnerPaint);
         }
 
-
         protected override void OnMeasure(int widthMeasureSpec, int heightMeasureSpec)
         {
             base.OnMeasure(widthMeasureSpec, heightMeasureSpec);
@@ -86,7 +85,6 @@ namespace KProgressHUD
             int heightDimension = Helper.DpToPixel(20, Context);
             SetMeasuredDimension(widthDimension, heightDimension);
         }
-
 
         public virtual void SetMax(int max)
         {

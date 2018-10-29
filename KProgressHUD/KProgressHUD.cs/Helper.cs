@@ -16,11 +16,10 @@
 
 using Android.Content;
 
-namespace KProgressHUD
+namespace KProgressHUDLib
 {
-    class Helper
+    public class Helper
     {
-
         private static float _scale;
 
         public static int DpToPixel(float dp, Context context)

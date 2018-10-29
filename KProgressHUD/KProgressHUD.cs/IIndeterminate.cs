@@ -14,14 +14,14 @@
  *    limitations under the License.
  */
 
-namespace KProgressHUD
+namespace KProgressHUDLib
 {
-
     /**
      * If a view , this interface passed to the HUD as a custom view, its animation
      * speed can be change by calling SetAnimationSpeed() on the HUD.
      * This interface only provides convenience, how animation speed work depends on the view implementation.
      */
+
     public interface IIndeterminate
     {
         void SetAnimationSpeed(float scale);

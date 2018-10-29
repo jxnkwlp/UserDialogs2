@@ -19,10 +19,9 @@ using Android.Graphics;
 using Android.Util;
 using Android.Views;
 
-
-namespace KProgressHUD
+namespace KProgressHUDLib
 {
-    class AnnularView : View, IDeterminate
+    public class AnnularView : View, IDeterminate
     {
         private Paint mWhitePaint;
         private Paint mGreyPaint;

@@ -20,12 +20,10 @@ using Android.OS;
 using Android.Util;
 using Android.Widget;
 
-
-namespace KProgressHUD
+namespace KProgressHUDLib
 {
     public class BackgroundLayout : LinearLayout
     {
-
         private float mCornerRadius;
         private int mBackgroundColor;
 

@@ -35,12 +35,15 @@ namespace Passingwind.UserDialogs
         {
             return Alert(new AlertOptions(message));
         }
+
         public abstract IDisposable Alert(AlertOptions config);
 
 
         public abstract IDisposable ActionSheet(ActionSheetOptions config);
 
+        public abstract IDisposable Loading(LoadingConfig config);
 
+        public abstract IProgressDialog Progress(ProgressConfig config);
 
     }
 }

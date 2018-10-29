@@ -14,13 +14,14 @@
  *    limitations under the License.
  */
 
-namespace KProgressHUD
-{ 
+namespace KProgressHUDLib
+{
     /**
      * If a view , this interface passed to the HUD as a custom view, its progress
      * can be updated by calling SetMax() and SetProgress() on the HUD.
      * This interface only provides convenience, how progress work depends on the view implementation.
      */
+
     public interface IDeterminate
     {
         void SetMax(int max);
