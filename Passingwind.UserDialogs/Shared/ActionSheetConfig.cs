@@ -4,13 +4,13 @@ using System.Text;
 
 namespace Passingwind.UserDialogs
 {
-    public class ActionSheetOptions : IAndroidStyleDialogConfig
+    public class ActionSheetConfig : IAndroidStyleDialogConfig
     {
-        public static int? DefaultAndroidStyleId { get; set; }
-        public static string DefaultCancelText { get; set; } = "Cancel";
-        public static string DefaultDestructiveText { get; set; } = "Remove";
-        public static bool DefaultBottomSheet { get; set; } = false;
-        public static string DefaultItemIcon { get; set; }
+        public static int? DefaultAndroidStyleId;
+        public static string DefaultCancelText = "Cancel";
+        public static string DefaultDestructiveText = "Remove";
+        public static bool DefaultBottomSheet = false;
+        public static string DefaultItemIcon;
 
 
 
@@ -43,37 +43,37 @@ namespace Passingwind.UserDialogs
 
 
 
-        public ActionSheetOptions SetTitle(string title)
+        public ActionSheetConfig SetTitle(string title)
         {
             this.Title = title;
             return this;
         }
 
-        public ActionSheetOptions SetMessage(string message)
+        public ActionSheetConfig SetMessage(string message)
         {
             this.Message = message;
             return this;
         }
 
-        public ActionSheetOptions SetBottomSheet(bool bottomSheet)
+        public ActionSheetConfig SetBottomSheet(bool bottomSheet)
         {
             this.BottomSheet = bottomSheet;
             return this;
         }
 
-        public ActionSheetOptions SetCancel(string text = null, Action action = null, string icon = null)
+        public ActionSheetConfig AddCancel(string text = null, Action action = null, string icon = null)
         {
             this.Cancel = new ActionSheetItem(text ?? DefaultCancelText, action, icon);
             return this;
         }
 
-        public ActionSheetOptions SetDestructive(string text = null, Action action = null, string icon = null)
+        public ActionSheetConfig AddDestructive(string text = null, Action action = null, string icon = null)
         {
             this.Destructive = new ActionSheetItem(text ?? DefaultDestructiveText, action, icon);
             return this;
         }
 
-        public ActionSheetOptions AddItem(string text, Action action = null, string icon = null)
+        public ActionSheetConfig AddItem(string text, Action action = null, string icon = null)
         {
             this.Items.Add(new ActionSheetItem(text, action, icon ?? DefaultItemIcon));
             return this;

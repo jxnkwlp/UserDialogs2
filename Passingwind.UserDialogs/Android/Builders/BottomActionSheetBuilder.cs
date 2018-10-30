@@ -21,7 +21,7 @@ namespace Passingwind.UserDialogs.Platforms
     {
         Activity Activity { get; set; }
 
-        public Dialog Build(Activity activity, ActionSheetOptions config)
+        public Dialog Build(Activity activity, ActionSheetConfig config)
         {
             this.Activity = activity;
 
@@ -94,9 +94,9 @@ namespace Passingwind.UserDialogs.Platforms
         public Activity Activity { get; private set; }
 
 
-        ActionSheetOptions _config;
+        ActionSheetConfig _config;
 
-        public BottomActionViewBuilder(Activity activity, ActionSheetOptions config)
+        public BottomActionViewBuilder(Activity activity, ActionSheetConfig config)
         {
             Activity = activity;
             _config = config;

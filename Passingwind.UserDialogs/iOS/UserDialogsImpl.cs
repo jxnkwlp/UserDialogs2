@@ -37,7 +37,7 @@ namespace Passingwind.UserDialogs
             return new SnackbarBuilder().Build(app, config);
         }
 
-        public override IDisposable ActionSheet(ActionSheetOptions config)
+        public override IDisposable ActionSheet(ActionSheetConfig config)
         {
             return AlertBuilder.ActionSheetCreate(config);
         }

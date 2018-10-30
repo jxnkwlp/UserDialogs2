@@ -123,7 +123,7 @@ namespace Passingwind.UserDialogs
 
 
 
-        public override IDisposable ActionSheet(ActionSheetOptions config)
+        public override IDisposable ActionSheet(ActionSheetConfig config)
         {
             var activity = this.TopActivityFunc();
 
@@ -132,11 +132,11 @@ namespace Passingwind.UserDialogs
             {
                 if (config.BottomSheet)
                 {
-                    return this.ShowDialog<BottomActionSheetDialogFragment, ActionSheetOptions>(compatActivity, config);
+                    return this.ShowDialog<BottomActionSheetDialogFragment, ActionSheetConfig>(compatActivity, config);
                 }
                 else
                 {
-                    return this.ShowDialog<ActionSheetAppCompatDialogFragment, ActionSheetOptions>(compatActivity, config);
+                    return this.ShowDialog<ActionSheetAppCompatDialogFragment, ActionSheetConfig>(compatActivity, config);
                 }
             }
             else

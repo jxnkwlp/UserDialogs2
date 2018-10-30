@@ -20,7 +20,7 @@ namespace Passingwind.UserDialogs.Platforms
                 _snackbar.Duration = config.Duration;
                 _snackbar.AnimationType = TTGSnackbarAnimationType.FadeInFadeOut;
 
-                if (config.ActionText != null && config.Action != null)
+                if (config.ActionText != null)
                 {
                     _snackbar.ActionText = config.ActionText;
                     _snackbar.ActionBlock = (_) => config.Action?.Invoke();

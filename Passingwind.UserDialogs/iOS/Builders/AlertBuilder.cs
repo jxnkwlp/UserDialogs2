@@ -32,7 +32,7 @@ namespace Passingwind.UserDialogs.Platforms
         }
 
 
-        public static IDisposable ActionSheetCreate(ActionSheetOptions config)
+        public static IDisposable ActionSheetCreate(ActionSheetConfig config)
         {
             var controller = UIAlertController.Create(config.Title, config.Message, UIAlertControllerStyle.ActionSheet);
 

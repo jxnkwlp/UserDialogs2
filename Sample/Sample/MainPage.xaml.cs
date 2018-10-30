@@ -20,12 +20,21 @@ namespace Sample
         {
             // await Navigation.PushAsync(new AlertPage());
 
-            UserDialogs.Instance.Alert(DateTime.Now.ToString());
+            // UserDialogs.Instance.Alert(DateTime.Now.ToString());
+
+            UserDialogs.Instance.Alert(new AlertConfig("you confirm message")
+                                                .AddOkButton(action: () =>
+                                                {
+                                                    // ok handle
+                                                })
+                                                .AddCancelButton());
 
         }
 
         private void Toast_Clicked(object sender, EventArgs e)
         {
+            UserDialogs.Instance.Toast("");
+
             UserDialogs.Instance.Toast(new ToastConfig()
             {
                 Message = DateTime.Now.ToString(),
@@ -56,28 +65,28 @@ namespace Sample
 
         private void ActionSheet_Clicked(object sender, EventArgs e)
         {
-            var c = new ActionSheetOptions();
+            var config = new ActionSheetConfig
+            {
+                Title = "Title",
+                Message = "Message",
 
-            c.Title = "Title";
-            c.Message = "Message";
-            // c.BottomSheet = true;
+                BottomSheet = false,
+            };
 
             // c.ItemTextAlgin = ActionSheetItemTextAlgin.Center;
 
-            c.AddItem("item1_icon", icon: "ic_3d_rotation_black_24dp");
-            c.AddItem("item2_icon", icon: "ic_android_black_24dp");
-            c.AddItem("item3_icon", icon: "ic_credit_card_black_24dp");
+            config.AddItem("item1_icon", icon: "ic_3d_rotation_black_24dp");
+            config.AddItem("item2_icon", icon: "ic_android_black_24dp");
+            config.AddItem("item3_icon", icon: "ic_credit_card_black_24dp");
 
             //c.AddItem("item1");
             //c.AddItem("item2");
             //c.AddItem("item3", action: () => ToastShow("item3"));
 
-            c.SetCancel(action: () => ToastShow("cancel"));
-            c.SetDestructive(action: () => ToastShow("destructive"));
-
-
-
-            UserDialogs.Instance.ActionSheet(c);
+            config.AddCancel(action: () => ToastShow("cancel"));
+            config.AddDestructive(action: () => ToastShow("destructive"));
+             
+            UserDialogs.Instance.ActionSheet(config);
 
         }
 

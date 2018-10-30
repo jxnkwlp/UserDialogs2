@@ -14,7 +14,7 @@ using Android.Widget;
 
 namespace Passingwind.UserDialogs.Platforms
 {
-    public class BottomActionSheetDialogFragment : AbstractAppCompatDialogFragment<ActionSheetOptions>
+    public class BottomActionSheetDialogFragment : AbstractAppCompatDialogFragment<ActionSheetConfig>
     {
         public override void OnCreate(Bundle savedInstanceState)
         {
@@ -88,7 +88,7 @@ namespace Passingwind.UserDialogs.Platforms
             base.OnKeyPress(sender, args);
         }
 
-        protected override Dialog CreateDialog(ActionSheetOptions config)
+        protected override Dialog CreateDialog(ActionSheetConfig config)
         {
             return new BottomActionSheetBuilder().Build(this.AppCompatActivity, config);
         }

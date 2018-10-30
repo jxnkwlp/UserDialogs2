@@ -7,7 +7,11 @@ namespace Passingwind.UserDialogs
 {
     public class SnackbarConfig : IAndroidStyleDialogConfig
     {
+        public static string DefaultActionText = null;
         public static TimeSpan DefaultTimeSpan = TimeSpan.FromSeconds(1.2);
+        public static Color? DefaultBackgroundColor = null;
+        public static Color? DefaultTextColor = null;
+        public static Color? DefaultActionTextColor = null;
 
         public static int? DefaultAndroidStyleId;
 
@@ -16,13 +20,13 @@ namespace Passingwind.UserDialogs
 
         public TimeSpan Duration { get; set; } = DefaultTimeSpan;
 
-        public Color? BackgroundColor { get; set; }
+        public Color? BackgroundColor { get; set; } = DefaultBackgroundColor;
+        public Color? TextColor { get; set; } = DefaultTextColor;
 
-        public Color? TextColor { get; set; }
 
+        public string ActionText { get; set; } = DefaultActionText;
+        public Color? ActionTextColor { get; set; } = DefaultActionTextColor;
 
-        public string ActionText { get; set; }
-        public Color? ActionTextColor { get; set; }
         public Action Action { get; set; }
 
         public int? AndroidStyleId { get; set; } = DefaultAndroidStyleId;
@@ -47,6 +51,18 @@ namespace Passingwind.UserDialogs
         public SnackbarConfig SetDuration(TimeSpan time)
         {
             this.Duration = time;
+            return this;
+        }
+
+        public SnackbarConfig SetActionText(string text)
+        {
+            this.ActionText = text;
+            return this;
+        }
+
+        public SnackbarConfig SetAction(Action action)
+        {
+            this.Action = action;
             return this;
         }
 

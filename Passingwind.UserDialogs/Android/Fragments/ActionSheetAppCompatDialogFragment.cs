@@ -6,7 +6,7 @@ using Android.Content;
 
 namespace Passingwind.UserDialogs.Platforms
 {
-    class ActionSheetAppCompatDialogFragment : AbstractAppCompatDialogFragment<ActionSheetOptions>
+    class ActionSheetAppCompatDialogFragment : AbstractAppCompatDialogFragment<ActionSheetConfig>
     {
         protected override void SetDialogDefaults(Dialog dialog)
         {
@@ -31,7 +31,7 @@ namespace Passingwind.UserDialogs.Platforms
             this.Dismiss();
         }
 
-        protected override Dialog CreateDialog(ActionSheetOptions config)
+        protected override Dialog CreateDialog(ActionSheetConfig config)
         {
             return new ActionSheetBuilder().Build(this.AppCompatActivity, config);
         }

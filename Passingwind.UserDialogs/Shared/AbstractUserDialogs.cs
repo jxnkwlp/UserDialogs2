@@ -39,7 +39,7 @@ namespace Passingwind.UserDialogs
         public abstract IDisposable Alert(AlertConfig config);
 
 
-        public abstract IDisposable ActionSheet(ActionSheetOptions config);
+        public abstract IDisposable ActionSheet(ActionSheetConfig config);
 
         public abstract IDisposable Loading(LoadingConfig config);
 

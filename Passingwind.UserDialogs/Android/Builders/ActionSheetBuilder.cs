@@ -12,7 +12,7 @@ namespace Passingwind.UserDialogs.Platforms
 {
     public class ActionSheetBuilder
     {
-        public Dialog Build(Activity activity, ActionSheetOptions config)
+        public Dialog Build(Activity activity, ActionSheetConfig config)
         {
             var dialog = new AlertDialog.Builder(activity, config.AndroidStyleId ?? 0)
                 .SetTitle(config.Title);
@@ -60,7 +60,7 @@ namespace Passingwind.UserDialogs.Platforms
             return dialog.Create();
         }
 
-        public Dialog Build(AppCompatActivity activity, ActionSheetOptions config)
+        public Dialog Build(AppCompatActivity activity, ActionSheetConfig config)
         {
             var dialog = new AppCompatAlertDialog.Builder(activity, config.AndroidStyleId ?? 0)
                 .SetTitle(config.Title);
@@ -115,11 +115,11 @@ namespace Passingwind.UserDialogs.Platforms
     {
         private Context _context;
         private int _resource;
-        private ActionSheetOptions _config;
+        private ActionSheetConfig _config;
 
         public bool AddMarginForImage { get; set; } = true;
 
-        public ActionSheetListAdapter(Context context, int resource, int textViewResourceId, ActionSheetOptions config) : base(context, resource, textViewResourceId, config.Items)
+        public ActionSheetListAdapter(Context context, int resource, int textViewResourceId, ActionSheetConfig config) : base(context, resource, textViewResourceId, config.Items)
         {
             this._context = context;
             this._config = config;

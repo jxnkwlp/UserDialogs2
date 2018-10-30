@@ -34,7 +34,7 @@ namespace Passingwind.UserDialogs
 
         #region ActionSheet
 
-        IDisposable ActionSheet(ActionSheetOptions config);
+        IDisposable ActionSheet(ActionSheetConfig config);
 
         #endregion
 
