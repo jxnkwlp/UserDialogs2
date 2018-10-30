@@ -136,7 +136,7 @@ namespace Passingwind.UserDialogs.Platforms
         }
 
 
-        protected View CreateRow(ActionSheetItemOption option, bool isDestructive, ActionSheetItemTextAlgin textAlgin)
+        protected View CreateRow(ActionSheetItem option, bool isDestructive, ActionSheetItemTextAlgin textAlgin)
         {
             var row = new LinearLayout(this.Activity)
             {

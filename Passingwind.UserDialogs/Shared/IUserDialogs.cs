@@ -11,21 +11,21 @@ namespace Passingwind.UserDialogs
         #region Toast
 
         IDisposable Toast(string message);
-        IDisposable Toast(ToastOptions options);
+        IDisposable Toast(ToastConfig config);
 
         #endregion
 
         #region Snackbar
 
         IDisposable Snackbar(string message, Action action = null);
-        IDisposable Snackbar(SnackbarOptions options);
+        IDisposable Snackbar(SnackbarConfig config);
 
         #endregion
 
         #region Alert
 
         IDisposable Alert(string message);
-        IDisposable Alert(AlertOptions config);
+        IDisposable Alert(AlertConfig config);
 
         //IDisposable Confirm(string message);
         //IDisposable Confirm(AlertOptions config);
@@ -46,17 +46,15 @@ namespace Passingwind.UserDialogs
 
         #endregion
 
-        //#region Show
+        #region MyRegion
+
+        // IDisposable DateTimerPicker();
+
+        // IDisposable OptionsPicker();
+
+        #endregion
 
 
-        //#endregion
 
-        //#region Pickerview
-
-        //// IDisposable DateTimerPicker();
-
-        //// IDisposable OptionsPicker();
-
-        //#endregion
     }
 }

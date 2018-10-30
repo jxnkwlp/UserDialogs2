@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Passingwind.UserDialogs
 {
-    public class ActionSheetItemOption
+    public class ActionSheetItem
     {
         public string Text { get; set; }
 
@@ -14,7 +14,7 @@ namespace Passingwind.UserDialogs
 
         public ItemIconPosition IconPosition { get; set; }
 
-        public ActionSheetItemOption(string text, Action action = null, string icon = null)
+        public ActionSheetItem(string text, Action action = null, string icon = null)
         {
             this.Text = text;
             this.Action = action;

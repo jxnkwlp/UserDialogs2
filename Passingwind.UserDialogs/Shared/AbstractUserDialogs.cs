@@ -18,25 +18,25 @@ namespace Passingwind.UserDialogs
 
         public IDisposable Toast(string message)
         {
-            return Toast(new ToastOptions() { Message = message });
+            return Toast(new ToastConfig() { Message = message });
         }
 
-        public abstract IDisposable Toast(ToastOptions options);
+        public abstract IDisposable Toast(ToastConfig options);
 
         public IDisposable Snackbar(string message, Action action = null)
         {
-            return Snackbar(new SnackbarOptions() { Message = message, Action = action });
+            return Snackbar(new SnackbarConfig() { Message = message, Action = action });
         }
 
-        public abstract IDisposable Snackbar(SnackbarOptions options);
+        public abstract IDisposable Snackbar(SnackbarConfig options);
 
 
         public IDisposable Alert(string message)
         {
-            return Alert(new AlertOptions(message));
+            return Alert(new AlertConfig(message));
         }
 
-        public abstract IDisposable Alert(AlertOptions config);
+        public abstract IDisposable Alert(AlertConfig config);
 
 
         public abstract IDisposable ActionSheet(ActionSheetOptions config);

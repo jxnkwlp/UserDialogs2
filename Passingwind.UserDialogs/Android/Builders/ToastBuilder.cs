@@ -15,7 +15,7 @@ namespace Passingwind.UserDialogs.Platforms
     {
         static Toast _toast;
 
-        public static void Show(Activity activity, ToastOptions config)
+        public static void Show(Activity activity, ToastConfig config)
         {
             if (_toast == null)
                 _toast = Toast.MakeText(activity, config.Message, ToastLength.Short);
@@ -59,7 +59,7 @@ namespace Passingwind.UserDialogs.Platforms
 
         static Snackbar _snackbar;
 
-        public static void ShowSnackbar(Activity activity, SnackbarOptions config)
+        public static void ShowSnackbar(Activity activity, SnackbarConfig config)
         {
             var view = activity.Window.DecorView.RootView.FindViewById(global::Android.Resource.Id.Content);
 

@@ -47,7 +47,7 @@ namespace Passingwind.UserDialogs.Platforms
                 });
             }
 
-            if (config.MarkType == MarkType.Blank)
+            if (config.MarkType == MarkType.Black)
             {
                 _progress.SetDimAmount(0.5f);
             }
@@ -87,7 +87,7 @@ namespace Passingwind.UserDialogs.Platforms
                 });
             }
 
-            if (config.MarkType == MarkType.Blank)
+            if (config.MarkType == MarkType.Black)
             {
                 _progress.SetDimAmount(0.5f);
             }

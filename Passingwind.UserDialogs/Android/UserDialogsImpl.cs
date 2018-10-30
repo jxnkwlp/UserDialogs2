@@ -84,7 +84,7 @@ namespace Passingwind.UserDialogs
         //}
 
 
-        public override IDisposable Toast(ToastOptions options)
+        public override IDisposable Toast(ToastConfig options)
         {
             var activity = this.TopActivityFunc();
 
@@ -97,7 +97,7 @@ namespace Passingwind.UserDialogs
         }
 
 
-        public override IDisposable Snackbar(SnackbarOptions options)
+        public override IDisposable Snackbar(SnackbarConfig options)
         {
             var activity = this.TopActivityFunc();
 
@@ -111,12 +111,12 @@ namespace Passingwind.UserDialogs
 
 
 
-        public override IDisposable Alert(AlertOptions config)
+        public override IDisposable Alert(AlertConfig config)
         {
             var activity = this.TopActivityFunc();
 
             if (activity is AppCompatActivity compatActivity)
-                return this.ShowDialog<AlertAppCompatDialogFragment, AlertOptions>(compatActivity, config);
+                return this.ShowDialog<AlertAppCompatDialogFragment, AlertConfig>(compatActivity, config);
 
             return this.Show(activity, () => new AlertBuilder().Build(activity, config));
         }

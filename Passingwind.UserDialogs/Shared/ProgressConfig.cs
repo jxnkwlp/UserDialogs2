@@ -6,14 +6,17 @@ namespace Passingwind.UserDialogs
 {
     public class ProgressConfig
     {
+        public static MarkType DefaultMarkType = MarkType.Clear;
+        public static int DefaultMax = 100;
+
         public string Text { get; set; }
 
-        public MarkType MarkType { get; set; }
+        public MarkType MarkType { get; set; } = DefaultMarkType;
 
         /// <summary>
         ///  default 100 
         /// </summary>
-        public int Max { get; set; } = 100;
+        public int Max { get; set; } = DefaultMax;
 
         /// <summary>
         ///  default 0

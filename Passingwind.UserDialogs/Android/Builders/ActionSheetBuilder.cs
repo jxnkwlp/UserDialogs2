@@ -111,7 +111,7 @@ namespace Passingwind.UserDialogs.Platforms
 
     }
 
-    public class ActionSheetListAdapter : ArrayAdapter<ActionSheetItemOption>
+    public class ActionSheetListAdapter : ArrayAdapter<ActionSheetItem>
     {
         private Context _context;
         private int _resource;
@@ -138,9 +138,9 @@ namespace Passingwind.UserDialogs.Platforms
             if (item.ItemIcon != null)
             {
                 var icon = ImageLoader.Load(item.ItemIcon);
-                if (item.IconPosition == ActionSheetItemOption.ItemIconPosition.Left)
+                if (item.IconPosition == ActionSheetItem.ItemIconPosition.Left)
                     textView.SetCompoundDrawablesWithIntrinsicBounds(icon, null, null, null);
-                else if (item.IconPosition == ActionSheetItemOption.ItemIconPosition.Right)
+                else if (item.IconPosition == ActionSheetItem.ItemIconPosition.Right)
                     textView.SetCompoundDrawablesWithIntrinsicBounds(null, null, icon, null);
 
                 if (AddMarginForImage)

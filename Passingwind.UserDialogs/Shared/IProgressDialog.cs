@@ -5,7 +5,6 @@ using System.Text;
 namespace Passingwind.UserDialogs
 {
     /// <summary>
-    ///  define <see cref="IProgressDialog"/>
     /// </summary>
     public interface IProgressDialog
     {

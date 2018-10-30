@@ -7,12 +7,12 @@ namespace Passingwind.UserDialogs
     /// <summary>
     ///  Define Alert config
     /// </summary>
-    public class AlertOptions : IAndroidStyleDialogConfig
+    public class AlertConfig : IAndroidStyleDialogConfig
     {
         public static string DefaultOkText = "Yes";
         public static string DefaultCancelText = "Cancel";
-
         public static int? DefaultAndroidStyleId;
+
 
         public string Title { get; set; }
 
@@ -26,73 +26,83 @@ namespace Passingwind.UserDialogs
         public string CancelText { get; set; } = DefaultCancelText;
 
 
+        public AlertButtonItem OkButton { get; set; }
+        public AlertButtonItem CancelButton { get; set; }
+        public AlertButtonItem DestructiveButton { get; set; }
 
-        public IList<AlertButtonOption> Buttons { get; } = new List<AlertButtonOption>();
 
-
-        public AlertOptions()
+        public AlertConfig()
         {
         }
 
-        public AlertOptions(string title, string message) : this()
+        public AlertConfig(string title, string message) : this()
         {
             this.Title = title;
             this.Message = message;
         }
 
-        public AlertOptions(string message) : this()
+        public AlertConfig(string message) : this()
         {
             this.Message = message;
         }
 
-        public AlertOptions SetTitle(string value)
+        public AlertConfig SetTitle(string value)
         {
             this.Title = value;
 
             return this;
         }
 
-        public AlertOptions SetMessage(string value)
+        public AlertConfig SetMessage(string value)
         {
             this.Message = value;
 
             return this;
         }
 
-        public AlertOptions AddButton(string text, Action action = null)
+        public AlertConfig AddDestructiveButton(string text, Action action = null)
         {
-            this.Buttons.Add(new AlertButtonOption(text) { Action = action });
+            this.DestructiveButton = new AlertButtonItem(text)
+            {
+                Action = action,
+            };
 
             return this;
         }
 
-        public AlertOptions AddOkButton(string text = null, Action action = null)
+        public AlertConfig AddOkButton(string text = null, Action action = null)
         {
             text = text ?? OkText;
 
-            this.Buttons.Add(new AlertButtonOption(text) { Action = action });
+            this.OkButton = new AlertButtonItem(text)
+            {
+                Action = action,
+            };
 
             return this;
         }
 
-        public AlertOptions AddCancelButton(string text = null, Action action = null)
+        public AlertConfig AddCancelButton(string text = null, Action action = null)
         {
             text = text ?? CancelText;
 
-            this.Buttons.Add(new AlertButtonOption(text) { Action = action });
+            this.CancelButton = new AlertButtonItem(text)
+            {
+                Action = action,
+            };
 
             return this;
         }
 
     }
 
-    public class AlertButtonOption
+    public class AlertButtonItem
     {
         public string Text { get; set; }
 
         public Action Action { get; set; }
 
-        public AlertButtonOption(string text)
+        public AlertButtonItem(string text)
         {
             this.Text = text;
         }

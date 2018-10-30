@@ -5,7 +5,7 @@ using Android.Views;
 
 namespace Passingwind.UserDialogs.Platforms
 {
-    public class AlertAppCompatDialogFragment : AbstractAppCompatDialogFragment<AlertOptions>
+    public class AlertAppCompatDialogFragment : AbstractAppCompatDialogFragment<AlertConfig>
     {
         protected override void OnKeyPress(object sender, DialogKeyEventArgs args)
         {
@@ -20,6 +20,6 @@ namespace Passingwind.UserDialogs.Platforms
         }
 
 
-        protected override Dialog CreateDialog(AlertOptions config) => new AlertBuilder().Build(this.AppCompatActivity, config);
+        protected override Dialog CreateDialog(AlertConfig config) => new AlertBuilder().Build(this.AppCompatActivity, config);
     }
 }

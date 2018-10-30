@@ -7,13 +7,12 @@ namespace Passingwind.UserDialogs
     public class ActionSheetOptions : IAndroidStyleDialogConfig
     {
         public static int? DefaultAndroidStyleId { get; set; }
-
         public static string DefaultCancelText { get; set; } = "Cancel";
         public static string DefaultDestructiveText { get; set; } = "Remove";
-
         public static bool DefaultBottomSheet { get; set; } = false;
-
         public static string DefaultItemIcon { get; set; }
+
+
 
 
         public int? AndroidStyleId { get; set; } = DefaultAndroidStyleId;
@@ -30,14 +29,14 @@ namespace Passingwind.UserDialogs
         /// <summary>
         ///  cancel option item 
         /// </summary>
-        public ActionSheetItemOption Cancel { get; set; }
+        public ActionSheetItem Cancel { get; set; }
 
         /// <summary>
         ///  destructive option item
         /// </summary>
-        public ActionSheetItemOption Destructive { get; set; }
+        public ActionSheetItem Destructive { get; set; }
 
-        public IList<ActionSheetItemOption> Items { get; } = new List<ActionSheetItemOption>();
+        public IList<ActionSheetItem> Items { get; } = new List<ActionSheetItem>();
 
 
         public bool BottomSheet { get; set; } = DefaultBottomSheet;
@@ -64,19 +63,19 @@ namespace Passingwind.UserDialogs
 
         public ActionSheetOptions SetCancel(string text = null, Action action = null, string icon = null)
         {
-            this.Cancel = new ActionSheetItemOption(text ?? DefaultCancelText, action, icon);
+            this.Cancel = new ActionSheetItem(text ?? DefaultCancelText, action, icon);
             return this;
         }
 
         public ActionSheetOptions SetDestructive(string text = null, Action action = null, string icon = null)
         {
-            this.Destructive = new ActionSheetItemOption(text ?? DefaultDestructiveText, action, icon);
+            this.Destructive = new ActionSheetItem(text ?? DefaultDestructiveText, action, icon);
             return this;
         }
 
         public ActionSheetOptions AddItem(string text, Action action = null, string icon = null)
         {
-            this.Items.Add(new ActionSheetItemOption(text, action, icon ?? DefaultItemIcon));
+            this.Items.Add(new ActionSheetItem(text, action, icon ?? DefaultItemIcon));
             return this;
         }
 

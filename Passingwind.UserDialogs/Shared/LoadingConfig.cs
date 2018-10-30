@@ -6,12 +6,15 @@ namespace Passingwind.UserDialogs
 {
     public class LoadingConfig
     {
+        public static TimeSpan? DefaultDuration;
+        public static MarkType DefaultMarkType;
+
+
         public string Text { get; set; }
 
+        public TimeSpan? Duration { get; set; } = DefaultDuration;
 
-        public TimeSpan? Duration { get; set; }
-
-        public MarkType MarkType { get; set; }
+        public MarkType MarkType { get; set; } = DefaultMarkType;
 
 
         public bool Cancellable { get; set; }

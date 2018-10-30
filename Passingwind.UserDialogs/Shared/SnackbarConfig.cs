@@ -5,22 +5,16 @@ using System.Text;
 
 namespace Passingwind.UserDialogs
 {
-    /// <summary>
-    /// Define toast config options 
-    /// </summary>
-    public class ToastOptions
+    public class SnackbarConfig : IAndroidStyleDialogConfig
     {
-        public static TimeSpan DefaultTimeSpan = TimeSpan.FromSeconds(1.5);
-        public static ToastPosition DefaultPosition = ToastPosition.Default;
+        public static TimeSpan DefaultTimeSpan = TimeSpan.FromSeconds(1.2);
+
+        public static int? DefaultAndroidStyleId;
 
 
         public string Message { get; set; }
 
         public TimeSpan Duration { get; set; } = DefaultTimeSpan;
-
-        public ToastPosition Position { get; set; } = DefaultPosition;
-
-
 
         public Color? BackgroundColor { get; set; }
 
@@ -31,36 +25,30 @@ namespace Passingwind.UserDialogs
         public Color? ActionTextColor { get; set; }
         public Action Action { get; set; }
 
+        public int? AndroidStyleId { get; set; } = DefaultAndroidStyleId;
 
-        public ToastOptions()
+
+        public SnackbarConfig()
         {
         }
 
 
-        public ToastOptions(string message) : this()
+        public SnackbarConfig(string message) : this()
         {
             this.Message = message;
         }
 
-        public ToastOptions SetMessage(string message)
+        public SnackbarConfig SetMessage(string message)
         {
             this.Message = message;
             return this;
         }
 
-        public ToastOptions SetDuration(TimeSpan time)
+        public SnackbarConfig SetDuration(TimeSpan time)
         {
             this.Duration = time;
             return this;
         }
 
-        public ToastOptions SetPosition(ToastPosition position)
-        {
-            this.Position = position;
-            return this;
-        }
-
     }
-
-
 }

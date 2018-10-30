@@ -7,6 +7,6 @@ namespace Passingwind.UserDialogs
     public enum MarkType
     {
         Clear,
-        Blank,
+        Black,
     }
 }

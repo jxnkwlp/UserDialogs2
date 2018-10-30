@@ -5,7 +5,7 @@ namespace Sample.ViewModels
 {
     public class AlertViewModel : BaseViewModel
     {
-        private AlertOptions _alertConfig = new AlertOptions();
+        private AlertConfig _alertConfig = new AlertConfig();
         private string _title;
         private string _okText;
         private string _message;
