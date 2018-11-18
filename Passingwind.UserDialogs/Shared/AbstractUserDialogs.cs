@@ -28,7 +28,7 @@ namespace Passingwind.UserDialogs
             return Snackbar(new SnackbarConfig() { Message = message, Action = action });
         }
 
-        public abstract IDisposable Snackbar(SnackbarConfig options);
+        public abstract IDisposable Snackbar(SnackbarConfig config);
 
 
         public IDisposable Alert(string message)

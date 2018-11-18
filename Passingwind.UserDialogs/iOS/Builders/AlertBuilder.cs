@@ -8,7 +8,7 @@ namespace Passingwind.UserDialogs.Platforms
 {
     public static class AlertBuilder
     {
-        public static IDisposable AlertCreate(AlertConfig config)
+        public static UIAlertController AlertBuild(AlertConfig config)
         {
             var controller = UIAlertController.Create(config.Title, config.Message, UIAlertControllerStyle.Alert);
 
@@ -32,7 +32,7 @@ namespace Passingwind.UserDialogs.Platforms
         }
 
 
-        public static IDisposable ActionSheetCreate(ActionSheetConfig config)
+        public static UIAlertController ActionSheetBuild(ActionSheetConfig config)
         {
             var controller = UIAlertController.Create(config.Title, config.Message, UIAlertControllerStyle.ActionSheet);
 

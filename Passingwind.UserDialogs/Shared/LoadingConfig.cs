@@ -8,7 +8,7 @@ namespace Passingwind.UserDialogs
     {
         public static TimeSpan? DefaultDuration;
         public static MarkType DefaultMarkType;
-
+        public static string DefaultCancelText = "Cancel";
 
         public string Text { get; set; }
 
@@ -18,6 +18,11 @@ namespace Passingwind.UserDialogs
 
 
         public bool Cancellable { get; set; }
+
+        /// <summary>
+        ///  for iOS 
+        /// </summary>
+        public string CancelText { get; set; } = DefaultCancelText;
 
         public Action CancelAction { get; set; }
 

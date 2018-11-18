@@ -72,8 +72,7 @@ namespace Passingwind.UserDialogs.Platforms
 
             _progress = KProgressHUD.Create(activity, KProgressHUD.Style.PieDeterminate).SetLabel(config.Text);
 
-            _progress.SetMaxProgress(config.Max);
-            _progress.SetProgress(config.Start);
+            _progress.SetMaxProgress(100);
 
             _progress.SetCancellable(config.Cancellable);
 
@@ -116,9 +115,9 @@ namespace Passingwind.UserDialogs.Platforms
                 _progress.Dismiss();
             }
 
-            public void SetProgress(int value)
+            public void SetProgress(uint value)
             {
-                _progress.SetProgress(value);
+                _progress.SetProgress((int)value);
             }
         }
 

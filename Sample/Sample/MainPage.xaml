@@ -8,6 +8,8 @@
 
         <Button Text="Alert" Clicked="Alert_Clicked" />
 
+        <Button Text="Confirm" Clicked="Confirm_Clicked" />
+
         <Button Text="Toast" Clicked="Toast_Clicked" />
 
         <Button Text="Snackbar" Clicked="Snackbar_Clicked" />

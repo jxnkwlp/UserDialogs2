@@ -7,24 +7,18 @@ namespace Passingwind.UserDialogs
     public class ProgressConfig
     {
         public static MarkType DefaultMarkType = MarkType.Clear;
-        public static int DefaultMax = 100;
+        public static string DefaultCancelText = "Cancel";
 
         public string Text { get; set; }
 
         public MarkType MarkType { get; set; } = DefaultMarkType;
 
-        /// <summary>
-        ///  default 100 
-        /// </summary>
-        public int Max { get; set; } = DefaultMax;
-
-        /// <summary>
-        ///  default 0
-        /// </summary>
-        public int Start { get; set; } = 0;
-
-
         public bool Cancellable { get; set; }
+
+        /// <summary>
+        ///  for iOS
+        /// </summary>
+        public string CancelText { get; set; } = DefaultCancelText;
 
         public Action CancelAction { get; set; }
 
@@ -43,20 +37,6 @@ namespace Passingwind.UserDialogs
             this.Text = text;
             return this;
         }
-
-        public ProgressConfig SetStart(int value)
-        {
-            this.Start = value;
-            return this;
-        }
-
-
-        public ProgressConfig SetMax(int value)
-        {
-            this.Max = value;
-            return this;
-        }
-
 
     }
 }

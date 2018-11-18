@@ -28,6 +28,15 @@
     <MtouchArch>x86_64</MtouchArch>
     <MtouchLink>None</MtouchLink>
     <MtouchDebug>true</MtouchDebug>
+    <MtouchFloat32>true</MtouchFloat32>
+    <CodesignKey>iPhone Developer</CodesignKey>
+    <CodesignProvision>
+    </CodesignProvision>
+    <CodesignExtraArgs />
+    <CodesignResourceRules />
+    <CodesignEntitlements />
+    <MtouchNoSymbolStrip>true</MtouchNoSymbolStrip>
+    <MtouchFastDev>true</MtouchFastDev>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
     <DebugType>none</DebugType>
@@ -88,6 +97,9 @@
     <CodesignProvision>Automatic:AppStore</CodesignProvision>
     <CodesignKey>iPhone Distribution</CodesignKey>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(RunConfiguration)' == 'Default' ">
+    <AppExtensionDebugBundleId />
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Main.cs" />
@@ -152,6 +164,10 @@
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>
+    <ProjectReference Include="..\..\Passingwind.UserDialogs\Passingwind.UserDialogs.csproj">
+      <Project>{dba6284b-c0c8-436a-b012-0fe2adced0aa}</Project>
+      <Name>Passingwind.UserDialogs</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Sample\Sample.csproj">
       <Project>{0382CB1C-6C0D-4D60-A746-6D07B967E749}</Project>
       <Name>Sample</Name>

@@ -18,23 +18,24 @@ namespace Sample
 
         private void Alert_Clicked(object sender, EventArgs e)
         {
-            // await Navigation.PushAsync(new AlertPage());
-
             // UserDialogs.Instance.Alert(DateTime.Now.ToString());
+            UserDialogs.Instance.Alert(new AlertConfig(DateTime.Now.ToString()).AddOkButton());
+        }
 
+        private void Confirm_Clicked(object sender, EventArgs e)
+        {
             UserDialogs.Instance.Alert(new AlertConfig("you confirm message")
-                                                .AddOkButton(action: () =>
-                                                {
-                                                    // ok handle
-                                                })
-                                                .AddCancelButton());
-
+                                              .AddOkButton(action: () =>
+                                              {
+                                                  // ok handle
+                                              })
+                                              .AddCancelButton()
+                                              // .AddDestructiveButton("Delete")
+                                              );
         }
 
         private void Toast_Clicked(object sender, EventArgs e)
         {
-            UserDialogs.Instance.Toast("");
-
             UserDialogs.Instance.Toast(new ToastConfig()
             {
                 Message = DateTime.Now.ToString(),
@@ -51,8 +52,8 @@ namespace Sample
 
                 Duration = TimeSpan.FromSeconds(3),
 
-                TextColor = Color.BurlyWood,
-                BackgroundColor = Color.Yellow,
+                //TextColor = Color.BurlyWood,
+                //BackgroundColor = Color.Yellow,
 
                 ActionText = "ok",
                 ActionTextColor = Color.Red,
@@ -75,17 +76,18 @@ namespace Sample
 
             // c.ItemTextAlgin = ActionSheetItemTextAlgin.Center;
 
-            config.AddItem("item1_icon", icon: "ic_3d_rotation_black_24dp");
-            config.AddItem("item2_icon", icon: "ic_android_black_24dp");
-            config.AddItem("item3_icon", icon: "ic_credit_card_black_24dp");
+            //config.AddItem("item1_icon", icon: "ic_3d_rotation_black_24dp");
+            //config.AddItem("item2_icon", icon: "ic_android_black_24dp");
+            //config.AddItem("item3_icon", icon: "ic_credit_card_black_24dp");
 
-            //c.AddItem("item1");
-            //c.AddItem("item2");
-            //c.AddItem("item3", action: () => ToastShow("item3"));
+            config.AddItem("item1");
+            config.AddItem("item2");
+            config.AddItem("item3", action: () => ToastShow("item3"));
+
 
             config.AddCancel(action: () => ToastShow("cancel"));
             config.AddDestructive(action: () => ToastShow("destructive"));
-             
+
             UserDialogs.Instance.ActionSheet(config);
 
         }
@@ -116,21 +118,20 @@ namespace Sample
                 Cancellable = true,
                 CancelAction = () => ToastShow("you canceled."),
 
-                Max = 10,
-                Start = 0,
             });
 
-            int i = 1;
+            uint i = 1;
             Device.StartTimer(TimeSpan.FromSeconds(1), () =>
             {
-                dialog.SetProgress(i++);
+                i += 10;
 
-                return i <= 10;
+                dialog.SetProgress(i);
+
+                return i <= 100;
             });
 
 
         }
-
 
 
     }

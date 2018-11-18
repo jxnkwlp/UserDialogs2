@@ -8,8 +8,15 @@ namespace Passingwind.UserDialogs
     /// </summary>
     public interface IProgressDialog
     {
+        /// <summary>
+        ///  hide the progress dialog hub
+        /// </summary>
         void Hide();
 
-        void SetProgress(int value);
+        /// <summary>
+        ///  set the progress values, value between 0-100 
+        /// </summary>
+        /// <param name="value">value</param>
+        void SetProgress(uint value);
     }
 }

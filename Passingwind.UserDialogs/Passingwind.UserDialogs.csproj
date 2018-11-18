@@ -20,7 +20,7 @@
 		<PackageProjectUrl>https://github.com/jxnkwlp/UserDialogs2</PackageProjectUrl>
 		<RepositoryUrl>https://github.com/jxnkwlp/UserDialogs2</RepositoryUrl>
 		<Description>A cross platform library that allows you to call for standard user dialogs from a shared/portable library, suport android and ios .
-Includes Alert, Confirm, Toast, ActionSheet, Loading, Progress.</Description>
+    Includes Alert, Confirm, Toast, ActionSheet, Loading, Progress.</Description>
 		<Version>0.1-bate</Version>
 
 		
@@ -75,6 +75,7 @@ Includes Alert, Confirm, Toast, ActionSheet, Loading, Progress.</Description>
 		<Compile Include="iOS\**\*.cs" />
 		<Reference Include="OpenTK-1.0" />
 		<PackageReference Include="SVProgressHUD" Version="2.2.5" />
+		<PackageReference Include="Ricardo.MBProgressHUD.iOS" Version="1.1.0" />
 	</ItemGroup>
 
 
