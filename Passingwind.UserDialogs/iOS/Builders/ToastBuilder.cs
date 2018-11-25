@@ -18,8 +18,10 @@ namespace Passingwind.UserDialogs.Platforms
                 _hub = MBProgressHUD.ShowHUD(view, true);
                 _hub.Mode = MBProgressHUDMode.Text;
                 _hub.Label.Text = config.Message;
-
+                _hub.Label.LineBreakMode = UILineBreakMode.WordWrap;
                 _hub.MinShowTime = 1; // The minimum time (in seconds) that the HUD is shown. 
+
+                _hub.UserInteractionEnabled = false;
 
                 if (config.TextColor.HasValue)
                 {
@@ -28,8 +30,18 @@ namespace Passingwind.UserDialogs.Platforms
 
                 if (config.BackgroundColor.HasValue)
                 {
-                    _hub.BackgroundColor = config.BackgroundColor.Value.ToNative();
+                    _hub.BezelView.BackgroundColor = config.BackgroundColor.Value.ToNative();
                 }
+
+                if (config.Position == ToastPosition.Top)
+                {
+                    _hub.Offset = new CoreGraphics.CGPoint(0, 0);
+                }
+                else if (config.Position == ToastPosition.Bottom || config.Position == ToastPosition.Default)
+                {
+                    _hub.Offset = new CoreGraphics.CGPoint(0, 10000);
+                }
+
 
                 _hub.Show(true);
 

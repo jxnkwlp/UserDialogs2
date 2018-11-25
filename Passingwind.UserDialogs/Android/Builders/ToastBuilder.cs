@@ -19,20 +19,19 @@ namespace Passingwind.UserDialogs.Platforms
         {
             if (_toast == null)
                 _toast = Toast.MakeText(activity, config.Message, ToastLength.Short);
+            
 
             // set message 
             _toast.SetText(config.Message);
 
             // TODO
             // change time 
-            if (config.Duration.Seconds >= 2)
+            if (config.Duration.Seconds >= 3)
             {
                 _toast.Duration = ToastLength.Long;
             }
 
-
-
-
+              
             if (config.Position == ToastPosition.Top)
             {
                 _toast.SetGravity(GravityFlags.Top, 0, 0);

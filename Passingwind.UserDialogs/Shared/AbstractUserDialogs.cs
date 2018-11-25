@@ -16,12 +16,12 @@ namespace Passingwind.UserDialogs
 
 
 
-        public IDisposable Toast(string message)
+        public void Toast(string message)
         {
-            return Toast(new ToastConfig() { Message = message });
+            Toast(new ToastConfig() { Message = message });
         }
 
-        public abstract IDisposable Toast(ToastConfig options);
+        public abstract void Toast(ToastConfig options);
 
         public IDisposable Snackbar(string message, Action action = null)
         {

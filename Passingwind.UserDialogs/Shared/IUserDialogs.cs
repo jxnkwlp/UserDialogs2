@@ -10,8 +10,8 @@ namespace Passingwind.UserDialogs
     {
         #region Toast
 
-        IDisposable Toast(string message);
-        IDisposable Toast(ToastConfig config);
+        void Toast(string message);
+        void Toast(ToastConfig config);
 
         #endregion
 

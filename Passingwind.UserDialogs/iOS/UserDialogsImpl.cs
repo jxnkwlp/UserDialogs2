@@ -26,11 +26,12 @@ namespace Passingwind.UserDialogs
             return this.Present(AlertBuilder.AlertBuild(config));
         }
 
-        public override IDisposable Toast(ToastConfig config)
+        // ok 
+        public override void Toast(ToastConfig config)
         {
             var app = UIApplication.SharedApplication;
             var top = this.ViewControllerFunc();
-            return ToastBuilder.Build(app, top.View, config);
+            ToastBuilder.Build(app, top.View, config);
         }
 
         public override IDisposable Snackbar(SnackbarConfig config)

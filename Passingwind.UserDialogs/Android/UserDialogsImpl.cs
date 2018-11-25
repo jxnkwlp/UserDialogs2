@@ -84,16 +84,11 @@ namespace Passingwind.UserDialogs
         //}
 
 
-        public override IDisposable Toast(ToastConfig options)
+        public override void Toast(ToastConfig options)
         {
             var activity = this.TopActivityFunc();
 
             ToastBuilder.Show(activity, options);
-
-            return new DisposableAction(() =>
-            {
-                activity.SafeRunOnUi(() => ToastBuilder.Hide());
-            });
         }
 
 

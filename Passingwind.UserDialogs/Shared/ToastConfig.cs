@@ -10,7 +10,7 @@ namespace Passingwind.UserDialogs
     /// </summary>
     public class ToastConfig : IAndroidStyleDialogConfig
     {
-        public static TimeSpan DefaultTimeSpan = TimeSpan.FromSeconds(1.5);
+        public static TimeSpan DefaultTimeSpan = TimeSpan.FromSeconds(2);
         public static ToastPosition DefaultPosition = ToastPosition.Default;
         public static int? DefaultAndroidStyleId;
 
@@ -23,22 +23,15 @@ namespace Passingwind.UserDialogs
 
         public ToastPosition Position { get; set; } = DefaultPosition;
 
-
-
         public Color? BackgroundColor { get; set; }
 
         public Color? TextColor { get; set; }
 
 
-        public string ActionText { get; set; }
-        public Color? ActionTextColor { get; set; }
-        public Action Action { get; set; }
-
 
         public ToastConfig()
         {
         }
-
 
         public ToastConfig(string message)
         {

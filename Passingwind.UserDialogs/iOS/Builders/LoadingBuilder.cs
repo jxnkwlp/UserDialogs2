@@ -18,6 +18,7 @@ namespace Passingwind.UserDialogs.Platforms
                 _loadingHub = MBProgressHUD.ShowHUD(view, true);
                 _loadingHub.Mode = MBProgressHUDMode.Indeterminate;
                 _loadingHub.Label.Text = config.Text;
+                _loadingHub.Label.LineBreakMode = UILineBreakMode.WordWrap;
 
                 _loadingHub.MinShowTime = 1; // The minimum time (in seconds) that the HUD is shown. 
 

@@ -1,84 +1,83 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-	<PropertyGroup>
-		<TargetFrameworks></TargetFrameworks>
-		<TargetFrameworks Condition=" '$(OS)' == 'Windows_NT' ">netstandard2.0;MonoAndroid80;Xamarin.iOS10;</TargetFrameworks>																																	 
-		<TargetFrameworks Condition=" '$(OS)' != 'Windows_NT' ">netstandard2.0;MonoAndroid80;Xamarin.iOS10</TargetFrameworks>
-		<SignAssembly>true</SignAssembly>
-		<AssemblyName>Passingwind.UserDialogs</AssemblyName>
-		<RootNamespace>Passingwind.UserDialogs</RootNamespace>
+  <PropertyGroup>
+    <TargetFrameworks></TargetFrameworks>
+    <TargetFrameworks Condition=" '$(OS)' == 'Windows_NT' ">netstandard2.0;MonoAndroid80;Xamarin.iOS10;</TargetFrameworks>
+    <TargetFrameworks Condition=" '$(OS)' != 'Windows_NT' ">netstandard2.0;MonoAndroid80;Xamarin.iOS10</TargetFrameworks>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyName>Passingwind.UserDialogs</AssemblyName>
+    <RootNamespace>Passingwind.UserDialogs</RootNamespace>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 
-		<EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <Product>Passingwind.UserDialogs</Product>
+    <Company>Passingwind</Company>
+    <Authors>Passingwind</Authors>
+    <PackageProjectUrl>https://github.com/jxnkwlp/UserDialogs2</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/jxnkwlp/UserDialogs2</RepositoryUrl>
+    <Description>
+      A cross platform library that allows you to call for standard user dialogs from a shared/portable library, suport android and ios .
+      Includes Alert, Confirm, Toast, ActionSheet, Loading, Progress.
+    </Description>
 
-		<GenerateAssemblyInfo>true</GenerateAssemblyInfo>
- 
-		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-
-		<Product>Passingwind.UserDialogs</Product>
-		<Company>Passingwind</Company>
-		<Authors>Passingwind</Authors>
-		<PackageProjectUrl>https://github.com/jxnkwlp/UserDialogs2</PackageProjectUrl>
-		<RepositoryUrl>https://github.com/jxnkwlp/UserDialogs2</RepositoryUrl>
-		<Description>A cross platform library that allows you to call for standard user dialogs from a shared/portable library, suport android and ios .
-    Includes Alert, Confirm, Toast, ActionSheet, Loading, Progress.</Description>
-		<Version>0.1-bate</Version>
-
-		
-	</PropertyGroup>
-
-
-	<PropertyGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' ">
-		<ProduceReferenceAssembly>True</ProduceReferenceAssembly>
-		<DefineConstants>$(DefineConstants);NETSTANDARD;BAIT</DefineConstants>
-		<Product>Passingwind.UserDialogs - .NET Standard 2</Product>
-	</PropertyGroup>
-
-	<PropertyGroup Condition=" '$(TargetFramework)' == 'MonoAndroid71' OR  '$(TargetFramework)' == 'MonoAndroid80' ">
-		<DefineConstants>$(DefineConstants);__ANDROID__</DefineConstants>
-		<Product>Passingwind.UserDialogs - Android</Product>
-		<!--<AndroidSupportedAbis>armeabi;x86</AndroidSupportedAbis>-->
-	</PropertyGroup>
-
-	<PropertyGroup Condition=" '$(TargetFramework)' == 'Xamarin.iOS10' ">
-		<DefineConstants>$(DefineConstants);__IOS__</DefineConstants>
-		<Product>Passingwind.UserDialogs - iOS</Product>
-	</PropertyGroup>
-
-	<ItemGroup>
-		<PackageReference Include="MSBuild.Sdk.Extras" Version="1.4.0" PrivateAssets="All" />
-	</ItemGroup>
-
-	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|netstandard2.0|AnyCPU'">
-		<DocumentationFile />
-	</PropertyGroup>
-
-	<ItemGroup>
-		<Compile Remove="**\*.cs" />
-		<None Include="**\*.cs" />
-		<!--<Compile Include="*.cs" />-->
-	</ItemGroup>
-
-	<ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
-		<Compile Include="Shared\**\*.cs" />
-		<PackageReference Include="Xamarin.Forms" Version="3.1.0.697729" />
-	</ItemGroup>
- 
-	<ItemGroup Condition="'$(TargetFramework)' == 'MonoAndroid80'">
-		<Compile Include="Shared\**\*.cs" />
-		<Compile Include="Android\**\*.cs" />
-		<PackageReference Include="KProgressHUD.csharp" Version="1.2.1" />
-		<PackageReference Include="Xamarin.Android.Support.Design" Version="26.1.0.1" />
-	</ItemGroup>
-
-	<ItemGroup Condition="'$(TargetFramework)' == 'Xamarin.iOS10'">
-		<Compile Include="Shared\**\*.cs" />
-		<Compile Include="iOS\**\*.cs" />
-		<Reference Include="OpenTK-1.0" />
-		<PackageReference Include="SVProgressHUD" Version="2.2.5" />
-		<PackageReference Include="Ricardo.MBProgressHUD.iOS" Version="1.1.0" />
-	</ItemGroup>
+    <Version>0.1-bate</Version>
+    <AssemblyVersion>0.1.6902.12</AssemblyVersion>
+  </PropertyGroup>
 
 
-	<Import Project="$(MSBuildSDKExtrasTargets)" Condition="Exists('$(MSBuildSDKExtrasTargets)')" />
+  <PropertyGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' ">
+    <ProduceReferenceAssembly>True</ProduceReferenceAssembly>
+    <DefineConstants>$(DefineConstants);NETSTANDARD;BAIT</DefineConstants>
+    <Product>Passingwind.UserDialogs - .NET Standard 2</Product>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(TargetFramework)' == 'MonoAndroid71' OR  '$(TargetFramework)' == 'MonoAndroid80' ">
+    <DefineConstants>$(DefineConstants);__ANDROID__</DefineConstants>
+    <Product>Passingwind.UserDialogs - Android</Product>
+    <!--<AndroidSupportedAbis>armeabi;x86</AndroidSupportedAbis>-->
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(TargetFramework)' == 'Xamarin.iOS10' ">
+    <DefineConstants>$(DefineConstants);__IOS__</DefineConstants>
+    <Product>Passingwind.UserDialogs - iOS</Product>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MSBuild.Sdk.Extras" Version="1.4.0" PrivateAssets="All" />
+  </ItemGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|netstandard2.0|AnyCPU'">
+    <DocumentationFile />
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="**\*.cs" />
+    <None Include="**\*.cs" />
+    <!--<Compile Include="*.cs" />-->
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
+    <Compile Include="Shared\**\*.cs" />
+    <PackageReference Include="Xamarin.Forms" Version="3.1.0.697729" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'MonoAndroid80'">
+    <Compile Include="Shared\**\*.cs" />
+    <Compile Include="Android\**\*.cs" />
+    <PackageReference Include="KProgressHUD.csharp" Version="1.2.1" />
+    <PackageReference Include="Xamarin.Android.Support.Design" Version="26.1.0.1" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'Xamarin.iOS10'">
+    <Compile Include="Shared\**\*.cs" />
+    <Compile Include="iOS\**\*.cs" />
+    <Reference Include="OpenTK-1.0" />
+    <PackageReference Include="SVProgressHUD" Version="2.2.5" />
+    <PackageReference Include="Ricardo.MBProgressHUD.iOS" Version="1.1.0" />
+  </ItemGroup>
+
+
+  <Import Project="$(MSBuildSDKExtrasTargets)" Condition="Exists('$(MSBuildSDKExtrasTargets)')" />
 
 </Project>

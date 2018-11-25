@@ -39,6 +39,14 @@ namespace Sample
             UserDialogs.Instance.Toast(new ToastConfig()
             {
                 Message = DateTime.Now.ToString(),
+
+                Position = ToastPosition.Center,
+
+                Duration = TimeSpan.FromSeconds(5),
+
+                TextColor = Color.Red,
+                BackgroundColor = Color.Yellow,
+
             });
 
             // await Navigation.PushAsync(new ToastPage());
