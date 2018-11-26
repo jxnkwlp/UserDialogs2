@@ -96,11 +96,11 @@ namespace Passingwind.UserDialogs
         {
             var activity = this.TopActivityFunc();
 
-            ToastBuilder.ShowSnackbar(activity, options);
+            SnackbarBuilder.ShowSnackbar(activity, options);
 
             return new DisposableAction(() =>
             {
-                ToastBuilder.Hide();
+                SnackbarBuilder.Hide();
             });
         }
 

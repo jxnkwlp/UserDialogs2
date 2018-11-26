@@ -40,7 +40,7 @@ namespace Sample
             {
                 Message = DateTime.Now.ToString(),
 
-                Position = ToastPosition.Center,
+                // Position = ToastPosition.Center,
 
                 Duration = TimeSpan.FromSeconds(5),
 
