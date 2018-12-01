@@ -3,7 +3,7 @@
 namespace Passingwind.UserDialogs
 {
     /// <summary>
-    ///  Define Alert config
+    ///  Alert config
     /// </summary>
     public class AlertConfig : IAndroidStyleDialogConfig
     {

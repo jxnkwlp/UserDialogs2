@@ -2,33 +2,33 @@
 
   <PropertyGroup>
     <TargetFrameworks></TargetFrameworks>
-    <TargetFrameworks Condition=" '$(OS)' == 'Windows_NT' ">netstandard2.0;MonoAndroid71;Xamarin.iOS10;</TargetFrameworks>
-    <TargetFrameworks Condition=" '$(OS)' != 'Windows_NT' ">netstandard2.0;MonoAndroid71;Xamarin.iOS10</TargetFrameworks>
+    <TargetFrameworks Condition=" '$(OS)' == 'Windows_NT' ">netstandard2.0;MonoAndroid71;MonoAndroid80;Xamarin.iOS10;</TargetFrameworks>
+    <TargetFrameworks Condition=" '$(OS)' != 'Windows_NT' ">netstandard2.0;MonoAndroid71;MonoAndroid80;Xamarin.iOS10</TargetFrameworks>
     <SignAssembly>true</SignAssembly>
     <AssemblyName>Passingwind.UserDialogs</AssemblyName>
     <RootNamespace>Passingwind.UserDialogs</RootNamespace>
     <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
     <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    
 
     <Product>Passingwind.UserDialogs</Product>
     <Company>Passingwind</Company>
     <Authors>Passingwind</Authors>
     <PackageProjectUrl>https://github.com/jxnkwlp/UserDialogs2</PackageProjectUrl>
     <RepositoryUrl>https://github.com/jxnkwlp/UserDialogs2</RepositoryUrl>
-    <Description>
-      A cross platform library that allows you to call for standard user dialogs from a shared/portable library, suport android and ios .
-      Includes Alert, Confirm, Toast, ActionSheet, Loading, Progress.
-    </Description>
+    <Description>A cross platform library that allows you to call for standard user dialogs from a shared/portable library, suport android and ios .
+Includes Alert, Confirm, Toast, ActionSheet, Loading, Progress.</Description>
 
     <Version>0.1</Version>
-    <AssemblyVersion>0.1.6909.23</AssemblyVersion>
+    <AssemblyVersion>0.1.6909.7</AssemblyVersion>
+    <RepositoryType>github</RepositoryType>
+    <PackageTags>xamarin.forms ios android dialogs plugin</PackageTags>
   </PropertyGroup>
  
 
   <PropertyGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' ">
     <ProduceReferenceAssembly>True</ProduceReferenceAssembly>
-    <DefineConstants>$(DefineConstants);NETSTANDARD;BAIT</DefineConstants>
+    <DefineConstants>DEBUG;TRACE;NETSTANDARD;BAIT</DefineConstants>
     <Product>Passingwind.UserDialogs - .NET Standard 2</Product>
   </PropertyGroup>
 
@@ -52,6 +52,11 @@
     <DocumentationFile />
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)'=='Release'">
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <DocumentationFile>bin\Passingwind.UserDialogs.xml</DocumentationFile>
+  </PropertyGroup>
+
   <ItemGroup>
     <Compile Remove="**\*.cs" />
     <None Include="**\*.cs" />
@@ -59,8 +64,14 @@
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
+    <Compile Include="Shared\**\*.cs" /> 
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'MonoAndroid71'">
     <Compile Include="Shared\**\*.cs" />
-    <PackageReference Include="Xamarin.Forms" Version="3.4.0.1008975" />
+    <Compile Include="Android\**\*.cs" />
+    <PackageReference Include="KProgressHUD.csharp" Version="1.2.1" />
+    <PackageReference Include="Xamarin.Android.Support.Design" Version="25.4.0.2" />
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' == 'MonoAndroid80'">

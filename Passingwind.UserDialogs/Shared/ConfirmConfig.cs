@@ -2,6 +2,9 @@
 
 namespace Passingwind.UserDialogs
 {
+    /// <summary>
+    ///  Confirm Config
+    /// </summary>
     public class ConfirmConfig
     {
         public static string DefaultOkText = "Ok";

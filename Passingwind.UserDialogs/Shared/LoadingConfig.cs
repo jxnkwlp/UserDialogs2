@@ -2,6 +2,9 @@
 
 namespace Passingwind.UserDialogs
 {
+    /// <summary>
+    ///  Loading Config
+    /// </summary>
     public class LoadingConfig
     {
         public static TimeSpan? DefaultDuration;

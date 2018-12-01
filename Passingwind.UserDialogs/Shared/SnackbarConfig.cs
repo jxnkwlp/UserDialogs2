@@ -3,6 +3,9 @@ using System.Drawing;
 
 namespace Passingwind.UserDialogs
 {
+    /// <summary>
+    ///  Snackbar Config
+    /// </summary>
     public class SnackbarConfig : IAndroidStyleDialogConfig
     {
         public static string DefaultActionText = null;

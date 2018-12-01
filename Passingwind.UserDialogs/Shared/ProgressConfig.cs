@@ -2,6 +2,9 @@
 
 namespace Passingwind.UserDialogs
 {
+    /// <summary>
+    ///  Progress Config
+    /// </summary>
     public class ProgressConfig
     {
         public static MarkType DefaultMarkType = MarkType.Clear;

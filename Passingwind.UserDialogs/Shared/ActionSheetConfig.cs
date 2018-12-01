@@ -11,6 +11,9 @@ namespace Passingwind.UserDialogs
         Theme1,
     }
 
+    /// <summary>
+    ///  ActionSheetConfig
+    /// </summary>
     public class ActionSheetConfig : IAndroidStyleDialogConfig
     {
         public static int? DefaultAndroidStyleId;

@@ -16,13 +16,17 @@ Common UserDialogs interface for xamarin android/ios
 
 # Support Platforms
 
-1. Android
+1. Android 7.1+
 2. iOS 10+
 3. NET Standard 2.0
 
 # Setup
 
-install nuget package in share/standard and platform projects. 
+Install nuget package in share/standard and platform projects. [Passingwind.UserDialogs](https://www.nuget.org/packages/Passingwind.UserDialogs/)
+
+~~~~ powershell
+Install-Package Passingwind.UserDialogs
+~~~~
 
 a. Android Initialization (In your main activity)  
 
@@ -157,8 +161,8 @@ IProgressDialog Progress(ProgressConfig config);
     ~~~~ csharp
     var dialog = UserDialogs.Instance.Loading(new LoadingConfig("please wait")
         {
-            Cancellable = true, // can cancel loading when show loading , only android
-            CancelAction = () => // you action handle, only android
+            Cancellable = true, // can cancel loading when show loading
+            CancelAction = () => // you action handle 
 
             Duration = TimeSpan.FromSeconds(5), // show loading duration second
 
@@ -176,13 +180,13 @@ IProgressDialog Progress(ProgressConfig config);
     ~~~~ csharp
     var dialog = UserDialogs.Instance.Progress(new ProgressConfig("download...")
     {
-        Cancellable = true, // can cancel loading when show loading , only android
-        CancelAction = () => // you action handle, only android
+        Cancellable = true, // can cancel loading when show loading 
+        CancelAction = () => // you action handle
 
     });
 
     // set current progress value when task update
-    dialog.SetProgress(6);   // 1-100
+    dialog.SetProgress(30);   // 1-100
 
     // close dialog if you need.
     dialog.Hide();
@@ -191,6 +195,6 @@ IProgressDialog Progress(ProgressConfig config);
 
 # Powered By
 
-1. Android- Progress/Loading uses KProgressHUD
+1. Android- Progress/Loading uses [KProgressHUD](https://github.com/jxnkwlp/KProgressHUD.csharp)
 2. iOS - Progress/Loading/Toast uses  [MBProgressHUD](https://github.com/ricardo-ch/xamarin-mbprogresshud-ios/)
 3. iOS - Snackbar uses  [TTGSnackbar](https://github.com/MarcBruins/TTGSnackbar-Xamarin-iOS)
