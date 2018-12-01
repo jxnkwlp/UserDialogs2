@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Passingwind.UserDialogs
 {
@@ -16,16 +14,14 @@ namespace Passingwind.UserDialogs
 
         public MarkType MarkType { get; set; } = DefaultMarkType;
 
-
         public bool Cancellable { get; set; }
 
         /// <summary>
-        ///  for iOS 
+        ///  for iOS
         /// </summary>
         public string CancelText { get; set; } = DefaultCancelText;
 
         public Action CancelAction { get; set; }
-
 
         public LoadingConfig()
         {
@@ -36,7 +32,6 @@ namespace Passingwind.UserDialogs
             this.Text = text;
         }
 
-
         public LoadingConfig SetText(string text)
         {
             this.Text = text;
@@ -44,13 +39,11 @@ namespace Passingwind.UserDialogs
             return this;
         }
 
-
         public LoadingConfig SetDuration(TimeSpan time)
         {
             this.Duration = time;
 
             return this;
         }
-
     }
 }

@@ -30,7 +30,6 @@ namespace Passingwind.UserDialogs
             Instance = new UserDialogsImpl(topActivityFactory);
         }
 
-
         /// <summary>
         /// Initialize android user dialogs
         /// </summary>
@@ -40,7 +39,6 @@ namespace Passingwind.UserDialogs
             Init(() => ActivityLifecycleCallbacks.CurrentTopActivity);
         }
 
-
         /// <summary>
         /// Initialize android user dialogs
         /// </summary>
@@ -49,6 +47,5 @@ namespace Passingwind.UserDialogs
             ActivityLifecycleCallbacks.Register(activity);
             Init(() => ActivityLifecycleCallbacks.CurrentTopActivity);
         }
-
     }
 }

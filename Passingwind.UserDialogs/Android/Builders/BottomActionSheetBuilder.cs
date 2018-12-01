@@ -38,7 +38,7 @@ namespace Passingwind.UserDialogs.Platforms
             di.SetContentView(viewBuilder.CreateView());
 
             // 3.
-            windows.SetBackgroundDrawable(new ColorDrawable(Color.White)); // 背景 
+            windows.SetBackgroundDrawable(new ColorDrawable(Color.White)); // 背景
 
             // 4.
             windows.SetLayout(-1, -2);
@@ -51,13 +51,9 @@ namespace Passingwind.UserDialogs.Platforms
 
             windows.SetDimAmount(0.5f);
 
-
             return di;
-
         }
-
     }
-
 
     class BottomActionViewBuilder
     {
@@ -72,7 +68,6 @@ namespace Passingwind.UserDialogs.Platforms
             Activity = activity;
             _config = config;
         }
-
 
         public virtual View CreateView()
         {
@@ -112,7 +107,6 @@ namespace Passingwind.UserDialogs.Platforms
             return container;
         }
 
-
         protected View CreateRow(ActionSheetItem option, bool isDestructive, ActionSheetItemTextAlgin textAlgin)
         {
             var row = new LinearLayout(this.Activity)
@@ -124,7 +118,6 @@ namespace Passingwind.UserDialogs.Platforms
 
             row.AddView(this.GetText(option.Text, option.ItemIcon, isDestructive, textAlgin));
 
-
             row.Click += (sender, args) =>
             {
                 option.Action?.Invoke();
@@ -133,7 +126,6 @@ namespace Passingwind.UserDialogs.Platforms
             };
 
             return row;
-
         }
 
         protected virtual TextView GetHeaderText(string text, ActionSheetItemTextAlgin textAlgin)
@@ -143,7 +135,6 @@ namespace Passingwind.UserDialogs.Platforms
                 LeftMargin = this.DpToPixels(16),
                 RightMargin = this.DpToPixels(16),
                 BottomMargin = this.DpToPixels(4),
-
             };
             var txt = new TextView(this.Activity)
             {
@@ -161,7 +152,6 @@ namespace Passingwind.UserDialogs.Platforms
 
             return txt;
         }
-
 
         protected virtual TextView GetText(string text, string icon, bool isDestructive, ActionSheetItemTextAlgin textAlgin)
         {
@@ -190,7 +180,6 @@ namespace Passingwind.UserDialogs.Platforms
                 txt.CompoundDrawablePadding = this.DpToPixels(6);
 
                 txt.CenterText = textAlgin == ActionSheetItemTextAlgin.Center;
-
             }
 
             if (string.IsNullOrWhiteSpace(icon) && textAlgin == ActionSheetItemTextAlgin.Center)
@@ -203,7 +192,6 @@ namespace Passingwind.UserDialogs.Platforms
 
             return txt;
         }
-
 
         protected virtual ImageView GetIcon(string icon)
         {
@@ -226,7 +214,6 @@ namespace Passingwind.UserDialogs.Platforms
             return img;
         }
 
-
         protected virtual View CreateDivider(int height = 1)
         {
             var view = new View(this.Activity)
@@ -238,14 +225,11 @@ namespace Passingwind.UserDialogs.Platforms
             return view;
         }
 
-
         protected virtual int DpToPixels(int dp)
         {
             var value = TypedValue.ApplyDimension(ComplexUnitType.Dip, dp, this.Activity.Resources.DisplayMetrics);
             return Convert.ToInt32(value);
         }
-
-
 
         public class TextViewFix : TextView
         {
@@ -271,7 +255,6 @@ namespace Passingwind.UserDialogs.Platforms
             {
             }
 
-
             protected override void OnDraw(Canvas canvas)
             {
                 if (!CenterText)
@@ -296,11 +279,8 @@ namespace Passingwind.UserDialogs.Platforms
 
                 base.OnDraw(canvas);
             }
-
         }
-
     }
-
 
     //public class BottomActionDialog : Dialog
     //{

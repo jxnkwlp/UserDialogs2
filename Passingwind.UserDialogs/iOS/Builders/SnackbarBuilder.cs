@@ -1,7 +1,5 @@
 ﻿using Passingwind.UserDialogs.TTGSnackBar;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using UIKit;
 
 namespace Passingwind.UserDialogs.Platforms
@@ -27,7 +25,6 @@ namespace Passingwind.UserDialogs.Platforms
 
                     if (config.ActionTextColor != null)
                         _snackbar.ActionTextColor = config.ActionTextColor.Value.ToNative();
-
                 }
 
                 if (config.TextColor != null)
@@ -37,7 +34,6 @@ namespace Passingwind.UserDialogs.Platforms
                     _snackbar.BackgroundColor = config.BackgroundColor.Value.ToNative();
 
                 _snackbar.Show();
-
             });
 
             return new DisposableAction(() => app.SafeInvokeOnMainThread(() => _snackbar?.Dismiss()));

@@ -21,10 +21,8 @@ namespace Passingwind.UserDialogs.Platforms
             handler.PostDelayed(new Runnable(() =>
             {
                 _progress.Dismiss();
-
             }), interval);
         }
-
 
         public IDisposable Loading(Activity activity, LoadingConfig config)
         {
@@ -61,7 +59,6 @@ namespace Passingwind.UserDialogs.Platforms
 
             return new DisposableAction(() => _progress.Dismiss());
         }
-
 
         public IProgressDialog Progress(Activity activity, ProgressConfig config)
         {
@@ -120,7 +117,5 @@ namespace Passingwind.UserDialogs.Platforms
                 _progress.SetProgress((int)value);
             }
         }
-
-
     }
 }

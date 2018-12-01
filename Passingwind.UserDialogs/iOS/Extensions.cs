@@ -1,7 +1,5 @@
 ﻿using Foundation;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using UIKit;
 
 namespace Passingwind.UserDialogs.Platforms
@@ -10,7 +8,6 @@ namespace Passingwind.UserDialogs.Platforms
     {
         public static UIColor ToNative(this System.Drawing.Color This)
             => new UIColor((float)This.R / 255.0f, (float)This.G / 255.0f, This.B / 255.0f, This.A / 255.0f);
-
 
         public static void SafeInvokeOnMainThread(this UIApplication app, Action action) => app.InvokeOnMainThread(() =>
         {
@@ -23,7 +20,6 @@ namespace Passingwind.UserDialogs.Platforms
                 // Log.Error("", ex.ToString());
             }
         });
-
 
         public static DateTime ToDateTime(this NSDate nsDate)
         {
@@ -42,7 +38,6 @@ namespace Passingwind.UserDialogs.Platforms
 
             return new DateTime(year, month, day, hour, minute, second, millisecond, DateTimeKind.Local);
         }
-
 
         public static NSDate ToNSDate(this DateTime dt)
         {

@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using UIKit;
 
 namespace Passingwind.UserDialogs
@@ -14,7 +12,6 @@ namespace Passingwind.UserDialogs
         {
             Instance = new UserDialogsImpl(viewControllerFunc);
         }
-
 
         static IUserDialogs currentInstance;
         public static IUserDialogs Instance

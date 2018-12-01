@@ -1,15 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Passingwind.UserDialogs
 {
     public partial class UserDialogs
     {
-
 #if NETSTANDARD
 
-        static IUserDialogs _instance = null;
+        private static IUserDialogs _instance = null;
 
         public static IUserDialogs Instance
         {
@@ -29,6 +26,5 @@ namespace Passingwind.UserDialogs
         }
 
 #endif
-
     }
 }

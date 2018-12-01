@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using UIKit;
 
 namespace Passingwind.UserDialogs.Platforms.Infrastructure
@@ -16,9 +14,7 @@ namespace Passingwind.UserDialogs.Platforms.Infrastructure
                 !x.Hidden
             );
 
-
         public static UIView GetTopView(this UIApplication app) => app.GetTopWindow().Subviews.Last();
-
 
         public static UIViewController GetTopViewController(this UIApplication app)
         {

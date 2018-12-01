@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace Passingwind.UserDialogs
 {
@@ -11,32 +7,35 @@ namespace Passingwind.UserDialogs
         #region Toast
 
         void Toast(string message);
+
         void Toast(ToastConfig config);
 
-        #endregion
+        #endregion Toast
 
         #region Snackbar
 
         IDisposable Snackbar(string message, Action action = null);
+
         IDisposable Snackbar(SnackbarConfig config);
 
-        #endregion
+        #endregion Snackbar
 
         #region Alert
 
         IDisposable Alert(string message);
+
         IDisposable Alert(AlertConfig config);
 
         //IDisposable Confirm(string message);
         //IDisposable Confirm(AlertOptions config);
 
-        #endregion
+        #endregion Alert
 
         #region ActionSheet
 
         IDisposable ActionSheet(ActionSheetConfig config);
 
-        #endregion
+        #endregion ActionSheet
 
         #region Loading
 
@@ -44,7 +43,7 @@ namespace Passingwind.UserDialogs
 
         IProgressDialog Progress(ProgressConfig config);
 
-        #endregion
+        #endregion Loading
 
         #region MyRegion
 
@@ -52,9 +51,6 @@ namespace Passingwind.UserDialogs
 
         // IDisposable OptionsPicker();
 
-        #endregion
-
-
-
+        #endregion MyRegion
     }
 }

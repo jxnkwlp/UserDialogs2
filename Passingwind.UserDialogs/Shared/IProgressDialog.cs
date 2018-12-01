@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Passingwind.UserDialogs
+﻿namespace Passingwind.UserDialogs
 {
     /// <summary>
     /// </summary>
@@ -14,7 +10,7 @@ namespace Passingwind.UserDialogs
         void Hide();
 
         /// <summary>
-        ///  set the progress values, value between 0-100 
+        ///  set the progress values, value between 0-100
         /// </summary>
         /// <param name="value">value</param>
         void SetProgress(uint value);

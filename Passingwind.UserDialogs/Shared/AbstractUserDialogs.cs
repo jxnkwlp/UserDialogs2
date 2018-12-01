@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace Passingwind.UserDialogs
 {
@@ -13,8 +9,6 @@ namespace Passingwind.UserDialogs
         //    disp.Dispose();
         //    tcs.TrySetCanceled();
         //}
-
-
 
         public void Toast(string message)
         {
@@ -30,7 +24,6 @@ namespace Passingwind.UserDialogs
 
         public abstract IDisposable Snackbar(SnackbarConfig config);
 
-
         public IDisposable Alert(string message)
         {
             return Alert(new AlertConfig(message));
@@ -38,12 +31,10 @@ namespace Passingwind.UserDialogs
 
         public abstract IDisposable Alert(AlertConfig config);
 
-
         public abstract IDisposable ActionSheet(ActionSheetConfig config);
 
         public abstract IDisposable Loading(LoadingConfig config);
 
         public abstract IProgressDialog Progress(ProgressConfig config);
-
     }
 }

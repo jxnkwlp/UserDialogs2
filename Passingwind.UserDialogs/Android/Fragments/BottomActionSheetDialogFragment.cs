@@ -23,9 +23,6 @@ namespace Passingwind.UserDialogs.Platforms
             //windows.SetGravity(GravityFlags.Bottom);
             //windows.Attributes.Width = WindowManagerLayoutParams.MatchParent;
             //windows.Attributes.Height = WindowManagerLayoutParams.WrapContent;
-
-
-
         }
 
         //public override void OnStart()
@@ -54,7 +51,6 @@ namespace Passingwind.UserDialogs.Platforms
         //    return di;
         //}
 
-
         protected override void SetDialogDefaults(Dialog dialog)
         {
             // base.SetDialogDefaults(dialog);
@@ -73,7 +69,6 @@ namespace Passingwind.UserDialogs.Platforms
 
             //this.Dialog.Window.SetLayout(WindowManagerLayoutParams.MatchParent, -2);
             //this.Dialog.Window.SetGravity(GravityFlags.Bottom);
-
         }
 
         protected override void OnKeyPress(object sender, DialogKeyEventArgs args)
@@ -92,7 +87,6 @@ namespace Passingwind.UserDialogs.Platforms
         {
             return new BottomActionSheetBuilder().Build(this.AppCompatActivity, config);
         }
-
 
         //private View CreateView(ActionSheetOptions config)
         //{
@@ -123,7 +117,6 @@ namespace Passingwind.UserDialogs.Platforms
         //    return container;
         //}
 
-
         //private View CreateRow(ActionSheetItemOption option, bool isDestructive)
         //{
         //    var row = new LinearLayout(this.Activity)
@@ -143,7 +136,6 @@ namespace Passingwind.UserDialogs.Platforms
         //    };
         //    return row;
 
-
         //}
 
         //protected virtual TextView GetHeaderText(string text)
@@ -161,7 +153,6 @@ namespace Passingwind.UserDialogs.Platforms
         //    txt.SetTextSize(ComplexUnitType.Sp, 16);
         //    return txt;
         //}
-
 
         //protected virtual TextView GetText(string text, bool isDestructive)
         //{
@@ -185,7 +176,6 @@ namespace Passingwind.UserDialogs.Platforms
         //    return txt;
         //}
 
-
         //protected virtual ImageView GetIcon(string icon)
         //{
         //    var layout = new LinearLayout.LayoutParams(this.DpToPixels(24), this.DpToPixels(24))
@@ -207,7 +197,6 @@ namespace Passingwind.UserDialogs.Platforms
         //    return img;
         //}
 
-
         //protected virtual View CreateDivider()
         //{
         //    var view = new View(this.Activity)
@@ -219,16 +208,12 @@ namespace Passingwind.UserDialogs.Platforms
         //    return view;
         //}
 
-
         //protected virtual int DpToPixels(int dp)
         //{
         //    var value = TypedValue.ApplyDimension(ComplexUnitType.Dip, dp, this.Activity.Resources.DisplayMetrics);
         //    return Convert.ToInt32(value);
         //}
-
-
     }
-
 
     //public class CustomBottomSheetDialog : Dialog
     //{
@@ -282,8 +267,5 @@ namespace Passingwind.UserDialogs.Platforms
     //        Window.Attributes = attribute;
     //    }
 
-
-
     //}
-
 }

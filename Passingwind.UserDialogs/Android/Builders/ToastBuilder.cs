@@ -22,17 +22,17 @@ namespace Passingwind.UserDialogs.Platforms
             else
                 _toast = Toast.MakeText(activity, config.Message, ToastLength.Short);
 
-            // set message 
+            // set message
             _toast.SetText(config.Message);
 
             // TODO
-            // change time 
+            // change time
             if (config.Duration.Seconds >= 3)
             {
                 _toast.Duration = ToastLength.Long;
             }
 
-            // TODO change color 
+            // TODO change color
             //var view = _toast.View;
 
             //if (view != null)
@@ -47,8 +47,6 @@ namespace Passingwind.UserDialogs.Platforms
 
             //    _toast.View = textView;
             //}
-
-
 
             if (config.Position == ToastPosition.Top)
             {
@@ -69,12 +67,6 @@ namespace Passingwind.UserDialogs.Platforms
         public static void Hide()
         {
             _toast?.Cancel();
-
         }
-
-
-
-
-
     }
 }

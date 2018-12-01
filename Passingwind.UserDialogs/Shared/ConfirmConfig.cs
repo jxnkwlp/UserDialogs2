@@ -1,20 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Passingwind.UserDialogs
 {
     public class ConfirmConfig
     {
-
         public static string DefaultOkText = "Ok";
         public static string DefaultCancelText = "Cancel";
 
         public static int? DefaultAndroidStyleId;
 
-
         // internal Action _okAction;
-
 
         public string Title { get; set; }
 
@@ -27,8 +22,6 @@ namespace Passingwind.UserDialogs
         public Action<bool> Action { get; set; }
 
         public int? AndroidStyleId { get; set; } = DefaultAndroidStyleId;
-
-
 
         public ConfirmConfig()
         {
@@ -44,7 +37,6 @@ namespace Passingwind.UserDialogs
         {
             this.Message = message;
         }
-
 
         public ConfirmConfig SetOkText(string value)
         {

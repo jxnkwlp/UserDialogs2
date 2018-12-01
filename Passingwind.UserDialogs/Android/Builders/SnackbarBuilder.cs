@@ -35,7 +35,6 @@ namespace Passingwind.UserDialogs.Platforms
 
                 if (config.ActionTextColor.HasValue)
                     _snackbar.SetActionTextColor(config.ActionTextColor.Value.ToNativeColor());
-
             }
 
             if (config.TextColor.HasValue)
@@ -43,7 +42,7 @@ namespace Passingwind.UserDialogs.Platforms
                 //TextView textView = _snackbar.View.FindViewById<TextView>(Resource.Id.snackbar_text);
                 //textView.SetTextColor(config.TextColor.Value.ToNativeColor());
 
-                // TODO 
+                // TODO
             }
 
             if (config.BackgroundColor.HasValue)
@@ -51,7 +50,7 @@ namespace Passingwind.UserDialogs.Platforms
                 //TextView textView = _snackbar.View.FindViewById<TextView>(Resource.Id.snackbar_text);
                 //textView.SetBackgroundColor(config.BackgroundColor.Value.ToNativeColor());
 
-                // TODO 
+                // TODO
             }
 
             //if (config.Position != ToastPosition.Default)

@@ -1,19 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Text;
 
 namespace Passingwind.UserDialogs
 {
     /// <summary>
-    /// Define toast config options 
+    /// Define toast config options
     /// </summary>
     public class ToastConfig : IAndroidStyleDialogConfig
     {
         public static TimeSpan DefaultTimeSpan = TimeSpan.FromSeconds(2);
         public static ToastPosition DefaultPosition = ToastPosition.Default;
         public static int? DefaultAndroidStyleId;
-
 
         public int? AndroidStyleId { get; set; } = DefaultAndroidStyleId;
 
@@ -26,8 +23,6 @@ namespace Passingwind.UserDialogs
         public Color? BackgroundColor { get; set; }
 
         public Color? TextColor { get; set; }
-
-
 
         public ToastConfig()
         {
@@ -55,8 +50,5 @@ namespace Passingwind.UserDialogs
             this.Position = position;
             return this;
         }
-
     }
-
-
 }

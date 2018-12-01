@@ -20,7 +20,6 @@ namespace Passingwind.UserDialogs.Platforms
 
                 this.Dismiss();
             }
-
         }
 
         protected override Dialog CreateDialog(ConfirmConfig config) => new ConfirmBuilder().Build(this.AppCompatActivity, config);

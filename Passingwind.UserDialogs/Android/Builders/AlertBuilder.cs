@@ -45,6 +45,5 @@ namespace Passingwind.UserDialogs.Platforms
 
             return builder.Create();
         }
-
     }
 }

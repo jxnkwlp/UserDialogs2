@@ -11,15 +11,12 @@ namespace Passingwind.UserDialogs.Platforms
     {
         public T Config { get; set; }
 
-
         public override void OnSaveInstanceState(Bundle outState)
         {
             base.OnSaveInstanceState(outState);
 
             ConfigStore.Instance.Store(outState, this.Config);
-             
         }
-
 
         public override Dialog OnCreateDialog(Bundle savedInstanceState)
         {
@@ -38,7 +35,6 @@ namespace Passingwind.UserDialogs.Platforms
             return dialog;
         }
 
-
         protected virtual void SetDialogDefaults(Dialog dialog)
         {
             // dialog.Window.SetSoftInputMode(SoftInput.StateHidden);
@@ -50,7 +46,6 @@ namespace Passingwind.UserDialogs.Platforms
             //dialog.getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE);
         }
 
-
         public override void OnDetach()
         {
             base.OnDetach();
@@ -58,11 +53,9 @@ namespace Passingwind.UserDialogs.Platforms
                 this.Dialog.KeyPress -= this.OnKeyPress;
         }
 
-
         protected virtual void OnKeyPress(object sender, DialogKeyEventArgs args)
         {
         }
-
 
         protected abstract Dialog CreateDialog(T config);
 

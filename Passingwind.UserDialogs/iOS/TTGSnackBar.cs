@@ -1,10 +1,10 @@
-﻿/**
+﻿using Foundation;
+/**
  * project from : https://github.com/MarcBruins/TTGSnackbar-Xamarin-iOS
- * 
+ *
  * https://github.com/MarcBruins/TTGSnackbar-Xamarin-iOS/blob/master/TTGSnackbar/TTGSnackbar.cs
  */
 using System;
-using Foundation;
 using UIKit;
 
 namespace Passingwind.UserDialogs.TTGSnackBar
@@ -26,7 +26,6 @@ namespace Passingwind.UserDialogs.TTGSnackBar
 
     public class TTGSnackbar : UIView
     {
-
         // Snackbar action button max width.
         private const float snackbarActionButtonMaxWidth = 64;
 
@@ -303,7 +302,6 @@ namespace Passingwind.UserDialogs.TTGSnackBar
             configure();
         }
 
-
         /// <summary>
         /// Show the snackbar.
         /// </summary>
@@ -402,11 +400,11 @@ namespace Passingwind.UserDialogs.TTGSnackBar
                     case TTGSnackbarLocation.Top:
                         localSuperView.AddConstraint(topMarginConstraint);
                         break;
+
                     default:
                         localSuperView.AddConstraint(bottomMarginConstraint);
                         break;
                 }
-
 
                 // Show
                 showWithAnimation();
@@ -503,7 +501,7 @@ namespace Passingwind.UserDialogs.TTGSnackBar
 
             this.AddSubview(ActivityIndicatorView);
 
-            // Add constraints        
+            // Add constraints
             invalidateHorizontalConstraints();
 
             var vConstraintsForIconImageView = NSLayoutConstraint.FromVisualFormat(
@@ -571,12 +569,10 @@ namespace Passingwind.UserDialogs.TTGSnackBar
             }
         }
 
-
         private void invalidateHorizontalConstraints()
         {
             if (hConstraints != null && hConstraints.Length > 0)
                 this.RemoveConstraints(hConstraints);
-
 
             hConstraints = NSLayoutConstraint.FromVisualFormat(
                 $"H:|-0-[iconImageView]-{MessageMarginLeft}-[messageLabel]-{MessageMarginRight}-[seperateView(0.5)]-2-[actionButton(>=44@999)]-0-[secondActionButton(>=44@999)]-0-|",
@@ -626,15 +622,19 @@ namespace Passingwind.UserDialogs.TTGSnackBar
                 case TTGSnackbarAnimationType.FadeInFadeOut:
                     animationBlock = () => { this.Alpha = 0; };
                     break;
+
                 case TTGSnackbarAnimationType.SlideFromBottomBackToBottom:
                     animationBlock = () => { bottomMarginConstraint.Constant = Height; };
                     break;
+
                 case TTGSnackbarAnimationType.SlideFromBottomToTop:
                     animationBlock = () => { this.Alpha = 0; bottomMarginConstraint.Constant = -Height - BottomMargin; };
                     break;
+
                 case TTGSnackbarAnimationType.SlideFromLeftToRight:
                     animationBlock = () => { leftMarginConstraint.Constant = LeftMargin + superViewWidth; rightMarginConstraint.Constant = -RightMargin + superViewWidth; };
                     break;
+
                 case TTGSnackbarAnimationType.SlideFromRightToLeft:
                     animationBlock = () =>
                     {
@@ -675,17 +675,20 @@ namespace Passingwind.UserDialogs.TTGSnackBar
 
                     animationBlock = () => { this.Alpha = 1; };
                     break;
+
                 case TTGSnackbarAnimationType.SlideFromBottomBackToBottom:
                 case TTGSnackbarAnimationType.SlideFromBottomToTop:
                     bottomMarginConstraint.Constant = -BottomMargin;
                     this.LayoutIfNeeded();
                     break;
+
                 case TTGSnackbarAnimationType.SlideFromLeftToRight:
                     leftMarginConstraint.Constant = LeftMargin - superViewWidth;
                     rightMarginConstraint.Constant = -RightMargin - superViewWidth;
                     bottomMarginConstraint.Constant = -BottomMargin;
                     this.LayoutIfNeeded();
                     break;
+
                 case TTGSnackbarAnimationType.SlideFromRightToLeft:
                     leftMarginConstraint.Constant = LeftMargin + superViewWidth;
                     rightMarginConstraint.Constant = -RightMargin + superViewWidth;
@@ -727,4 +730,3 @@ namespace Passingwind.UserDialogs.TTGSnackBar
         }
     }
 }
-

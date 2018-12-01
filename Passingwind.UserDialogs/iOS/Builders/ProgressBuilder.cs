@@ -1,7 +1,4 @@
 ﻿using Ricardo.RMBProgressHUD.iOS;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using UIKit;
 
 namespace Passingwind.UserDialogs.Platforms
@@ -20,13 +17,12 @@ namespace Passingwind.UserDialogs.Platforms
                 _progressHub.Label.Text = config.Text;
                 _progressHub.Label.LineBreakMode = UILineBreakMode.WordWrap;
 
-                _progressHub.MinShowTime = 1; // The minimum time (in seconds) that the HUD is shown. 
+                _progressHub.MinShowTime = 1; // The minimum time (in seconds) that the HUD is shown.
 
                 if (config.MarkType == MarkType.Black)
                 {
                     _progressHub.BackgroundView.Style = MBProgressHUDBackgroundStyle.SolidColor;
                     _progressHub.BackgroundView.Color = UIColor.Black.ColorWithAlpha(0.5f);
-
                 }
 
                 if (config.Cancellable)
@@ -36,12 +32,10 @@ namespace Passingwind.UserDialogs.Platforms
                     {
                         config.CancelAction?.Invoke();
                         _progressHub.Hide(true);
-
                     }, UIControlEvent.TouchUpInside);
                 }
 
                 _progressHub.Show(true);
-
             });
 
             return new DefaultProgressDialog(app, config, _progressHub);
@@ -58,7 +52,6 @@ namespace Passingwind.UserDialogs.Platforms
                 _app = app;
                 _config = config;
                 _hub = hub;
-
             }
 
             public void Hide()

@@ -11,9 +11,7 @@ namespace Passingwind.UserDialogs.Platforms
         long counter = 0;
         readonly IDictionary<long, object> configStore = new Dictionary<long, object>();
 
-
         public static ConfigStore Instance { get; } = new ConfigStore();
-
 
         public void Store(Bundle bundle, object config)
         {
@@ -22,10 +20,8 @@ namespace Passingwind.UserDialogs.Platforms
             bundle.PutLong(this.BundleKey, this.counter);
         }
 
-
         public bool Contains(Bundle bundle) => bundle?.ContainsKey(this.BundleKey) ?? false;
 
-         
         public T Pop<T>(Bundle bundle) where T : class
         {
             var id = bundle.GetLong(this.BundleKey);

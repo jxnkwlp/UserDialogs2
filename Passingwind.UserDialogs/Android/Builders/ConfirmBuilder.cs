@@ -17,7 +17,6 @@ namespace Passingwind.UserDialogs.Platforms
                 .SetPositiveButton(config.OkText, (o, e) => config.Action?.Invoke(true))
                 .SetNegativeButton(config.CancelText, (o, e) => config.Action?.Invoke(false))
                 .Create();
-
         }
 
         public Dialog Build(AppCompatActivity activity, ConfirmConfig config)
@@ -29,7 +28,6 @@ namespace Passingwind.UserDialogs.Platforms
                 .SetPositiveButton(config.OkText, (o, e) => config.Action?.Invoke(true))
                 .SetNegativeButton(config.CancelText, (o, e) => config.Action?.Invoke(false))
                 .Create();
-
         }
     }
 }

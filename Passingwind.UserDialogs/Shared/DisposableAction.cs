@@ -2,15 +2,14 @@
 
 namespace Passingwind.UserDialogs
 {
-    class DisposableAction : IDisposable
+    internal class DisposableAction : IDisposable
     {
-        readonly Action action;
+        private readonly Action action;
 
         public DisposableAction(Action action)
         {
             this.action = action;
         }
-
 
         public void Dispose()
         {

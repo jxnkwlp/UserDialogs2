@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Text;
 
 namespace Passingwind.UserDialogs
 {
@@ -23,7 +21,6 @@ namespace Passingwind.UserDialogs
             this.Action = action;
             this.ItemIcon = icon;
         }
-
 
         public enum ItemIconPosition
         {

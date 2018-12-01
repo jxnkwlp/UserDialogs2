@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Text;
 
 namespace Passingwind.UserDialogs
 {
@@ -15,14 +13,12 @@ namespace Passingwind.UserDialogs
 
         public static int? DefaultAndroidStyleId;
 
-
         public string Message { get; set; }
 
         public TimeSpan Duration { get; set; } = DefaultTimeSpan;
 
         public Color? BackgroundColor { get; set; } = DefaultBackgroundColor;
         public Color? TextColor { get; set; } = DefaultTextColor;
-
 
         public string ActionText { get; set; } = DefaultActionText;
         public Color? ActionTextColor { get; set; } = DefaultActionTextColor;
@@ -31,11 +27,9 @@ namespace Passingwind.UserDialogs
 
         public int? AndroidStyleId { get; set; } = DefaultAndroidStyleId;
 
-
         public SnackbarConfig()
         {
         }
-
 
         public SnackbarConfig(string message) : this()
         {
@@ -65,6 +59,5 @@ namespace Passingwind.UserDialogs
             this.Action = action;
             return this;
         }
-
     }
 }

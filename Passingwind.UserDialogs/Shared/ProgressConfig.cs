@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Passingwind.UserDialogs
 {
@@ -31,12 +29,10 @@ namespace Passingwind.UserDialogs
             this.Text = text;
         }
 
-
         public ProgressConfig SetText(string text)
         {
             this.Text = text;
             return this;
         }
-
     }
 }

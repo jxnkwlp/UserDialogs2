@@ -29,6 +29,5 @@ namespace Passingwind.UserDialogs.Platforms
             var resourceId = res.GetIdentifier(resourceName, "drawable", con.PackageName);
             return ContextCompat.GetDrawable(Application.Context, resourceId);
         }
-
     }
 }

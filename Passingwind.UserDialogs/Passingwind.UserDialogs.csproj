@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <TargetFrameworks></TargetFrameworks>
-    <TargetFrameworks Condition=" '$(OS)' == 'Windows_NT' ">netstandard2.0;MonoAndroid80;Xamarin.iOS10;</TargetFrameworks>
-    <TargetFrameworks Condition=" '$(OS)' != 'Windows_NT' ">netstandard2.0;MonoAndroid80;Xamarin.iOS10</TargetFrameworks>
+    <TargetFrameworks Condition=" '$(OS)' == 'Windows_NT' ">netstandard2.0;MonoAndroid71;Xamarin.iOS10;</TargetFrameworks>
+    <TargetFrameworks Condition=" '$(OS)' != 'Windows_NT' ">netstandard2.0;MonoAndroid71;Xamarin.iOS10</TargetFrameworks>
     <SignAssembly>true</SignAssembly>
     <AssemblyName>Passingwind.UserDialogs</AssemblyName>
     <RootNamespace>Passingwind.UserDialogs</RootNamespace>
@@ -21,8 +21,8 @@
       Includes Alert, Confirm, Toast, ActionSheet, Loading, Progress.
     </Description>
 
-    <Version>0.1-bate</Version>
-    <AssemblyVersion>0.1.6909.17</AssemblyVersion>
+    <Version>0.1</Version>
+    <AssemblyVersion>0.1.6909.23</AssemblyVersion>
   </PropertyGroup>
  
 

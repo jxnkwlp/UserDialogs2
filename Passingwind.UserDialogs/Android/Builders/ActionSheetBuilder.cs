@@ -17,7 +17,6 @@ namespace Passingwind.UserDialogs.Platforms
             var dialog = new AlertDialog.Builder(activity, config.AndroidStyleId ?? 0)
                 .SetTitle(config.Title);
 
-
             if (config.Cancel != null)
             {
                 dialog.SetNeutralButton(config.Cancel.Text, (s, a) =>
@@ -33,7 +32,6 @@ namespace Passingwind.UserDialogs.Platforms
                     config.Destructive.Action?.Invoke();
                 });
             }
-
 
             if (config.Items != null && config.Items.Count > 0)
             {
@@ -65,7 +63,6 @@ namespace Passingwind.UserDialogs.Platforms
             var dialog = new AppCompatAlertDialog.Builder(activity, config.AndroidStyleId ?? 0)
                 .SetTitle(config.Title);
 
-
             if (config.Cancel != null)
             {
                 dialog.SetNeutralButton(config.Cancel.Text, (s, a) =>
@@ -81,7 +78,6 @@ namespace Passingwind.UserDialogs.Platforms
                     config.Destructive.Action?.Invoke();
                 });
             }
-
 
             if (config.Items != null && config.Items.Count > 0)
             {
@@ -102,13 +98,11 @@ namespace Passingwind.UserDialogs.Platforms
                     {
                         config.Items[a.Which].Action?.Invoke();
                     });
-
                 }
             }
 
             return dialog.Create();
         }
-
     }
 
     public class ActionSheetListAdapter : ArrayAdapter<ActionSheetItem>
@@ -153,6 +147,5 @@ namespace Passingwind.UserDialogs.Platforms
 
             return view;
         }
-
     }
 }

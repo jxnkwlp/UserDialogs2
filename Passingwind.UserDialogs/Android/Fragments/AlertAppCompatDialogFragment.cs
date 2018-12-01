@@ -19,7 +19,6 @@ namespace Passingwind.UserDialogs.Platforms
             this.Dismiss();
         }
 
-
         protected override Dialog CreateDialog(AlertConfig config) => new AlertBuilder().Build(this.AppCompatActivity, config);
     }
 }

@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Passingwind.UserDialogs
 {
@@ -13,23 +11,18 @@ namespace Passingwind.UserDialogs
         public static string DefaultCancelText = "Cancel";
         public static int? DefaultAndroidStyleId;
 
-
         public string Title { get; set; }
 
         public string Message { get; set; }
 
-
         public int? AndroidStyleId { get; set; } = DefaultAndroidStyleId;
-
 
         public string OkText { get; set; } = DefaultOkText;
         public string CancelText { get; set; } = DefaultCancelText;
 
-
         public AlertButtonItem OkButton { get; set; }
         public AlertButtonItem CancelButton { get; set; }
         public AlertButtonItem DestructiveButton { get; set; }
-
 
         public AlertConfig()
         {
@@ -93,7 +86,6 @@ namespace Passingwind.UserDialogs
 
             return this;
         }
-
     }
 
     public class AlertButtonItem

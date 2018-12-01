@@ -34,7 +34,7 @@ namespace Passingwind.UserDialogs.Platforms
             di.SetContentView(viewBuilder.CreateView());
 
             // 3.
-            windows.SetBackgroundDrawable(new ColorDrawable(Color.White)); // 背景 
+            windows.SetBackgroundDrawable(new ColorDrawable(Color.White)); // 背景
 
             // 4.
             windows.SetLayout(-1, -2);
@@ -47,11 +47,8 @@ namespace Passingwind.UserDialogs.Platforms
 
             windows.SetDimAmount(0.5f);
 
-
             return di;
-
         }
-
 
         public class ActionSheetTheme1ViewBuilder
         {
@@ -66,7 +63,6 @@ namespace Passingwind.UserDialogs.Platforms
                 Activity = activity;
                 _config = config;
             }
-
 
             public virtual View CreateView()
             {
@@ -105,7 +101,6 @@ namespace Passingwind.UserDialogs.Platforms
                 return container;
             }
 
-
             protected View CreateRow(ActionSheetItem item, bool isDestructive)
             {
                 var row = new LinearLayout(this.Activity)
@@ -125,7 +120,6 @@ namespace Passingwind.UserDialogs.Platforms
 
                 // row.SetGravity(GravityFlags.CenterHorizontal | GravityFlags.CenterVertical);
 
-
                 row.Click += (sender, args) =>
                 {
                     item.Action?.Invoke();
@@ -134,7 +128,6 @@ namespace Passingwind.UserDialogs.Platforms
                 };
 
                 return row;
-
             }
 
             protected virtual View GetHeaderText(string title, string message)
@@ -182,7 +175,6 @@ namespace Passingwind.UserDialogs.Platforms
                 return row;
             }
 
-
             protected virtual TextView GetText(string text, string icon, bool isDestructive, Color? textColor)
             {
                 var layout = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MatchParent, LinearLayout.LayoutParams.MatchParent)
@@ -229,7 +221,6 @@ namespace Passingwind.UserDialogs.Platforms
                 return txt;
             }
 
-
             protected virtual ImageView GetIcon(string icon)
             {
                 var layout = new LinearLayout.LayoutParams(this.DpToPixels(24), this.DpToPixels(24))
@@ -251,7 +242,6 @@ namespace Passingwind.UserDialogs.Platforms
                 return img;
             }
 
-
             protected virtual View CreateDivider(int height = 1)
             {
                 var view = new View(this.Activity)
@@ -263,14 +253,11 @@ namespace Passingwind.UserDialogs.Platforms
                 return view;
             }
 
-
             protected virtual int DpToPixels(int dp)
             {
                 var value = TypedValue.ApplyDimension(ComplexUnitType.Dip, dp, this.Activity.Resources.DisplayMetrics);
                 return Convert.ToInt32(value);
             }
-
-
 
             public class TextViewFix : TextView
             {
@@ -296,7 +283,6 @@ namespace Passingwind.UserDialogs.Platforms
                 {
                 }
 
-
                 protected override void OnDraw(Canvas canvas)
                 {
                     if (!CenterText)
@@ -321,7 +307,6 @@ namespace Passingwind.UserDialogs.Platforms
 
                     base.OnDraw(canvas);
                 }
-
             }
         }
     }

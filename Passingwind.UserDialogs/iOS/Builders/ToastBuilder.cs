@@ -1,8 +1,4 @@
 ﻿using Ricardo.RMBProgressHUD.iOS;
-using SVProgressHUDBinding;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using UIKit;
 
 namespace Passingwind.UserDialogs.Platforms
@@ -11,7 +7,7 @@ namespace Passingwind.UserDialogs.Platforms
     {
         static MBProgressHUD _hub;
 
-        public static IDisposable Build(UIApplication app, UIView view, ToastConfig config)
+        public static void Build(UIApplication app, UIView view, ToastConfig config)
         {
             app.SafeInvokeOnMainThread(() =>
             {
@@ -19,7 +15,7 @@ namespace Passingwind.UserDialogs.Platforms
                 _hub.Mode = MBProgressHUDMode.Text;
                 _hub.Label.Text = config.Message;
                 _hub.Label.LineBreakMode = UILineBreakMode.WordWrap;
-                _hub.MinShowTime = 1; // The minimum time (in seconds) that the HUD is shown. 
+                _hub.MinShowTime = 1; // The minimum time (in seconds) that the HUD is shown.
 
                 _hub.UserInteractionEnabled = false;
 
@@ -42,14 +38,10 @@ namespace Passingwind.UserDialogs.Platforms
                     _hub.Offset = new CoreGraphics.CGPoint(0, 10000);
                 }
 
-
                 _hub.Show(true);
 
                 _hub.Hide(true, config.Duration.TotalSeconds);
-
             });
-
-            return new DisposableAction(() => app.SafeInvokeOnMainThread(SVProgressHUD.Dismiss));
         }
 
         //public IDisposable Build(UIApplication app, ToastConfig config)

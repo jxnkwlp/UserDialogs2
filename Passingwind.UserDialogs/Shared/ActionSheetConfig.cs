@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Passingwind.UserDialogs
 {
@@ -20,9 +19,6 @@ namespace Passingwind.UserDialogs
         public static bool DefaultBottomSheet = false;
         public static string DefaultItemIcon;
 
-
-
-
         public int? AndroidStyleId { get; set; } = DefaultAndroidStyleId;
 
         //public ActionSheetTheme? Theme { get; set; }
@@ -32,11 +28,10 @@ namespace Passingwind.UserDialogs
 
         public string ItemIcon { get; set; } = DefaultItemIcon;
 
-
         public ActionSheetItemTextAlgin ItemTextAlgin { get; set; }
 
         /// <summary>
-        ///  cancel option item 
+        ///  cancel option item
         /// </summary>
         public ActionSheetItem Cancel { get; set; }
 
@@ -47,10 +42,7 @@ namespace Passingwind.UserDialogs
 
         public IList<ActionSheetItem> Items { get; } = new List<ActionSheetItem>();
 
-
         public bool BottomSheet { get; set; } = DefaultBottomSheet;
-
-
 
         public ActionSheetConfig SetTitle(string title)
         {
@@ -87,6 +79,5 @@ namespace Passingwind.UserDialogs
             this.Items.Add(new ActionSheetItem(text, action, icon ?? DefaultItemIcon));
             return this;
         }
-
     }
 }

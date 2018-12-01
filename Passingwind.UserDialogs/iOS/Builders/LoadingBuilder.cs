@@ -1,7 +1,5 @@
 ﻿using Ricardo.RMBProgressHUD.iOS;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using UIKit;
 
 namespace Passingwind.UserDialogs.Platforms
@@ -19,7 +17,7 @@ namespace Passingwind.UserDialogs.Platforms
                 _loadingHub.Label.Text = config.Text;
                 _loadingHub.Label.LineBreakMode = UILineBreakMode.WordWrap;
 
-                _loadingHub.MinShowTime = 1; // The minimum time (in seconds) that the HUD is shown. 
+                _loadingHub.MinShowTime = 1; // The minimum time (in seconds) that the HUD is shown.
 
                 if (config.MarkType == MarkType.Black)
                 {
@@ -43,12 +41,10 @@ namespace Passingwind.UserDialogs.Platforms
                     _loadingHub.Hide(true, config.Duration.Value.TotalSeconds);
 
                 //_loadingHub.Hide(true, 3);  // seconds
-
             });
 
             return new DisposableAction(() => _loadingHub.Hide(true));
         }
-
 
         //public IDisposable Loading(UIApplication app, LoadingConfig config)
         //{
@@ -63,7 +59,6 @@ namespace Passingwind.UserDialogs.Platforms
 
         //        if (config.Duration != null)
         //            SVProgressHUD.DismissWithDelay(config.Duration.Value.Milliseconds);
-
 
         //    });
 

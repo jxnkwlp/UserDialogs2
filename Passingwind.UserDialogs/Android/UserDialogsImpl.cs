@@ -20,12 +20,10 @@ namespace Passingwind.UserDialogs
 
         protected internal Func<Activity> TopActivityFunc { get; set; }
 
-
         public UserDialogsImpl(Func<Activity> getTopActivity)
         {
             this.TopActivityFunc = getTopActivity;
         }
-
 
         protected virtual IDisposable Show(Activity activity, Func<Dialog> dialogBuilder)
         {
@@ -39,7 +37,6 @@ namespace Passingwind.UserDialogs
                 activity.RunOnUiThread(dialog.Dismiss)
             );
         }
-
 
         protected virtual IDisposable ShowDialog<TFragment, TConfig>(AppCompatActivity activity, TConfig config)
             where TFragment : AbstractAppCompatDialogFragment<TConfig>
@@ -58,10 +55,6 @@ namespace Passingwind.UserDialogs
             );
         }
 
-
-
-
-
         //public override IDisposable Alert(AlertConfig config)
         //{
         //    var activity = this.TopActivityFunc();
@@ -71,7 +64,6 @@ namespace Passingwind.UserDialogs
 
         //    return this.Show(activity, () => new AlertBuilder().Build(activity, config));
         //}
-
 
         //public override IDisposable Confirm(ConfirmConfig config)
         //{
@@ -83,14 +75,12 @@ namespace Passingwind.UserDialogs
         //    return this.Show(activity, () => new ConfirmBuilder().Build(activity, config));
         //}
 
-
         public override void Toast(ToastConfig options)
         {
             var activity = this.TopActivityFunc();
 
             ToastBuilder.Show(activity, options);
         }
-
 
         public override IDisposable Snackbar(SnackbarConfig options)
         {
@@ -104,8 +94,6 @@ namespace Passingwind.UserDialogs
             });
         }
 
-
-
         public override IDisposable Alert(AlertConfig config)
         {
             var activity = this.TopActivityFunc();
@@ -115,8 +103,6 @@ namespace Passingwind.UserDialogs
 
             return this.Show(activity, () => new AlertBuilder().Build(activity, config));
         }
-
-
 
         public override IDisposable ActionSheet(ActionSheetConfig config)
         {
@@ -149,10 +135,7 @@ namespace Passingwind.UserDialogs
                     return this.Show(activity, () => new ActionSheetBuilder().Build(activity, config));
                 }
             }
-
         }
-
-
 
         public override IDisposable Loading(LoadingConfig config)
         {
@@ -167,9 +150,5 @@ namespace Passingwind.UserDialogs
 
             return new ProgressBuilder().Progress(activity, config);
         }
-
-
-
-
     }
 }

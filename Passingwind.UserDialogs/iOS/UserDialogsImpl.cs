@@ -19,14 +19,12 @@ namespace Passingwind.UserDialogs
             this.ViewControllerFunc = viewControllerFunc;
         }
 
-
-
         public override IDisposable Alert(AlertConfig config)
         {
             return this.Present(AlertBuilder.AlertBuild(config));
         }
 
-        // ok 
+        // ok
         public override void Toast(ToastConfig config)
         {
             var app = UIApplication.SharedApplication;
@@ -59,8 +57,6 @@ namespace Passingwind.UserDialogs
             return ProgressBuilder.Progress(app, top.View, config);
         }
 
-
-
         protected virtual IDisposable Present(Func<UIAlertController> alertFunc)
         {
             UIAlertController alert = null;
@@ -84,7 +80,6 @@ namespace Passingwind.UserDialogs
             return new DisposableAction(() => app.SafeInvokeOnMainThread(() => alert.DismissViewController(true, null)));
         }
 
-
         protected virtual IDisposable Present(UIViewController controller)
         {
             var app = UIApplication.SharedApplication;
@@ -93,6 +88,5 @@ namespace Passingwind.UserDialogs
             app.SafeInvokeOnMainThread(() => top.PresentViewController(controller, true, null));
             return new DisposableAction(() => app.SafeInvokeOnMainThread(() => controller.DismissViewController(true, null)));
         }
-
     }
 }

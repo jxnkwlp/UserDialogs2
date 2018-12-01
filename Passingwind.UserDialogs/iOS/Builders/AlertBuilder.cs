@@ -1,7 +1,4 @@
 ﻿using Foundation;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using UIKit;
 
 namespace Passingwind.UserDialogs.Platforms
@@ -27,10 +24,8 @@ namespace Passingwind.UserDialogs.Platforms
                 controller.AddAction(UIAlertAction.Create(config.DestructiveButton.Text, UIAlertActionStyle.Default, (_) => config.DestructiveButton.Action?.Invoke()));
             }
 
-
             return controller;
         }
-
 
         public static UIAlertController ActionSheetBuild(ActionSheetConfig config)
         {
@@ -64,6 +59,5 @@ namespace Passingwind.UserDialogs.Platforms
 
             return controller;
         }
-
     }
 }
