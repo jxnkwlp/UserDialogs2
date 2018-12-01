@@ -19,17 +19,21 @@ namespace Sample
         private void Alert_Clicked(object sender, EventArgs e)
         {
             // UserDialogs.Instance.Alert(DateTime.Now.ToString());
-            UserDialogs.Instance.Alert(new AlertConfig(DateTime.Now.ToString()).AddOkButton());
+            UserDialogs.Instance.Alert(new AlertConfig(DateTime.Now.ToString()).AddOkButton("OK"));
         }
 
         private void Confirm_Clicked(object sender, EventArgs e)
         {
             UserDialogs.Instance.Alert(new AlertConfig("you confirm message")
-                                              .AddOkButton(action: () =>
+                                              .AddOkButton(text: "yes", action: () =>
+                                               {
+                                                   // ok handle
+                                                   ToastShow("ok button");
+                                               })
+                                              .AddCancelButton(action: () =>
                                               {
-                                                  // ok handle
+                                                  ToastShow("cancel button");
                                               })
-                                              .AddCancelButton()
                                               // .AddDestructiveButton("Delete")
                                               );
         }
@@ -112,9 +116,9 @@ namespace Sample
                 Cancellable = true,
                 CancelAction = () => ToastShow("you canceled."),
 
-                Duration = TimeSpan.FromSeconds(5),
+                // Duration = TimeSpan.FromSeconds(5),
 
-                MarkType = MarkType.Black,
+                MarkType = MarkType.Clear,
 
             });
         }
@@ -125,6 +129,7 @@ namespace Sample
             {
                 Cancellable = true,
                 CancelAction = () => ToastShow("you canceled."),
+
 
             });
 

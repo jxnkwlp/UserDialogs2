@@ -56,7 +56,7 @@ namespace Passingwind.UserDialogs
         {
             var app = UIApplication.SharedApplication;
             var top = this.ViewControllerFunc();
-            return LoadingBuilder.Progress(app, top.View, config);
+            return ProgressBuilder.Progress(app, top.View, config);
         }
 
 
