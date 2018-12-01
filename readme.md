@@ -179,12 +179,10 @@ IProgressDialog Progress(ProgressConfig config);
         Cancellable = true, // can cancel loading when show loading , only android
         CancelAction = () => // you action handle, only android
 
-        Max = 10, // max value for current progress
-        Start = 0, // the progress start value
     });
 
     // set current progress value when task update
-    dialog.SetProgress(6);  
+    dialog.SetProgress(6);   // 1-100
 
     // close dialog if you need.
     dialog.Hide();
@@ -194,5 +192,5 @@ IProgressDialog Progress(ProgressConfig config);
 # Powered By
 
 1. Android- Progress/Loading uses KProgressHUD
-2. iOS - Progress/Loading/Toast uses  [SVProgressHUD](https://github.com/trinnguyen/SVProgressHUD-Xamarin)
+2. iOS - Progress/Loading/Toast uses  [MBProgressHUD](https://github.com/ricardo-ch/xamarin-mbprogresshud-ios/)
 3. iOS - Snackbar uses  [TTGSnackbar](https://github.com/MarcBruins/TTGSnackbar-Xamarin-iOS)

@@ -4,6 +4,14 @@ using System.Text;
 
 namespace Passingwind.UserDialogs
 {
+    public enum ActionSheetTheme
+    {
+        /// <summary>
+        ///  第一种底部弹出样式
+        /// </summary>
+        Theme1,
+    }
+
     public class ActionSheetConfig : IAndroidStyleDialogConfig
     {
         public static int? DefaultAndroidStyleId;
@@ -17,6 +25,7 @@ namespace Passingwind.UserDialogs
 
         public int? AndroidStyleId { get; set; } = DefaultAndroidStyleId;
 
+        //public ActionSheetTheme? Theme { get; set; }
 
         public string Title { get; set; }
         public string Message { get; set; }

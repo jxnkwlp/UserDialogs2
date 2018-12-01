@@ -122,6 +122,10 @@ namespace Passingwind.UserDialogs
         {
             var activity = this.TopActivityFunc();
 
+            //if (config.Theme.HasValue && config.Theme == ActionSheetTheme.Theme1)
+            //{
+            //    return this.Show(activity, () => new ActionSheetTheme1Builder().Build(activity, config));
+            //}
 
             if (activity is AppCompatActivity compatActivity)
             {

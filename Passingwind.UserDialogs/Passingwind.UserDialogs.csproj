@@ -22,7 +22,7 @@
     </Description>
 
     <Version>0.1-bate</Version>
-    <AssemblyVersion>0.1.6909.5</AssemblyVersion>
+    <AssemblyVersion>0.1.6909.17</AssemblyVersion>
   </PropertyGroup>
  
 
@@ -73,8 +73,7 @@
   <ItemGroup Condition="'$(TargetFramework)' == 'Xamarin.iOS10'">
     <Compile Include="Shared\**\*.cs" />
     <Compile Include="iOS\**\*.cs" />
-    <Reference Include="OpenTK-1.0" />
-    <PackageReference Include="SVProgressHUD" Version="2.2.5" />
+    <Reference Include="OpenTK-1.0" /> 
     <PackageReference Include="Ricardo.MBProgressHUD.iOS" Version="1.1.0" />
   </ItemGroup>
 

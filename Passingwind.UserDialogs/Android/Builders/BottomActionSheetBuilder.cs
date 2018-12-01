@@ -56,33 +56,6 @@ namespace Passingwind.UserDialogs.Platforms
 
         }
 
-
-
-        //protected override Dialog CreateDialog(ActionSheetOptions config)
-        //{
-        //    var contentView = CreateView(this.Config);
-
-        //    //dialog.SetContentView();
-
-        //    //var windows = this.Dialog.Window;
-        //    //windows.SetGravity(GravityFlags.Bottom);
-        //    //windows.Attributes.Gravity = GravityFlags.Bottom;
-
-        //    //dialog.Window.SetSoftInputMode(SoftInput.StateAlwaysHidden);
-
-        //    // ButtomDialogView dialog = new ButtomDialogView(this.Activity, contentView);
-
-        //    var dialog = new Dialog(this.Context);
-
-        //    dialog.SetContentView(contentView);
-
-        //    return dialog;
-        //}
-
-
-
-
-
     }
 
 
@@ -90,9 +63,7 @@ namespace Passingwind.UserDialogs.Platforms
     {
         public Action Clicked { get; set; }
 
-
         public Activity Activity { get; private set; }
-
 
         ActionSheetConfig _config;
 
@@ -112,23 +83,29 @@ namespace Passingwind.UserDialogs.Platforms
             if (!string.IsNullOrEmpty(_config.Title))
             {
                 container.AddView(GetHeaderText(_config.Title, _config.ItemTextAlgin));
+                container.AddView(this.CreateDivider(1));
             }
 
             foreach (var item in _config.Items)
             {
                 container.AddView(this.CreateRow(item, false, _config.ItemTextAlgin));
+
+                if (item != _config.Items.Last())
+                    container.AddView(this.CreateDivider(1));
+            }
+
+            if (_config.Destructive != null || _config.Cancel != null)
+            {
+                container.AddView(this.CreateDivider(15));
             }
 
             if (_config.Destructive != null)
             {
-                container.AddView(this.CreateDivider());
                 container.AddView(this.CreateRow(_config.Destructive, true, _config.ItemTextAlgin));
             }
+
             if (_config.Cancel != null)
             {
-                if (_config.Destructive == null)
-                    container.AddView(this.CreateDivider());
-
                 container.AddView(this.CreateRow(_config.Cancel, false, _config.ItemTextAlgin));
             }
 
@@ -145,12 +122,7 @@ namespace Passingwind.UserDialogs.Platforms
                 LayoutParameters = new LinearLayout.LayoutParams(Android.Views.ViewGroup.LayoutParams.MatchParent, this.DpToPixels(48))
             };
 
-            //if (option.ItemIcon != null)
-            //    row.AddView(this.GetIcon(option.ItemIcon));
-
             row.AddView(this.GetText(option.Text, option.ItemIcon, isDestructive, textAlgin));
-
-            // row.SetGravity(GravityFlags.CenterHorizontal | GravityFlags.CenterVertical);
 
 
             row.Click += (sender, args) =>
@@ -170,6 +142,8 @@ namespace Passingwind.UserDialogs.Platforms
             {
                 LeftMargin = this.DpToPixels(16),
                 RightMargin = this.DpToPixels(16),
+                BottomMargin = this.DpToPixels(4),
+
             };
             var txt = new TextView(this.Activity)
             {
@@ -222,10 +196,7 @@ namespace Passingwind.UserDialogs.Platforms
             if (string.IsNullOrWhiteSpace(icon) && textAlgin == ActionSheetItemTextAlgin.Center)
             {
                 txt.Gravity = GravityFlags.CenterHorizontal | GravityFlags.CenterVertical;
-
             }
-
-
 
             if (isDestructive)
                 txt.SetTextColor(Color.Red);
@@ -256,12 +227,12 @@ namespace Passingwind.UserDialogs.Platforms
         }
 
 
-        protected virtual View CreateDivider()
+        protected virtual View CreateDivider(int height = 1)
         {
             var view = new View(this.Activity)
             {
-                Background = new ColorDrawable(Color.LightGray),
-                LayoutParameters = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MatchParent, this.DpToPixels(1))
+                Background = new ColorDrawable(Color.Rgb(239, 239, 239)),
+                LayoutParameters = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MatchParent, this.DpToPixels(height))
             };
             view.SetPadding(0, this.DpToPixels(7), 0, this.DpToPixels(8));
             return view;

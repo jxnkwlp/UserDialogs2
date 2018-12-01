@@ -104,6 +104,21 @@ namespace Sample
 
         }
 
+        private void ActionSheet2_Clicked(object sender, EventArgs e)
+        {
+            UserDialogs.Instance.ActionSheet(new ActionSheetConfig()
+            {
+                ItemTextAlgin = ActionSheetItemTextAlgin.Center
+            }
+            .SetTitle("title")
+            .AddCancel()
+            .AddItem("item1")
+            .AddItem("item2")
+            .SetBottomSheet(true)
+
+            );
+        }
+
         void ToastShow(string text)
         {
             UserDialogs.Instance.Toast(text);

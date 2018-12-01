@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Text;
 
 namespace Passingwind.UserDialogs
@@ -13,6 +14,8 @@ namespace Passingwind.UserDialogs
         public string ItemIcon { get; set; }
 
         public ItemIconPosition IconPosition { get; set; }
+
+        public Color? TextColor { get; set; }
 
         public ActionSheetItem(string text, Action action = null, string icon = null)
         {
