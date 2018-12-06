@@ -15,7 +15,7 @@ namespace Passingwind.UserDialogs
             Toast(new ToastConfig() { Message = message });
         }
 
-        public abstract void Toast(ToastConfig options);
+        public abstract void Toast(ToastConfig config);
 
         public IDisposable Snackbar(string message, Action action = null)
         {
@@ -38,6 +38,8 @@ namespace Passingwind.UserDialogs
         public abstract IProgressDialog Progress(ProgressConfig config);
 
         public abstract void Prompt(PromptConfig config);
+
+        public abstract void Form(PromptFormConfig config);
 
     }
 }

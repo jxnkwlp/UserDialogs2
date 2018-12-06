@@ -25,6 +25,8 @@
 
             <Button Text="Prompt" Clicked="Prompt_Clicked" />
 
+            <Button Text="Prompt Forms" Clicked="Forms_Clicked" />
+
         </StackLayout>
     </ScrollView>
 </ContentPage>

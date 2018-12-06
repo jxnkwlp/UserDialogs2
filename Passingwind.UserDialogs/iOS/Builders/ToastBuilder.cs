@@ -15,6 +15,7 @@ namespace Passingwind.UserDialogs.Platforms
                 _hub.Mode = MBProgressHUDMode.Text;
                 _hub.Label.Text = config.Message;
                 _hub.Label.LineBreakMode = UILineBreakMode.WordWrap;
+                _hub.Label.Lines = int.MaxValue;
                 _hub.MinShowTime = 1; // The minimum time (in seconds) that the HUD is shown.
 
                 _hub.UserInteractionEnabled = false;

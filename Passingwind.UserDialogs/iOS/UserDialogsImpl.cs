@@ -95,5 +95,10 @@ namespace Passingwind.UserDialogs
         {
             this.Present(PromptBuilder.Build(config));
         }
+
+        public override void Form(PromptFormConfig config)
+        {
+            this.Present(FormBuider.Build(config));
+        }
     }
 }

@@ -176,5 +176,30 @@ namespace Sample
                 }
             });
         }
+
+        private void Forms_Clicked(object sender, EventArgs e)
+        {
+            UserDialogs.Instance.Form(new PromptFormConfig()
+            {
+                Title = "title",
+                Message = "message",
+
+                OnAction = (result) =>
+                {
+                    StringBuilder sb = new StringBuilder();
+
+                    if (result.Result != null)
+                        foreach (var item in result.Result)
+                        {
+                            sb.AppendLine($"{item.Key}:{item.Value}");
+                        }
+
+                    ToastShow($"{result.Ok}:{sb}");
+                }
+            }
+            .AddItem("username", "username", maxLength: 10)
+            .AddItem("password", "password", InputType.Password, maxLength: 6)
+            );
+        }
     }
 }

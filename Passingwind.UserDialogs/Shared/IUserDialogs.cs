@@ -76,14 +76,9 @@ namespace Passingwind.UserDialogs
 
         void Prompt(PromptConfig config);
 
+        void Form(PromptFormConfig config);
+
         #endregion
 
-        #region MyRegion
-
-        // IDisposable DateTimerPicker();
-
-        // IDisposable OptionsPicker();
-
-        #endregion MyRegion
     }
 }

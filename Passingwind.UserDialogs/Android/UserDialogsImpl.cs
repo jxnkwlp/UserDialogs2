@@ -1,16 +1,7 @@
 ﻿using Android.App;
-using Android.Text;
-using Android.Views;
-using Android.Widget;
 using Android.Support.V7.App;
-using Android.Support.Design.Widget;
-using Android.Text.Style;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using Passingwind.UserDialogs.Platforms;
+using System;
 
 namespace Passingwind.UserDialogs
 {
@@ -82,11 +73,11 @@ namespace Passingwind.UserDialogs
             ToastBuilder.Show(activity, options);
         }
 
-        public override IDisposable Snackbar(SnackbarConfig options)
+        public override IDisposable Snackbar(SnackbarConfig config)
         {
             var activity = this.TopActivityFunc();
 
-            SnackbarBuilder.ShowSnackbar(activity, options);
+            SnackbarBuilder.ShowSnackbar(activity, config);
 
             return new DisposableAction(() =>
             {
@@ -164,5 +155,20 @@ namespace Passingwind.UserDialogs
                 this.Show(activity, () => new PromptBuilder().Build(activity, config));
             }
         }
+
+        public override void Form(PromptFormConfig config)
+        {
+            var activity = this.TopActivityFunc();
+
+            if (activity is AppCompatActivity compatActivity)
+            {
+                this.ShowDialog<PromptFormAppCompatDialogFragment, PromptFormConfig>(compatActivity, config);
+            }
+            else
+            {
+                this.Show(activity, () => new PromptBuilder().BuildForm(activity, config));
+            }
+        }
+
     }
 }

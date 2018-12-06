@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using Android.App;
 using Android.Content;
 using Android.Support.V7.App;
 using Android.Text;
 using Android.Text.Method;
+using Android.Views;
 using Android.Views.InputMethods;
 using Android.Widget;
 using AlertDialog = Android.App.AlertDialog;
@@ -14,6 +16,9 @@ namespace Passingwind.UserDialogs.Platforms
 {
     public class PromptBuilder
     {
+        #region Prompt
+
+
         public Dialog Build(Activity activity, PromptConfig config)
         {
             var txt = new EditText(activity)
@@ -70,7 +75,7 @@ namespace Passingwind.UserDialogs.Platforms
 
             if (config.MaxLength != null)
                 txt.SetFilters(new[] { new InputFilterLengthFilter(config.MaxLength.Value) });
-             
+
             SetInputType(txt, config.InputType);
 
             var builder = new AppCompatAlertDialog.Builder(activity, config.AndroidStyleId ?? 0)
@@ -94,6 +99,143 @@ namespace Passingwind.UserDialogs.Platforms
             return dialog;
         }
 
+        #endregion
+
+        #region Form
+
+        public Dialog BuildForm(Activity activity, PromptFormConfig config)
+        {
+            var view = new LinearLayout(activity)
+            {
+                Orientation = Orientation.Vertical,
+            };
+
+            var txts = new Dictionary<string, EditText>();
+            var result = new Dictionary<string, string>();
+
+            foreach (var item in config.Items)
+            {
+                var txt = new EditText(activity)
+                {
+                    Id = Int32.MaxValue,
+                    Hint = item.Placeholder,
+                };
+                if (item.Text != null)
+                {
+                    txt.Text = item.Text;
+                    txt.SetSelection(item.Text.Length);
+                }
+
+                if (item.MaxLength != null)
+                    txt.SetFilters(new[] { new InputFilterLengthFilter(item.MaxLength.Value) });
+
+                SetInputType(txt, item.InputType);
+
+                view.AddView(txt);
+                txts[item.Key] = (txt);
+                result[item.Key] = string.Empty;
+            }
+
+            Action action = () =>
+            {
+                foreach (var item in txts)
+                {
+                    result[item.Key] = item.Value.Text.Trim();
+                }
+            };
+
+            var builder = new AlertDialog.Builder(activity, config.AndroidStyleId ?? 0)
+                .SetCancelable(false)
+                .SetMessage(config.Message)
+                .SetTitle(config.Title)
+                .SetView(view)
+                .SetPositiveButton(config.OkText, (s, a) =>
+                {
+                    action();
+                    config.OnAction?.Invoke(new PromptFormResult(true, result));
+                });
+
+            if (config.IsCancellable)
+            {
+                builder.SetNegativeButton(config.CancelText, (s, a) =>
+                {
+                    action();
+                    config.OnAction?.Invoke(new PromptFormResult(false, result));
+                });
+            }
+
+            var dialog = builder.Create();
+            return dialog;
+        }
+
+
+        public Dialog BuildForm(AppCompatActivity activity, PromptFormConfig config)
+        {
+            var layout = new LinearLayout(activity)
+            {
+                Orientation = Orientation.Vertical,
+            };
+
+            var txts = new Dictionary<string, EditText>();
+            var result = new Dictionary<string, string>();
+
+            foreach (var item in config.Items)
+            {
+                var txt = new EditText(activity)
+                {
+                    Hint = item.Placeholder,
+                };
+                if (item.Text != null)
+                {
+                    txt.Text = item.Text;
+                    txt.SetSelection(item.Text.Length);
+                }
+
+                if (item.MaxLength != null)
+                    txt.SetFilters(new[] { new InputFilterLengthFilter(item.MaxLength.Value) });
+
+                SetInputType(txt, item.InputType);
+
+                layout.AddView(txt, ViewGroup.LayoutParams.MatchParent);
+                txts[item.Key] = (txt);
+                result[item.Key] = string.Empty;
+            }
+
+            Action action = () =>
+            {
+                foreach (var item in txts)
+                {
+                    result[item.Key] = item.Value.Text.Trim();
+                }
+            };
+
+
+            var builder = new AppCompatAlertDialog.Builder(activity, config.AndroidStyleId ?? 0)
+                .SetCancelable(false)
+                .SetMessage(config.Message)
+                .SetTitle(config.Title)
+                .SetView(layout)
+                .SetPositiveButton(config.OkText, (s, a) =>
+                {
+                    action();
+                    config.OnAction?.Invoke(new PromptFormResult(true, result));
+                });
+
+            if (config.IsCancellable)
+            {
+                builder.SetNegativeButton(config.CancelText, (s, a) =>
+                {
+                    action();
+                    config.OnAction?.Invoke(new PromptFormResult(false, result));
+                });
+            }
+
+            var dialog = builder.Create();
+            return dialog;
+        }
+
+
+        #endregion
 
         protected virtual void HookTextChanged(Dialog dialog, EditText txt, PromptConfig config)
         {

@@ -91,6 +91,7 @@ Includes Alert, Confirm, Toast, ActionSheet, Loading, Progress.</Description>
   <ItemGroup>
     <None Remove="Shared\InputType.cs" />
     <None Remove="Shared\PromptConfig.cs" />
+    <None Remove="Shared\PromptFormConfig.cs" />
     <None Remove="Shared\PromptResult.cs" />
     <None Remove="Shared\PromptTextChangedArgs.cs" />
   </ItemGroup>
