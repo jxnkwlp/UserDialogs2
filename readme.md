@@ -5,14 +5,16 @@ Common UserDialogs interface for xamarin android/ios
 
 # Component
 
-1. [x] Alert
-2. [x] Confirm
-3. [x] Toast
-4. [x] ActionSheet
-5. [x] Loading
-6. [x] Progress
-7. [ ] DateTimePicker
-8. [ ] OptionsPicker
+1.  [x] Alert
+2.  [x] Confirm
+3.  [x] Toast
+4.  [x] ActionSheet
+5.  [x] Loading
+6.  [x] Progress
+7.  [ ] DateTimePicker
+8.  [ ] OptionsPicker
+9.  [x] Prompt
+10. [x] Prompt with Multi-line (eg: Login Prompt ) 
 
 # Support Platforms
 
@@ -39,23 +41,27 @@ b. iOS (nothing to do)
 # Interface
 
 ~~~~ csharp
-IDisposable Toast(string message);
+void Toast(string message);
 
-IDisposable Toast(ToastConfig config);
+void Toast(ToastConfig config);
 
 IDisposable Snackbar(string message, Action action = null);
 
 IDisposable Snackbar(SnackbarConfig config);
 
-IDisposable Alert(string message);
+void Alert(string message);
 
-IDisposable Alert(AlertConfig config);
+void Alert(AlertConfig config);
 
 IDisposable ActionSheet(ActionSheetConfig config);
 
 IDisposable Loading(LoadingConfig config);
 
 IProgressDialog Progress(ProgressConfig config);
+
+void Prompt(PromptConfig config);
+
+void Form(PromptFormConfig config);
 
 ~~~~
 
@@ -192,6 +198,29 @@ IProgressDialog Progress(ProgressConfig config);
     dialog.Hide();
     ~~~~
 
+
+7. Form
+
+    show prompt form 
+    
+    ~~~~ csharp
+    UserDialogs.Instance.Form(new PromptFormConfig()
+    {
+        Title = "Please Login", 
+
+        OnAction = (result) =>
+        {
+            if(result.Ok){ 
+                var username = result.Result["username"]; 
+                // then you code ...
+            } 
+        }
+    }
+    .AddItem("username", "username", maxLength: 16) // add 'username' inputbox
+    .AddItem("password", "password", InputType.Password, maxLength: 6) // add 'password' password inputbox
+    );
+    ~~~~
+  
 
 # Powered By
 
