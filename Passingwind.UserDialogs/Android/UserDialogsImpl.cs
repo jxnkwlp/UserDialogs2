@@ -150,5 +150,19 @@ namespace Passingwind.UserDialogs
 
             return new ProgressBuilder().Progress(activity, config);
         }
+
+        public override void Prompt(PromptConfig config)
+        {
+            var activity = this.TopActivityFunc();
+
+            if (activity is AppCompatActivity compatActivity)
+            {
+                this.ShowDialog<PromptAppCompatDialogFragment, PromptConfig>(compatActivity, config);
+            }
+            else
+            {
+                this.Show(activity, () => new PromptBuilder().Build(activity, config));
+            }
+        }
     }
 }

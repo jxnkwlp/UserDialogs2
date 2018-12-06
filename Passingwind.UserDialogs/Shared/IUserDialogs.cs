@@ -72,6 +72,12 @@ namespace Passingwind.UserDialogs
 
         #endregion Loading
 
+        #region Prompt
+
+        void Prompt(PromptConfig config);
+
+        #endregion
+
         #region MyRegion
 
         // IDisposable DateTimerPicker();

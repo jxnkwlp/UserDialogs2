@@ -36,5 +36,8 @@ namespace Passingwind.UserDialogs
         public abstract IDisposable Loading(LoadingConfig config);
 
         public abstract IProgressDialog Progress(ProgressConfig config);
+
+        public abstract void Prompt(PromptConfig config);
+
     }
 }

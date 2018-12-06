@@ -161,6 +161,20 @@ namespace Sample
 
         }
 
+        private void Prompt_Clicked(object sender, EventArgs e)
+        {
+            UserDialogs.Instance.Prompt(new PromptConfig()
+            {
+                Title = "title",
+                Message = "message",
+                InputType = InputType.DecimalNumber,
+                MaxLength = 10,
 
+                OnAction = (result) =>
+                {
+                    ToastShow($"{result.Ok}:{result.Text}");
+                }
+            });
+        }
     }
 }

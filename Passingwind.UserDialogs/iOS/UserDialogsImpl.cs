@@ -6,6 +6,8 @@ using UIKit;
 
 namespace Passingwind.UserDialogs
 {
+    /// <summary> 
+    /// </summary>
     public class UserDialogsImpl : AbstractUserDialogs
     {
         protected Func<UIViewController> ViewControllerFunc { get; set; }
@@ -87,6 +89,11 @@ namespace Passingwind.UserDialogs
 
             app.SafeInvokeOnMainThread(() => top.PresentViewController(controller, true, null));
             return new DisposableAction(() => app.SafeInvokeOnMainThread(() => controller.DismissViewController(true, null)));
+        }
+
+        public override void Prompt(PromptConfig config)
+        {
+            this.Present(PromptBuilder.Build(config));
         }
     }
 }

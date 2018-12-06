@@ -20,7 +20,7 @@
 Includes Alert, Confirm, Toast, ActionSheet, Loading, Progress.</Description>
 
     <Version>0.1</Version>
-    <AssemblyVersion>0.1.6909.7</AssemblyVersion>
+    <AssemblyVersion>0.1.6915.0</AssemblyVersion>
     <RepositoryType>github</RepositoryType>
     <PackageTags>xamarin.forms ios android dialogs plugin</PackageTags>
   </PropertyGroup>
@@ -86,6 +86,13 @@ Includes Alert, Confirm, Toast, ActionSheet, Loading, Progress.</Description>
     <Compile Include="iOS\**\*.cs" />
     <Reference Include="OpenTK-1.0" /> 
     <PackageReference Include="Ricardo.MBProgressHUD.iOS" Version="1.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Shared\InputType.cs" />
+    <None Remove="Shared\PromptConfig.cs" />
+    <None Remove="Shared\PromptResult.cs" />
+    <None Remove="Shared\PromptTextChangedArgs.cs" />
   </ItemGroup>
 
 
