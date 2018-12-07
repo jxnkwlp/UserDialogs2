@@ -16,13 +16,14 @@
     <Authors>Passingwind</Authors>
     <PackageProjectUrl>https://github.com/jxnkwlp/UserDialogs2</PackageProjectUrl>
     <RepositoryUrl>https://github.com/jxnkwlp/UserDialogs2</RepositoryUrl>
-    <Description>A cross platform library that allows you to call for standard user dialogs from a shared/portable library, suport android and ios .
-Includes Alert, Confirm, Toast, ActionSheet, Loading, Progress.</Description>
+    <Description>A cross platform library that allows you to call for standard user dialogs from a shared/portable library, suport android and ios . 
+Includes Alert, Confirm, Toast, ActionSheet, Loading, Progress, Prompt.</Description>
 
-    <Version>0.1</Version>
+    <Version>0.1.1</Version>
     <AssemblyVersion>0.1.6915.0</AssemblyVersion>
     <RepositoryType>github</RepositoryType>
     <PackageTags>xamarin.forms ios android dialogs plugin</PackageTags>
+    <PackageReleaseNotes>Add prompt component.</PackageReleaseNotes>
   </PropertyGroup>
  
 
