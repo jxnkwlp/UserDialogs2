@@ -1,7 +1,7 @@
 
 # UserDialogs
 
-Common UserDialogs interface for xamarin android/ios
+Common UserDialogs interface for xamarin.forms(android/ios).
 
 # Component
 
