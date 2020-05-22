@@ -5,170 +5,184 @@ using System;
 
 namespace Passingwind.UserDialogs
 {
-    public class UserDialogsImpl : AbstractUserDialogs
-    {
-        public static string FragmentTag { get; set; } = "UserDialogs";
+	/// <summary> 
+	/// Impl 
+	/// </summary>
+	public class UserDialogsImpl : AbstractUserDialogs
+	{
+		public static string FragmentTag { get; set; } = "UserDialogs";
 
-        protected internal Func<Activity> TopActivityFunc { get; set; }
+		protected internal Func<Activity> TopActivityFunc { get; set; }
 
-        public UserDialogsImpl(Func<Activity> getTopActivity)
-        {
-            this.TopActivityFunc = getTopActivity;
-        }
+		private ProgressBuilder _loadingBuilder;
 
-        protected virtual IDisposable Show(Activity activity, Func<Dialog> dialogBuilder)
-        {
-            Dialog dialog = null;
-            activity.SafeRunOnUi(() =>
-            {
-                dialog = dialogBuilder();
-                dialog.Show();
-            });
-            return new DisposableAction(() =>
-                activity.RunOnUiThread(dialog.Dismiss)
-            );
-        }
+		public UserDialogsImpl(Func<Activity> getTopActivity)
+		{
+			TopActivityFunc = getTopActivity;
+		}
 
-        protected virtual IDisposable ShowDialog<TFragment, TConfig>(AppCompatActivity activity, TConfig config)
-            where TFragment : AbstractAppCompatDialogFragment<TConfig>
-            where TConfig : class, new()
-        {
-            var frag = (TFragment)Activator.CreateInstance(typeof(TFragment));
+		protected virtual IDisposable Show(Activity activity, Func<Dialog> dialogBuilder)
+		{
+			Dialog dialog = null;
+			activity.SafeRunOnUi(() =>
+			{
+				dialog = dialogBuilder();
+				dialog.Show();
+			});
+			return new DisposableAction(() =>
+				activity.RunOnUiThread(dialog.Dismiss)
+			);
+		}
 
-            activity.SafeRunOnUi(() =>
-            {
-                frag.Config = config;
-                frag.Show(activity.SupportFragmentManager, FragmentTag);
-            });
+		protected virtual IDisposable ShowDialog<TFragment, TConfig>(AppCompatActivity activity, TConfig config)
+			where TFragment : AbstractAppCompatDialogFragment<TConfig>
+			where TConfig : class, new()
+		{
+			var frag = (TFragment)Activator.CreateInstance(typeof(TFragment));
 
-            return new DisposableAction(() =>
-                activity.SafeRunOnUi(frag.Dismiss)
-            );
-        }
+			activity.SafeRunOnUi(() =>
+			{
+				frag.Config = config;
+				frag.Show(activity.SupportFragmentManager, FragmentTag);
+			});
 
-        //public override IDisposable Alert(AlertConfig config)
-        //{
-        //    var activity = this.TopActivityFunc();
+			return new DisposableAction(() =>
+				activity.SafeRunOnUi(frag.Dismiss)
+			);
+		}
 
-        //    if (activity is AppCompatActivity compatActivity)
-        //        return this.ShowDialog<AlertAppCompatDialogFragment, AlertConfig>(compatActivity, config);
+		//public override IDisposable Alert(AlertConfig config)
+		//{
+		//    var activity = this.TopActivityFunc();
 
-        //    return this.Show(activity, () => new AlertBuilder().Build(activity, config));
-        //}
+		//    if (activity is AppCompatActivity compatActivity)
+		//        return this.ShowDialog<AlertAppCompatDialogFragment, AlertConfig>(compatActivity, config);
 
-        //public override IDisposable Confirm(ConfirmConfig config)
-        //{
-        //    var activity = this.TopActivityFunc();
+		//    return this.Show(activity, () => new AlertBuilder().Build(activity, config));
+		//}
 
-        //    if (activity is AppCompatActivity compatActivity)
-        //        return this.ShowDialog<ConfirmAppCompatDialogFragment, ConfirmConfig>(compatActivity, config);
+		//public override IDisposable Confirm(ConfirmConfig config)
+		//{
+		//    var activity = this.TopActivityFunc();
 
-        //    return this.Show(activity, () => new ConfirmBuilder().Build(activity, config));
-        //}
+		//    if (activity is AppCompatActivity compatActivity)
+		//        return this.ShowDialog<ConfirmAppCompatDialogFragment, ConfirmConfig>(compatActivity, config);
 
-        public override void Toast(ToastConfig options)
-        {
-            var activity = this.TopActivityFunc();
+		//    return this.Show(activity, () => new ConfirmBuilder().Build(activity, config));
+		//}
 
-            ToastBuilder.Show(activity, options);
-        }
+		public override void Toast(ToastConfig options)
+		{
+			var activity = TopActivityFunc();
+			activity.SafeRunOnUi(() =>
+			{
+				ToastBuilder.Show(activity, options);
+			});
+		}
 
-        public override IDisposable Snackbar(SnackbarConfig config)
-        {
-            var activity = this.TopActivityFunc();
+		public override IDisposable Snackbar(SnackbarConfig config)
+		{
+			var activity = TopActivityFunc();
 
-            SnackbarBuilder.ShowSnackbar(activity, config);
+			SnackbarBuilder.ShowSnackbar(activity, config);
 
-            return new DisposableAction(() =>
-            {
-                SnackbarBuilder.Hide();
-            });
-        }
+			return new DisposableAction(() =>
+			{
+				SnackbarBuilder.Hide();
+			});
+		}
 
-        public override IDisposable Alert(AlertConfig config)
-        {
-            var activity = this.TopActivityFunc();
+		public override IDisposable Alert(AlertConfig config)
+		{
+			var activity = TopActivityFunc();
 
-            if (activity is AppCompatActivity compatActivity)
-                return this.ShowDialog<AlertAppCompatDialogFragment, AlertConfig>(compatActivity, config);
+			if (activity is AppCompatActivity compatActivity)
+				return ShowDialog<AlertAppCompatDialogFragment, AlertConfig>(compatActivity, config);
 
-            return this.Show(activity, () => new AlertBuilder().Build(activity, config));
-        }
+			return Show(activity, () => new AlertBuilder().Build(activity, config));
+		}
 
-        public override IDisposable ActionSheet(ActionSheetConfig config)
-        {
-            var activity = this.TopActivityFunc();
+		public override IDisposable ActionSheet(ActionSheetConfig config)
+		{
+			var activity = TopActivityFunc();
 
-            //if (config.Theme.HasValue && config.Theme == ActionSheetTheme.Theme1)
-            //{
-            //    return this.Show(activity, () => new ActionSheetTheme1Builder().Build(activity, config));
-            //}
+			//if (config.Theme.HasValue && config.Theme == ActionSheetTheme.Theme1)
+			//{
+			//    return this.Show(activity, () => new ActionSheetTheme1Builder().Build(activity, config));
+			//}
 
-            if (activity is AppCompatActivity compatActivity)
-            {
-                if (config.BottomSheet)
-                {
-                    return this.ShowDialog<BottomActionSheetDialogFragment, ActionSheetConfig>(compatActivity, config);
-                }
-                else
-                {
-                    return this.ShowDialog<ActionSheetAppCompatDialogFragment, ActionSheetConfig>(compatActivity, config);
-                }
-            }
-            else
-            {
-                if (config.BottomSheet)
-                {
-                    return this.Show(activity, () => new BottomActionSheetBuilder().Build(activity, config));
-                }
-                else
-                {
-                    return this.Show(activity, () => new ActionSheetBuilder().Build(activity, config));
-                }
-            }
-        }
+			if (activity is AppCompatActivity compatActivity)
+			{
+				if (config.BottomSheet)
+				{
+					return ShowDialog<BottomActionSheetDialogFragment, ActionSheetConfig>(compatActivity, config);
+				}
+				else
+				{
+					return ShowDialog<ActionSheetAppCompatDialogFragment, ActionSheetConfig>(compatActivity, config);
+				}
+			}
+			else
+			{
+				if (config.BottomSheet)
+				{
+					return Show(activity, () => new BottomActionSheetBuilder().Build(activity, config));
+				}
+				else
+				{
+					return Show(activity, () => new ActionSheetBuilder().Build(activity, config));
+				}
+			}
+		}
 
-        public override IDisposable Loading(LoadingConfig config)
-        {
-            var activity = this.TopActivityFunc();
 
-            return new ProgressBuilder().Loading(activity, config);
-        }
+		public override IDisposable Loading(LoadingConfig config)
+		{
+			var activity = TopActivityFunc();
 
-        public override IProgressDialog Progress(ProgressConfig config)
-        {
-            var activity = this.TopActivityFunc();
+			_loadingBuilder = new ProgressBuilder();
+			return _loadingBuilder.Loading(activity, config);
+		}
 
-            return new ProgressBuilder().Progress(activity, config);
-        }
+		public override void HideLoading()
+		{
+			_loadingBuilder?.Hide();
+		}
 
-        public override void Prompt(PromptConfig config)
-        {
-            var activity = this.TopActivityFunc();
+		public override IProgressDialog Progress(ProgressConfig config)
+		{
+			var activity = TopActivityFunc();
 
-            if (activity is AppCompatActivity compatActivity)
-            {
-                this.ShowDialog<PromptAppCompatDialogFragment, PromptConfig>(compatActivity, config);
-            }
-            else
-            {
-                this.Show(activity, () => new PromptBuilder().Build(activity, config));
-            }
-        }
+			return new ProgressBuilder().Progress(activity, config);
+		}
 
-        public override void Form(PromptFormConfig config)
-        {
-            var activity = this.TopActivityFunc();
+		public override void Prompt(PromptConfig config)
+		{
+			var activity = TopActivityFunc();
 
-            if (activity is AppCompatActivity compatActivity)
-            {
-                this.ShowDialog<PromptFormAppCompatDialogFragment, PromptFormConfig>(compatActivity, config);
-            }
-            else
-            {
-                this.Show(activity, () => new PromptBuilder().BuildForm(activity, config));
-            }
-        }
+			if (activity is AppCompatActivity compatActivity)
+			{
+				ShowDialog<PromptAppCompatDialogFragment, PromptConfig>(compatActivity, config);
+			}
+			else
+			{
+				Show(activity, () => new PromptBuilder().Build(activity, config));
+			}
+		}
 
-    }
+		public override void Form(PromptFormConfig config)
+		{
+			var activity = TopActivityFunc();
+
+			if (activity is AppCompatActivity compatActivity)
+			{
+				ShowDialog<PromptFormAppCompatDialogFragment, PromptFormConfig>(compatActivity, config);
+			}
+			else
+			{
+				Show(activity, () => new PromptBuilder().BuildForm(activity, config));
+			}
+		}
+
+	}
 }

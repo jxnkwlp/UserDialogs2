@@ -3,119 +3,122 @@ using Android.OS;
 using Java.Lang;
 using KProgressHUDLib;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Passingwind.UserDialogs.Platforms
 {
-    public class ProgressBuilder
-    {
-        private KProgressHUD _progress;
+	public class ProgressBuilder
+	{
+		private KProgressHUD _progress;
 
-        private void DelayDismiss(int interval)
-        {
-            if (_progress == null)
-                return;
+		private void DelayDismiss(int interval)
+		{
+			if (_progress == null)
+				return;
 
-            Handler handler = new Handler();
-            handler.PostDelayed(new Runnable(() =>
-            {
-                _progress.Dismiss();
-            }), interval);
-        }
+			Handler handler = new Handler();
+			handler.PostDelayed(new Runnable(() =>
+			{
+				_progress.Dismiss();
+			}), interval);
+		}
 
-        public IDisposable Loading(Activity activity, LoadingConfig config)
-        {
-            if (_progress != null && _progress.IsShowing)
-            {
-                _progress.Dismiss();
-            }
+		public IDisposable Loading(Activity activity, LoadingConfig config)
+		{
+			if (_progress != null && _progress.IsShowing)
+			{
+				_progress.Dismiss();
+			}
 
-            _progress = KProgressHUD.Create(activity, KProgressHUD.Style.SpinIndeterminate).SetLabel(config.Text);
+			_progress = KProgressHUD.Create(activity, KProgressHUD.Style.SpinIndeterminate).SetLabel(config.Text);
 
-            _progress.SetCancellable(config.Cancellable);
+			_progress.SetCancellable(config.Cancellable);
 
-            if (config.Cancellable)
-            {
-                _progress.SetCancelAction(() =>
-                {
-                    _progress.Dismiss();
+			if (config.Cancellable)
+			{
+				_progress.SetCancelAction(() =>
+				{
+					_progress.Dismiss();
 
-                    config.CancelAction?.Invoke();
-                });
-            }
+					config.CancelAction?.Invoke();
+				});
+			}
 
-            if (config.MarkType == MarkType.Black)
-            {
-                _progress.SetDimAmount(0.5f);
-            }
+			if (config.MarkType == MarkType.Black)
+			{
+				_progress.SetDimAmount(0.5f);
+			}
 
-            _progress.Show();
+			_progress.Show();
 
-            if (config.Duration != null)
-            {
-                DelayDismiss((int)config.Duration.Value.TotalMilliseconds);
-            }
+			if (config.Duration != null)
+			{
+				DelayDismiss((int)config.Duration.Value.TotalMilliseconds);
+			}
 
-            return new DisposableAction(() => _progress.Dismiss());
-        }
+			return new DisposableAction(() => _progress.Dismiss());
+		}
 
-        public IProgressDialog Progress(Activity activity, ProgressConfig config)
-        {
-            if (_progress != null && _progress.IsShowing)
-            {
-                _progress.Dismiss();
-            }
+		public IProgressDialog Progress(Activity activity, ProgressConfig config)
+		{
+			if (_progress != null && _progress.IsShowing)
+			{
+				_progress.Dismiss();
+			}
 
-            _progress = KProgressHUD.Create(activity, KProgressHUD.Style.PieDeterminate).SetLabel(config.Text);
+			_progress = KProgressHUD.Create(activity, KProgressHUD.Style.PieDeterminate).SetLabel(config.Text);
 
-            _progress.SetMaxProgress(100);
+			_progress.SetMaxProgress(100);
 
-            _progress.SetCancellable(config.Cancellable);
+			_progress.SetCancellable(config.Cancellable);
 
-            if (config.Cancellable)
-            {
-                _progress.SetCancelAction(() =>
-                {
-                    _progress.Dismiss();
+			if (config.Cancellable)
+			{
+				_progress.SetCancelAction(() =>
+				{
+					_progress.Dismiss();
 
-                    config.CancelAction?.Invoke();
-                });
-            }
+					config.CancelAction?.Invoke();
+				});
+			}
 
-            if (config.MarkType == MarkType.Black)
-            {
-                _progress.SetDimAmount(0.5f);
-            }
+			if (config.MarkType == MarkType.Black)
+			{
+				_progress.SetDimAmount(0.5f);
+			}
 
-            _progress.Show();
+			_progress.Show();
 
-            return new LoadingDialog(_progress);
-        }
+			return new LoadingDialog(_progress);
+		}
 
-        public class LoadingDialog : IProgressDialog, IDisposable
-        {
-            readonly KProgressHUD _progress;
+		public void Hide()
+		{
+			_progress?.Dismiss();
+		}
 
-            public LoadingDialog(KProgressHUD progress)
-            {
-                _progress = progress;
-            }
+		public class LoadingDialog : IProgressDialog, IDisposable
+		{
+			private readonly KProgressHUD _progress;
 
-            public void Dispose()
-            {
-                Hide();
-            }
+			public LoadingDialog(KProgressHUD progress)
+			{
+				_progress = progress;
+			}
 
-            public void Hide()
-            {
-                _progress.Dismiss();
-            }
+			public void Dispose()
+			{
+				Hide();
+			}
 
-            public void SetProgress(uint value)
-            {
-                _progress.SetProgress((int)value);
-            }
-        }
-    }
+			public void Hide()
+			{
+				_progress.Dismiss();
+			}
+
+			public void SetProgress(uint value)
+			{
+				_progress.SetProgress((int)value);
+			}
+		}
+	}
 }

@@ -52,6 +52,11 @@ namespace Passingwind.UserDialogs
             return LoadingBuilder.Loading(app, top.View, config);
         }
 
+        public override void HideLoading()
+        {
+            throw new NotImplementedException();
+        }
+
         public override IProgressDialog Progress(ProgressConfig config)
         {
             var app = UIApplication.SharedApplication;
@@ -100,5 +105,6 @@ namespace Passingwind.UserDialogs
         {
             this.Present(FormBuider.Build(config));
         }
-    }
+         
+	}
 }

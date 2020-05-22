@@ -3,8 +3,6 @@ using Android.Graphics.Drawables;
 using Android.Support.V4.Content;
 using Android.Util;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Passingwind.UserDialogs.Platforms
 {
